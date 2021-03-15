@@ -1,4 +1,4 @@
-_base_ = '../detr/detr_r50_8x2_150e_coco.py'
+_base_ = '../reppoints/reppoints_moment_r50_fpn_1x_coco.py'
 # 1. dataset settings
 classes = ('erosive',)
 data_root = '/data1/qilei_chen/DATA/erosive/'

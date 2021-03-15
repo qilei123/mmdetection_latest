@@ -32,5 +32,6 @@ data = dict(
 model = dict(
     roi_head=dict(
         bbox_head=
-            dict(num_classes=1)))# explicitly over-write all the `num_classes` field from default 80 to 1.
+            dict(type='Shared2FCBBoxHead',
+                num_classes=1)))# explicitly over-write all the `num_classes` field from default 80 to 1.
                 

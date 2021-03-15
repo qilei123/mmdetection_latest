@@ -2,7 +2,7 @@ _base_ = '../faster_rcnn/faster_rcnn_r50_fpn_1x_coco.py'
 
 # 1. dataset settings
 dataset_type = 'CocoDataset'
-classes = ('erosive')
+classes = ('erosive',)
 data = dict(
     samples_per_gpu=2,
     workers_per_gpu=2,

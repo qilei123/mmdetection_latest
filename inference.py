@@ -26,7 +26,7 @@ for key in coco_imgs:
 
     for ann in anns:
         [x,y,w,h] = ann['bbox']
-        cv2.rectangle(img, (int(x), int(y)), ((int(x+w), int(y+h)), (0,255,0), 2))
+        cv2.rectangle(img, (int(x), int(y)), (int(x+w), int(y+h)), (0,255,0), 2)
 
     result = inference_detector(model, img)
     model.show_result(img, result,bbox_color =(255,0,0), out_file='/data1/qilei_chen/DATA/erosive/work_dirs/faster_rcnn_r50_fpn_1x_coco/test_result/'+img_file_name)

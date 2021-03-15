@@ -2,6 +2,7 @@ from mmdet.apis import init_detector, inference_detector
 import mmcv
 from pycocotools.coco import COCO
 import os
+import cv2
 # Specify the path to model config and checkpoint file
 config_file = 'configs/erosive/faster_rcnn_r50_fpn_1x_coco.py'
 checkpoint_file = '/data1/qilei_chen/DATA/erosive/work_dirs/faster_rcnn_r50_fpn_1x_coco/epoch_10.pth'

@@ -9,19 +9,16 @@ data = dict(
     train=dict(
         type=dataset_type,
         # explicitly add your class names to the field `classes`
-        classes=classes,
         ann_file='/data1/qilei_chen/DATA/erosive/annotations/train.json',
         img_prefix='/data1/qilei_chen/DATA/erosive/images'),
     val=dict(
         type=dataset_type,
         # explicitly add your class names to the field `classes`
-        classes=classes,
         ann_file='/data1/qilei_chen/DATA/erosive/annotations/test.json',
         img_prefix='/data1/qilei_chen/DATA/erosive/images/'),
     test=dict(
         type=dataset_type,
         # explicitly add your class names to the field `classes`
-        classes=classes,
         ann_file='/data1/qilei_chen/DATA/erosive/annotations/test.json',
         img_prefix='/data1/qilei_chen/DATA/erosive/images/'))
 

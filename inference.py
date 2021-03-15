@@ -16,6 +16,9 @@ coco_instance = COCO(anns_file)
 coco_imgs = coco_instance.imgs
 
 for key in coco_imgs:
+    annIds = coco_instance.getAnnIds(imgIds= coco_imgs[key]['id'])
+    anns = coco_instance.loadAnns(annIds)
+    print(anns)
     img_file_name = coco_imgs[key]["file_name"]
     img_dir = os.path.join("/data1/qilei_chen/DATA/erosive/images",img_file_name)
     img = mmcv.imread(img_dir)

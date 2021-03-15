@@ -18,10 +18,15 @@ coco_imgs = coco_instance.imgs
 for key in coco_imgs:
     annIds = coco_instance.getAnnIds(imgIds= coco_imgs[key]['id'])
     anns = coco_instance.loadAnns(annIds)
-    print(anns)
+
     img_file_name = coco_imgs[key]["file_name"]
     img_dir = os.path.join("/data1/qilei_chen/DATA/erosive/images",img_file_name)
     img = mmcv.imread(img_dir)
+
+    for ann in anns:
+        [x,y,w,h] = ann['bbox']
+        cv2.rectangle(img, (int(x), int(y)), ((int(x+w), int(y+h)), (0,255,0), 2))
+
     result = inference_detector(model, img)
     model.show_result(img, result,bbox_color =(255,0,0), out_file='/data1/qilei_chen/DATA/erosive/work_dirs/faster_rcnn_r50_fpn_1x_coco/test_result/'+img_file_name)
 # img = 'test.jpg'  # or img = mmcv.imread(img), which will only load it once

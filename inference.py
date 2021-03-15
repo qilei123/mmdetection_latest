@@ -20,7 +20,7 @@ for key in coco_imgs:
     img_dir = os.path.join("/data1/qilei_chen/DATA/erosive/images",img_file_name)
     img = mmcv.imread(img_dir)
     result = inference_detector(model, img)
-    model.show_result(img, result, out_file='/data1/qilei_chen/DATA/erosive/work_dirs/faster_rcnn_r50_fpn_1x_coco/test_result/'+img_file_name)
+    model.show_result(img, result,bbox_color =(255,0,0), out_file='/data1/qilei_chen/DATA/erosive/work_dirs/faster_rcnn_r50_fpn_1x_coco/test_result/'+img_file_name)
 # img = 'test.jpg'  # or img = mmcv.imread(img), which will only load it once
 # result = inference_detector(model, img)
 # # visualize the results in a new window

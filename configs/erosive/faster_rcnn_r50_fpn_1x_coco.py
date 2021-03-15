@@ -11,19 +11,19 @@ data = dict(
         # explicitly add your class names to the field `classes`
         classes=classes,
         ann_file='/data1/qilei_chen/DATA/erosive/annotations/train.json',
-        img_prefix='/data1/qilei_chen/DATA/erosive/images/'),
+        img_prefix='/data1/qilei_chen/DATA/erosive/'),
     val=dict(
         type=dataset_type,
         # explicitly add your class names to the field `classes`
         classes=classes,
         ann_file='/data1/qilei_chen/DATA/erosive/annotations/test.json',
-        img_prefix='/data1/qilei_chen/DATA/erosive/images/'),
+        img_prefix='/data1/qilei_chen/DATA/erosive/'),
     test=dict(
         type=dataset_type,
         # explicitly add your class names to the field `classes`
         classes=classes,
         ann_file='/data1/qilei_chen/DATA/erosive/annotations/test.json',
-        img_prefix='/data1/qilei_chen/DATA/erosive/images/'))
+        img_prefix='/data1/qilei_chen/DATA/erosive/'))
 
 # 2. model settings
 

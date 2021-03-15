@@ -29,16 +29,6 @@ for key in coco_imgs:
         cv2.rectangle(img, (int(x), int(y)), (int(x+w), int(y+h)), (0,255,0), 2)
 
     result = inference_detector(model, img)
-    model.show_result(img, result,bbox_color =(255,0,0),text_color = (255,0,0),font_size=5, out_file='/data1/qilei_chen/DATA/erosive/work_dirs/faster_rcnn_r50_fpn_1x_coco/test_result/'+img_file_name)
-# img = 'test.jpg'  # or img = mmcv.imread(img), which will only load it once
-# result = inference_detector(model, img)
-# # visualize the results in a new window
-# model.show_result(img, result)
-# # or save the visualization results to image files
-# model.show_result(img, result, out_file='result.jpg')
-
-# # test a video and show the results
-# video = mmcv.VideoReader('video.mp4')
-# for frame in video:
-#     result = inference_detector(model, frame)
-#     model.show_result(frame, result, wait_time=1)
+    model.show_result(img, result,score_thr=0.1,bbox_color =(255,0,0),
+                    text_color = (255,0,0),font_size=5, 
+                    out_file='/data1/qilei_chen/DATA/erosive/work_dirs/faster_rcnn_r50_fpn_1x_coco/test_result/'+img_file_name)

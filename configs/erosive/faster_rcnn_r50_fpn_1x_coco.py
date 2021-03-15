@@ -2,7 +2,7 @@ _base_ = '../faster_rcnn/faster_rcnn_r50_fpn_1x_coco.py'
 
 # 1. dataset settings
 dataset_type = 'CocoDataset'
-classes = ('erosive')
+#classes = ('erosive')
 data = dict(
     samples_per_gpu=2,
     workers_per_gpu=2,
@@ -11,19 +11,19 @@ data = dict(
         # explicitly add your class names to the field `classes`
         classes=classes,
         ann_file='/data1/qilei_chen/DATA/erosive/annotations/train.json',
-        img_prefix='/data1/qilei_chen/DATA/erosive/'),
+        img_prefix='/data1/qilei_chen/DATA/erosive/images'),
     val=dict(
         type=dataset_type,
         # explicitly add your class names to the field `classes`
         classes=classes,
         ann_file='/data1/qilei_chen/DATA/erosive/annotations/test.json',
-        img_prefix='/data1/qilei_chen/DATA/erosive/'),
+        img_prefix='/data1/qilei_chen/DATA/erosive/images/'),
     test=dict(
         type=dataset_type,
         # explicitly add your class names to the field `classes`
         classes=classes,
         ann_file='/data1/qilei_chen/DATA/erosive/annotations/test.json',
-        img_prefix='/data1/qilei_chen/DATA/erosive/'))
+        img_prefix='/data1/qilei_chen/DATA/erosive/images/'))
 
 # 2. model settings
 

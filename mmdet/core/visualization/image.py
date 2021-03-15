@@ -142,7 +142,7 @@ def imshow_det_bboxes(img,
             f'{label_text}',
             bbox={
                 'facecolor': 'black',
-                'alpha': 0.8,
+                'alpha': 0.0,
                 'pad': 0.7,
                 'edgecolor': 'none'
             },

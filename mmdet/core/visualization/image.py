@@ -137,7 +137,7 @@ def imshow_det_bboxes(img,
         if len(bbox) > 4:
             label_text += f'|{bbox[-1]:.02f}'
         ax.text(
-            bbox_int[0],
+            bbox_int[0]+bbox_int[2],
             bbox_int[1],
             f'{label_text}',
             bbox={

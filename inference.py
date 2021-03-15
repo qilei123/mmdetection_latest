@@ -14,10 +14,10 @@ model = init_detector(config_file, checkpoint_file, device='cuda:0')
 anns_file = '/data1/qilei_chen/DATA/erosive/annotations/test.json'
 coco_instance = COCO(anns_file)
 coco_imgs = coco_instance.imgs
-print(coco_imgs)
+
 for key in coco_imgs:
     img_file_name = coco_imgs[key]["file_name"]
-    img_dir = os.path.join("/data1/qilei_chen/DATA/erosive",img_file_name)
+    img_dir = os.path.join("/data1/qilei_chen/DATA/erosive/images",img_file_name)
     img = mmcv.imread(img_dir)
     result = inference_detector(model, img)
     model.show_result(img, result, out_file='/data1/qilei_chen/DATA/erosive/work_dirs/faster_rcnn_r50_fpn_1x_coco/test_result/'+img_file_name)

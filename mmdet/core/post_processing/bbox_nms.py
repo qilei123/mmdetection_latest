@@ -80,7 +80,7 @@ def multiclass_nms(multi_bboxes,
             return bboxes, labels, inds
         else:
             return bboxes, labels
-
+    print(nms_cfg)
     dets, keep = batched_nms(bboxes, scores, labels, nms_cfg)
 
     if max_num > 0:

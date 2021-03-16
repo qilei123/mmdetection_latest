@@ -12,7 +12,7 @@ model = init_detector(config_file, checkpoint_file, device='cuda:0')
 
 
 # test images and show the results
-set_name = 'train'
+set_name = 'train' #['train','test']
 anns_file = '/data1/qilei_chen/DATA/erosive/annotations/'+set_name+'.json'
 coco_instance = COCO(anns_file)
 coco_imgs = coco_instance.imgs

@@ -12,7 +12,8 @@ model = init_detector(config_file, checkpoint_file, device='cuda:0')
 
 
 # test images and show the results
-anns_file = '/data1/qilei_chen/DATA/erosive/annotations/test.json'
+set_name = 'train'
+anns_file = '/data1/qilei_chen/DATA/erosive/annotations/'+set_name+'.json'
 coco_instance = COCO(anns_file)
 coco_imgs = coco_instance.imgs
 
@@ -32,4 +33,4 @@ for key in coco_imgs:
     score_thr=0.1
     model.show_result(img, result,score_thr=score_thr,bbox_color =(255,0,0),
                     text_color = (255,0,0),font_size=5, 
-                    out_file='/data1/qilei_chen/DATA/erosive/work_dirs/faster_rcnn_r50_fpn_1x_coco/test_result_'+str(score_thr)+'/'+img_file_name)
+                    out_file='/data1/qilei_chen/DATA/erosive/work_dirs/faster_rcnn_r50_fpn_1x_coco/'+set_name+'_result_'+str(score_thr)+'/'+img_file_name)

@@ -25,11 +25,12 @@ for key in coco_imgs:
     img_dir = os.path.join("/data1/qilei_chen/DATA/erosive/images",img_file_name)
     img = mmcv.imread(img_dir)
 
+
+
+    result = inference_detector(model, img)
     for ann in anns:
         [x,y,w,h] = ann['bbox']
         cv2.rectangle(img, (int(x), int(y)), (int(x+w), int(y+h)), (0,255,0), 2)
-
-    result = inference_detector(model, img)
     score_thr=0.1
     model.show_result(img, result,score_thr=score_thr,bbox_color =(255,0,0),
                     text_color = (255,0,0),font_size=5, 

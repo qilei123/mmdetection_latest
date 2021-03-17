@@ -22,3 +22,8 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 PORT=9646 \
 ./tools/dist_train.sh \
     configs/erosive/cascade_rcnn_r50_fpn_1x_coco.py 4 \
     '--work-dir /data1/qilei_chen/DATA/erosive/work_dirs/cascade_rcnn_r50_fpn_1x_coco/'
+
+CUDA_VISIBLE_DEVICES=0,1,2,3 PORT=7646 \
+./tools/dist_train.sh \
+    configs/erosive/yolov3_d53_320_273e_coco.py 4 \
+    '--work-dir /data1/qilei_chen/DATA/erosive/work_dirs/yolov3_d53_320_273e_coco/'

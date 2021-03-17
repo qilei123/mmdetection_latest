@@ -29,7 +29,7 @@ model = dict(
         nms_pre=100,
         min_bbox_size=0,
         score_thr=0.05,
-        nms=dict(type='nms', iou_threshold=0.1),
+        nms=dict(type='nms', iou_threshold=0.01),
         max_per_img=100))# explicitly over-write all the `num_classes` field from default 80 to 1.
 
 runner = dict(type='EpochBasedRunner', max_epochs=96)

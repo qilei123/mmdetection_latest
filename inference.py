@@ -122,7 +122,6 @@ def center_in_xywhrule(Point,Bbox):
 def filt_boxes(boxes_with_scores,thres):
     filted_boxes = []
     for box in boxes_with_scores:
-        print(box)
         if box[4]>=thres:
             filted_boxes.append(box[0:4])
     return filted_boxes
@@ -140,7 +139,7 @@ def peval(result_dir,coco_instance,thresh = 0.3):
     eval = Metric()
     
     for img_id in results:
-        filed_boxes = filt_boxes(results[img_id]['result'],thresh)
+        filed_boxes = filt_boxes(results[img_id]['result'][0],thresh)
         gtannIds = coco_instance.getAnnIds(imgIds= img_id)
         gtanns = coco_instance.loadAnns(gtannIds)  
         gtboxes = anns2gtboxes(gtanns)  

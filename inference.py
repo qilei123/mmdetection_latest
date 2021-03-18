@@ -80,7 +80,7 @@ def inference_and_save_result(model,coco_instance,img_folder_dir,result_save_dir
         results[coco_imgs[key]['id']] = dict()
         results[coco_imgs[key]['id']]['file_name'] = img_file_name
         results[coco_imgs[key]['id']]['result'] = result
-        print(results[coco_imgs[key]['id']])
+        break
 
     with open(result_save_dir, 'w') as fp:
         pickle.dump(results, fp)

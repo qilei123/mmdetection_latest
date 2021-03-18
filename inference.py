@@ -5,6 +5,7 @@ import os
 import cv2
 import json
 import pickle
+from metric_polyp import Metric
 def test_data():
     # Specify the path to model config and checkpoint file
     model_name = 'reppoints_moment_r50_fpn_1x_coco'
@@ -84,25 +85,82 @@ def inference_and_save_result(model,coco_instance,img_folder_dir,result_save_dir
     with open(result_save_dir, 'wb') as fp:
         pickle.dump(results, fp)
 
-if __name__=="__main__":
+def generate_result(coco_instance):
     # Specify the path to model config and checkpoint file
     model_name = 'reppoints_moment_r50_fpn_1x_coco'
-    score_thr=0.25
 
     config_file = 'configs/erosive/'+model_name+'.py'
     checkpoint_file = '/data1/qilei_chen/DATA/erosive/work_dirs/'+model_name+'/epoch_83.pth'
 
     # build the model from a config file and a checkpoint file
     model = init_detector(config_file, checkpoint_file, device='cuda:0')
+
+   
+    inference_and_save_result(model,coco_instance,"/data1/qilei_chen/DATA/erosive/images",checkpoint_file+".pkl")
+
+
+
+def xyxy2xywh(box):
+    return [box[0],box[1],box[2]-box[0],box[3]-box[1]]
+
+def xyxycenter(box):
+    return ((box[0]+box[2])/2,(box[1]+box[3])/2)
+
+def xywh2xyxy(box):
+    return [box[0],box[1],box[2]+box[0],box[3]+box[1]]
+def xywhcenter(box):
+    return (box[0]+box[2]/2,box[1]+box[3]/2)
+
+def center_in_xyxyrule(Point,Bbox):
+    if Point[0]>=Bbox[0] and Point[1]>=Bbox[1] and Point[0]<=Bbox[0]+Bbox[2] and Point[1]<=Bbox[1]+Bbox[3]:
+        return True
+    return False
+def center_in_xywhrule(Point,Bbox):
+    if Point[0]>=Bbox[0] and Point[1]>=Bbox[1] and Point[0]<=Bbox[2] and Point[1]<=Bbox[3]:
+        return True
+    return False
+def filt_boxes(boxes_with_scores,thres):
+    filted_boxes = []
+    for box in boxes_with_scores:
+        if box[4]>=thres:
+            filted_boxes.append(box[0:4])
+    return filted_boxes
+    
+def anns2gtboxes(gtanns):
+    gtboxes = []
+    for ann in gtanns:
+        gtboxes.append(xywh2xyxy(ann['bbox']))
+    return gtboxes
+
+def peval(result_dir,coco_instance,thresh = 0.3):
+    
+    fp = open(result_dir,'rb')
+    results = pickle.load(fp)
+    eval = Metric()
+    
+    for img_id in results:
+        filed_boxes = filt_boxes(results[img_id]['result'],thresh)
+        gtannIds = coco_instance.getAnnIds(imgIds= img_id)
+        gtanns = coco_instance.loadAnns(gtannIds)  
+        gtboxes = anns2gtboxes(gtanns)  
+        eval.eval_add_result(gtboxes,filed_boxes)   
+     
+    precision, recall = eval.get_result()
+    F1 = 2 * (precision * recall) / max((precision + recall), 1e-5)
+    F2 = 5 * (precision * recall) / max((4 * precision + recall), 1e-5)
+    out = "precision: {:.4f}  recall:  {:.4f} F1: {:.4f} F2: {:.4f} thresh: {:.4f} TP: {:3} FP: {:3} FN: {:3} FP+FN: {:3}" \
+        .format(precision, recall, F1, F2, thresh, len(eval.TPs), len(eval.FPs), len(eval.FNs), len(eval.FPs)+len(eval.FNs))
+    print (out)
+
+if __name__=="__main__":
     # test images and show the results
     set_name = 'test' #['train','test']
     anns_file = '/data1/qilei_chen/DATA/erosive/annotations/'+set_name+'.json'
     coco_instance = COCO(anns_file)
-    coco_imgs = coco_instance.imgs    
-    inference_and_save_result(model,coco_instance,"/data1/qilei_chen/DATA/erosive/images",checkpoint_file+".json")
-
-def eval(result_dir,coco_instance,thres = 0.3):
-    fp = open(result_dir,'rb')
-    results = pickle.load(fp)
     
+    //generate_result(coco_instance)
+
+    model_name = 'reppoints_moment_r50_fpn_1x_coco'
+    results_file_dir = '/data1/qilei_chen/DATA/erosive/work_dirs/'+model_name+'/epoch_83.pth.pkl'
+    peval(results_file_dir,coco_instance)
     

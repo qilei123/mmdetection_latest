@@ -6,6 +6,7 @@ import cv2
 import json
 import pickle
 from metric_polyp import Metric
+
 def test_data():
     # Specify the path to model config and checkpoint file
     model_name = 'reppoints_moment_r50_fpn_1x_coco'

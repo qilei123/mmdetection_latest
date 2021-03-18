@@ -109,7 +109,9 @@ def inference_detector(model, imgs):
 
     cfg.data.test.pipeline = replace_ImageToTensor(cfg.data.test.pipeline)
     test_pipeline = Compose(cfg.data.test.pipeline)
-
+    
+    import datetime
+    time0=datetime.datetime.now()    
     datas = []
     for img in imgs:
         # prepare data
@@ -122,7 +124,12 @@ def inference_detector(model, imgs):
         # build the data pipeline
         data = test_pipeline(data)
         datas.append(data)
+    time1=datetime.datetime.now()
+    print("test_pipeline process")
+    print((time1-time0).microseconds/1000)  
 
+    import datetime
+    time0=datetime.datetime.now()  
     data = collate(datas, samples_per_gpu=len(imgs))
     # just get the actual data from DataContainer
     data['img_metas'] = [img_metas.data[0] for img_metas in data['img_metas']]
@@ -135,7 +142,9 @@ def inference_detector(model, imgs):
             assert not isinstance(
                 m, RoIPool
             ), 'CPU inference with RoIPool is not supported currently.'
-
+    time1=datetime.datetime.now()
+    print("data cpu2gpu process")
+    print((time1-time0).microseconds/1000)  
     # forward the model
     with torch.no_grad():
         import datetime

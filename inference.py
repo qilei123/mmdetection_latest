@@ -85,7 +85,7 @@ def inference_and_save_result(model,coco_instance,img_folder_dir,result_save_dir
     with open(result_save_dir, 'wb') as fp:
         pickle.dump(results, fp)
 
-def generate_result(coco_instance):
+def generate_result(coco_instance,set_name = 'test'):
     # Specify the path to model config and checkpoint file
     model_name = 'reppoints_moment_r50_fpn_1x_coco'
 
@@ -96,7 +96,7 @@ def generate_result(coco_instance):
     model = init_detector(config_file, checkpoint_file, device='cuda:0')
 
    
-    inference_and_save_result(model,coco_instance,"/data1/qilei_chen/DATA/erosive/images",checkpoint_file+".pkl")
+    inference_and_save_result(model,coco_instance,"/data1/qilei_chen/DATA/erosive/images",checkpoint_file+"_"+set_name+".pkl")
 
 
 
@@ -156,13 +156,15 @@ def peval(result_dir,coco_instance,thresh = 0.3,with_empty_images=True):
 
 if __name__=="__main__":
     # test images and show the results
-    set_name = 'test' #['train','test']
+    sets = ['train','test']
+    set_name = sets[0] #
     anns_file = '/data1/qilei_chen/DATA/erosive/annotations/'+set_name+'.json'
     coco_instance = COCO(anns_file)
     
-    #generate_result(coco_instance)
-
+    generate_result(coco_instance,set_name)
+    '''
     model_name = 'reppoints_moment_r50_fpn_1x_coco'
-    results_file_dir = '/data1/qilei_chen/DATA/erosive/work_dirs/'+model_name+'/epoch_83.pth.pkl'
-    peval(results_file_dir,coco_instance,thresh=0.2,with_empty_images=False)
+    results_file_dir = '/data1/qilei_chen/DATA/erosive/work_dirs/'+model_name+'/epoch_83.pth'+'_'+set_name+'.pkl'
+    peval(results_file_dir,coco_instance,thresh=0.3,with_empty_images=False)
+    '''
     

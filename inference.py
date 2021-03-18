@@ -37,11 +37,12 @@ for key in coco_imgs:
     if not img_file_name in img_file_name_list:
         img_file_name_list[img_file_name] = []
         img_file_name_list[img_file_name].append(anns)
-        if len(anns)==0:
-            count_zero_ann+=1
+
     else:
         print(img_file_name)
         print(img_file_name_list[img_file_name])
+        if len(img_file_name_list[img_file_name])==0:
+            count_zero_ann+=1
         print(anns)
     '''
     img_file_name = coco_imgs[key]["file_name"]

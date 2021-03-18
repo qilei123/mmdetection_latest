@@ -84,7 +84,7 @@ def inference_and_save_result(model,coco_instance,img_folder_dir,result_save_dir
         time1=datetime.datetime.now()
         print("model process")
         print((time1-time0).microseconds/1000)
-           
+
         results[coco_imgs[key]['id']] = dict()
         results[coco_imgs[key]['id']]['file_name'] = img_file_name
         results[coco_imgs[key]['id']]['result'] = result
@@ -164,7 +164,7 @@ def peval(result_dir,coco_instance,thresh = 0.3,with_empty_images=True):
 if __name__=="__main__":
     # test images and show the results
     sets = ['train','test']
-    set_name = sets[1] #
+    set_name = sets[0] #
     anns_file = '/data1/qilei_chen/DATA/erosive/annotations/'+set_name+'.json'
     coco_instance = COCO(anns_file)
     

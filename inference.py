@@ -100,7 +100,6 @@ def generate_result(coco_instance,set_name = 'test'):
     inference_and_save_result(model,coco_instance,"/data1/qilei_chen/DATA/erosive/images",checkpoint_file+"_"+set_name+".pkl")
 
 
-
 def xyxy2xywh(box):
     return [box[0],box[1],box[2]-box[0],box[3]-box[1]]
 
@@ -158,7 +157,7 @@ def peval(result_dir,coco_instance,thresh = 0.3,with_empty_images=True):
 if __name__=="__main__":
     # test images and show the results
     sets = ['train','test']
-    set_name = sets[0] #
+    set_name = sets[1] #
     anns_file = '/data1/qilei_chen/DATA/erosive/annotations/'+set_name+'.json'
     coco_instance = COCO(anns_file)
     

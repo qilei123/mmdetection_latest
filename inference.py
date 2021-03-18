@@ -20,17 +20,22 @@ anns_file = '/data1/qilei_chen/DATA/erosive/annotations/'+set_name+'.json'
 coco_instance = COCO(anns_file)
 coco_imgs = coco_instance.imgs
 
+count_images_with_anns = 0
+count_anns = 0
+
 for key in coco_imgs:
     annIds = coco_instance.getAnnIds(imgIds= coco_imgs[key]['id'])
     anns = coco_instance.loadAnns(annIds)
-
+    if not len(anns)==0:
+        count_images_with_anns+=1
+        count_anns+=len(anns)
+    '''
     img_file_name = coco_imgs[key]["file_name"]
     img_dir = os.path.join("/data1/qilei_chen/DATA/erosive/images",img_file_name)
     img = mmcv.imread(img_dir)
 
-
-
     result = inference_detector(model, img)
+
     for ann in anns:
         [x,y,w,h] = ann['bbox']
         cv2.rectangle(img, (int(x), int(y)), (int(x+w), int(y+h)), (0,255,0), 2)
@@ -38,3 +43,6 @@ for key in coco_imgs:
     model.show_result(img, result,score_thr=score_thr,bbox_color =(255,0,0),
                     text_color = (255,0,0),font_size=5, 
                     out_file='/data1/qilei_chen/DATA/erosive/work_dirs/'+model_name+'/'+set_name+'_result_'+str(score_thr)+'/'+img_file_name)
+    '''
+print(count_images_with_anns)
+print(count_anns)

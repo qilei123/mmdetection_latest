@@ -41,7 +41,7 @@ for key in coco_imgs:
     else:
         print(img_file_name)
         print(img_file_name_list[img_file_name])
-        if len(img_file_name_list[img_file_name])==0:
+        if len(img_file_name_list[img_file_name][0])==0:
             count_zero_ann+=1
         print(anns)
     '''

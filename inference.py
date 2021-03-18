@@ -122,6 +122,7 @@ def center_in_xywhrule(Point,Bbox):
 def filt_boxes(boxes_with_scores,thres):
     filted_boxes = []
     for box in boxes_with_scores:
+        print(box)
         if box[4]>=thres:
             filted_boxes.append(box[0:4])
     return filted_boxes

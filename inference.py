@@ -132,7 +132,7 @@ def anns2gtboxes(gtanns):
         gtboxes.append(xywh2xyxy(ann['bbox']))
     return gtboxes
 
-def peval(result_dir,coco_instance,thresh = 0.3):
+def peval(result_dir,coco_instance,thresh = 0.3,with_empty_images=True):
     
     fp = open(result_dir,'rb')
     results = pickle.load(fp)
@@ -143,6 +143,8 @@ def peval(result_dir,coco_instance,thresh = 0.3):
         gtannIds = coco_instance.getAnnIds(imgIds= img_id)
         gtanns = coco_instance.loadAnns(gtannIds)  
         gtboxes = anns2gtboxes(gtanns)  
+        if len(gtboxes)==0 and (not with_empty_images):
+            continue
         eval.eval_add_result(gtboxes,filed_boxes)   
      
     precision, recall = eval.get_result()

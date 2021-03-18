@@ -74,10 +74,12 @@ def inference_and_save_result(model,coco_instance,img_folder_dir,result_save_dir
         img_file_name = coco_imgs[key]["file_name"]
         img_dir = os.path.join(img_folder_dir,img_file_name)
         img = mmcv.imread(img_dir)
-        result = inference_detector(model, img)        
+        result = inference_detector(model, img)   
+
         results[coco_imgs[key]['id']] = dict()
         results[coco_imgs[key]['id']]['file_name'] = img_file_name
         results[coco_imgs[key]['id']]['result'] = result
+        print(results[coco_imgs[key]['id']])
 
     with open(result_save_dir, 'w') as fp:
         json.dump(results, fp)
@@ -98,4 +100,7 @@ if __name__=="__main__":
     coco_instance = COCO(anns_file)
     coco_imgs = coco_instance.imgs    
     inference_and_save_result(model,coco_instance,"/data1/qilei_chen/DATA/erosive/images",checkpoint_file+".json")
+
+def eval(result_dir,coco_instance,thres = 0.3):
+
     

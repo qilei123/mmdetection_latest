@@ -15,7 +15,7 @@ checkpoint_file = '/data1/qilei_chen/DATA/erosive/work_dirs/'+model_name+'/epoch
 
 
 # test images and show the results
-set_name = 'train' #['train','test']
+set_name = 'test' #['train','test']
 anns_file = '/data1/qilei_chen/DATA/erosive/annotations/'+set_name+'.json'
 coco_instance = COCO(anns_file)
 coco_imgs = coco_instance.imgs
@@ -23,7 +23,7 @@ coco_imgs = coco_instance.imgs
 count_images_with_anns = 0
 count_images_without_anns = 0
 count_anns = 0
-img_file_name_list = []
+img_file_name_list = {}
 for key in coco_imgs:
     annIds = coco_instance.getAnnIds(imgIds= coco_imgs[key]['id'])
     anns = coco_instance.loadAnns(annIds)
@@ -34,9 +34,12 @@ for key in coco_imgs:
         count_images_without_anns+=1
     img_file_name = coco_imgs[key]["file_name"]
     if not img_file_name in img_file_name_list:
-        img_file_name_list.append(img_file_name)
+        img_file_name_list[img_file_name] = []
+        img_file_name_list[img_file_name].append(anns)
     else:
         print(img_file_name)
+        print(img_file_name_list[img_file_name])
+        print(anns)
     '''
     img_file_name = coco_imgs[key]["file_name"]
     img_dir = os.path.join("/data1/qilei_chen/DATA/erosive/images",img_file_name)

@@ -123,7 +123,7 @@ custom_hooks = [dict(type='NumClassCheckHook')]
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
 load_from = None
-resume_from = '/data1/qilei_chen/DATA/erosive/work_dirs/reppoints_moment_r50_fpn_1x_coco/latest.pth'
+resume_from = None
 workflow = [('train', 1)]
 model = dict(
     type='RepPointsDetector',

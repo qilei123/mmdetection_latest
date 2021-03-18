@@ -24,6 +24,7 @@ count_images_with_anns = 0
 count_images_without_anns = 0
 count_anns = 0
 img_file_name_list = {}
+count_zero_ann = 0
 for key in coco_imgs:
     annIds = coco_instance.getAnnIds(imgIds= coco_imgs[key]['id'])
     anns = coco_instance.loadAnns(annIds)
@@ -36,6 +37,8 @@ for key in coco_imgs:
     if not img_file_name in img_file_name_list:
         img_file_name_list[img_file_name] = []
         img_file_name_list[img_file_name].append(anns)
+        if len(anns)==0:
+            count_zero_ann+=1
     else:
         print(img_file_name)
         print(img_file_name_list[img_file_name])
@@ -59,3 +62,4 @@ print(count_images_with_anns)
 print(count_anns)
 print(count_images_without_anns)
 print(len(img_file_name_list))
+print(count_zero_ann)

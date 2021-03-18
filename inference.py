@@ -4,6 +4,7 @@ from pycocotools.coco import COCO
 import os
 import cv2
 import json
+import pickle
 def test_data():
     # Specify the path to model config and checkpoint file
     model_name = 'reppoints_moment_r50_fpn_1x_coco'
@@ -82,7 +83,7 @@ def inference_and_save_result(model,coco_instance,img_folder_dir,result_save_dir
         print(results[coco_imgs[key]['id']])
 
     with open(result_save_dir, 'w') as fp:
-        json.dump(results, fp)
+        pickle.dump(results, fp)
 
 if __name__=="__main__":
     # Specify the path to model config and checkpoint file
@@ -102,5 +103,5 @@ if __name__=="__main__":
     inference_and_save_result(model,coco_instance,"/data1/qilei_chen/DATA/erosive/images",checkpoint_file+".json")
 
 def eval(result_dir,coco_instance,thres = 0.3):
-
+    pass
     

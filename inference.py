@@ -11,11 +11,11 @@ config_file = 'configs/erosive/'+model_name+'.py'
 checkpoint_file = '/data1/qilei_chen/DATA/erosive/work_dirs/'+model_name+'/epoch_83.pth'
 
 # build the model from a config file and a checkpoint file
-model = init_detector(config_file, checkpoint_file, device='cuda:0')
+#model = init_detector(config_file, checkpoint_file, device='cuda:0')
 
 
 # test images and show the results
-set_name = 'test' #['train','test']
+set_name = 'train' #['train','test']
 anns_file = '/data1/qilei_chen/DATA/erosive/annotations/'+set_name+'.json'
 coco_instance = COCO(anns_file)
 coco_imgs = coco_instance.imgs

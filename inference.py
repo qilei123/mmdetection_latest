@@ -77,8 +77,14 @@ def inference_and_save_result(model,coco_instance,img_folder_dir,result_save_dir
         img_file_name = coco_imgs[key]["file_name"]
         img_dir = os.path.join(img_folder_dir,img_file_name)
         img = mmcv.imread(img_dir)
-        result = inference_detector(model, img)   
 
+        import datetime
+        time0=datetime.datetime.now()
+        result = inference_detector(model, img)   
+        time1=datetime.datetime.now()
+        print("model process")
+        print((time1-time0).microseconds/1000)
+           
         results[coco_imgs[key]['id']] = dict()
         results[coco_imgs[key]['id']]['file_name'] = img_file_name
         results[coco_imgs[key]['id']]['result'] = result
@@ -94,6 +100,7 @@ def generate_result(coco_instance,set_name = 'test'):
     checkpoint_file = '/data1/qilei_chen/DATA/erosive/work_dirs/'+model_name+'/epoch_83.pth'
 
     # build the model from a config file and a checkpoint file
+
     model = init_detector(config_file, checkpoint_file, device='cuda:0')
 
    

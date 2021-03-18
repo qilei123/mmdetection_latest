@@ -138,7 +138,12 @@ def inference_detector(model, imgs):
 
     # forward the model
     with torch.no_grad():
+        import datetime
+        time0=datetime.datetime.now()
         results = model(return_loss=False, rescale=True, **data)
+        time1=datetime.datetime.now()
+        print("model process")
+        print((time1-time0).microseconds/1000)        
 
     if not is_batch:
         return results[0]

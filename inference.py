@@ -82,7 +82,7 @@ def inference_and_save_result(model,coco_instance,img_folder_dir,result_save_dir
         time0=datetime.datetime.now()
         result = inference_detector(model, img)   
         time1=datetime.datetime.now()
-        print("model process")
+        print("inference_detector process")
         print((time1-time0).microseconds/1000)
 
         results[coco_imgs[key]['id']] = dict()

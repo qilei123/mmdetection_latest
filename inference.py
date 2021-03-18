@@ -23,7 +23,7 @@ coco_imgs = coco_instance.imgs
 count_images_with_anns = 0
 count_images_without_anns = 0
 count_anns = 0
-
+img_file_name_list = []
 for key in coco_imgs:
     annIds = coco_instance.getAnnIds(imgIds= coco_imgs[key]['id'])
     anns = coco_instance.loadAnns(annIds)
@@ -32,6 +32,11 @@ for key in coco_imgs:
         count_anns+=len(anns)
     else:
         count_images_without_anns+=1
+    img_file_name = coco_imgs[key]["file_name"]
+    if not img_file_name in img_file_name_list:
+        img_file_name_list.append(img_file_name)
+    else:
+        print(img_file_name)
     '''
     img_file_name = coco_imgs[key]["file_name"]
     img_dir = os.path.join("/data1/qilei_chen/DATA/erosive/images",img_file_name)
@@ -50,3 +55,4 @@ for key in coco_imgs:
 print(count_images_with_anns)
 print(count_anns)
 print(count_images_without_anns)
+print(len(img_file_name_list))

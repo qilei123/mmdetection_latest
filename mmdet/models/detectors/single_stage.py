@@ -113,15 +113,15 @@ class SingleStageDetector(BaseDetector):
         time0=datetime.datetime.now()        
         x = self.extract_feat(img)
         time1=datetime.datetime.now()
-        print("extract_feat process")
-        print((time1-time0).microseconds/1000)
+        #print("extract_feat process")
+        #print((time1-time0).microseconds/1000)
 
         import datetime
         time0=datetime.datetime.now() 
         outs = self.bbox_head(x)
         time1=datetime.datetime.now()
-        print("bbox_head process")
-        print((time1-time0).microseconds/1000)
+        #print("bbox_head process")
+        #print((time1-time0).microseconds/1000)
 
         # get origin input shape to support onnx dynamic shape
         if torch.onnx.is_in_onnx_export():

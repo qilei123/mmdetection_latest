@@ -108,6 +108,8 @@ def generate_result(model_name,work_dir,model_epoch,coco_instance,set_name = 'te
    
     inference_and_save_result(model,coco_instance,"/data1/qilei_chen/DATA/erosive/images",checkpoint_file+"_"+set_name+".pkl")
 
+    return checkpoint_file+"_"+set_name+".pkl"
+
 
 def xyxy2xywh(box):
     return [box[0],box[1],box[2]-box[0],box[3]-box[1]]
@@ -173,12 +175,11 @@ if __name__=="__main__":
     coco_instance = COCO(anns_file)
     
 
-    model_name = 'faster_rcnn_r50_fpn_1x_coco'
+    model_name = 'cascade_rcnn_r50_fpn_1x_coco'
     work_dir = '/data1/qilei_chen/DATA/erosive/work_dirs/'
     model_epoch = 'epoch_10.pth'
-    generate_result(model_name,work_dir,model_epoch,coco_instance,set_name)
-    
-    results_file_dir = os.path.join(work_dir,model_name,model_epoch+'_'+set_name+'.pkl')
+    results_file_dir = generate_result(model_name,work_dir,model_epoch,coco_instance,set_name)
+
     peval(results_file_dir,coco_instance,thresh=0.3,with_empty_images=True)
     
     

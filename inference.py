@@ -72,7 +72,8 @@ def test_data(with_gt=False):
     print(len(img_file_name_list))
     print(count_zero_ann)
 
-def inference_and_save_result(model,coco_instance,img_folder_dir,result_save_dir):
+def inference_and_save_result(model,coco_instance,img_folder_dir,
+                        result_save_dir,imshow = False,score_thr=0.3):
     coco_imgs = coco_instance.imgs
     results = dict()
     for key in coco_imgs:
@@ -87,6 +88,17 @@ def inference_and_save_result(model,coco_instance,img_folder_dir,result_save_dir
         #print("--------inference_detector process--------")
         #print((time1-time0).microseconds/1000)
 
+        if imshow:
+            annIds = coco_instance.getAnnIds(imgIds= coco_imgs[key]['id'])
+            anns = coco_instance.loadAnns(annIds)            
+            for ann in anns:
+                [x,y,w,h] = ann['bbox']
+                cv2.rectangle(img, (int(x), int(y)), (int(x+w), int(y+h)), (0,255,0), 2)
+            out_file = result_save_dir+'_result_'+str(score_thr)+'/'+img_file_name
+            model.show_result(img, result,score_thr=score_thr,bbox_color =(255,0,0),
+                            text_color = (255,0,0),font_size=5, 
+                            out_file=out_file)            
+
         results[coco_imgs[key]['id']] = dict()
         results[coco_imgs[key]['id']]['file_name'] = img_file_name
         results[coco_imgs[key]['id']]['result'] = result
@@ -94,7 +106,8 @@ def inference_and_save_result(model,coco_instance,img_folder_dir,result_save_dir
     with open(result_save_dir, 'wb') as fp:
         pickle.dump(results, fp)
 
-def generate_result(model_name,work_dir,model_epoch,coco_instance,set_name = 'test'):
+def generate_result(model_name,work_dir,model_epoch,
+                coco_instance,set_name = 'test',imshow = False,score_thr = 0.3):
     # Specify the path to model config and checkpoint file
     #model_name = 'reppoints_moment_r50_fpn_1x_coco'
 
@@ -106,7 +119,8 @@ def generate_result(model_name,work_dir,model_epoch,coco_instance,set_name = 'te
     model = init_detector(config_file, checkpoint_file, device='cuda:0')
 
    
-    inference_and_save_result(model,coco_instance,"/data1/qilei_chen/DATA/erosive/images",checkpoint_file+"_"+set_name+".pkl")
+    inference_and_save_result(model,coco_instance,"/data1/qilei_chen/DATA/erosive/images",
+                    checkpoint_file+"_"+set_name+".pkl",imshow=imshow,score_thr = score_thr)
 
     return checkpoint_file+"_"+set_name+".pkl"
 
@@ -178,7 +192,7 @@ if __name__=="__main__":
     model_name = 'cascade_rcnn_r50_fpn_1x_coco'
     work_dir = '/data1/qilei_chen/DATA/erosive/work_dirs/'
     model_epoch = 'epoch_10.pth'
-    results_file_dir = generate_result(model_name,work_dir,model_epoch,coco_instance,set_name)
+    results_file_dir = generate_result(model_name,work_dir,model_epoch,coco_instance,set_name,imshow=True)
 
     peval(results_file_dir,coco_instance,thresh=0.3,with_empty_images=True)
     

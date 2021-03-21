@@ -165,14 +165,14 @@ def peval(result_dir,coco_instance,thresh = 0.3,with_empty_images=True):
 
 if __name__=="__main__":
     # test images and show the results
-    test_data()
+    #test_data()
     
     sets = ['train','test']
-    set_name = sets[0] #
+    set_name = sets[1] #
     anns_file = '/data1/qilei_chen/DATA/erosive/annotations/'+set_name+'.json'
     coco_instance = COCO(anns_file)
     
-    generate_result(coco_instance,set_name)
+    #generate_result(coco_instance,set_name)
     
     
     model_name = 'reppoints_moment_r50_fpn_1x_coco'

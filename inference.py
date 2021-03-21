@@ -177,6 +177,6 @@ if __name__=="__main__":
     
     model_name = 'reppoints_moment_r50_fpn_1x_coco'
     results_file_dir = '/data1/qilei_chen/DATA/erosive/work_dirs/'+model_name+'/epoch_83.pth'+'_'+set_name+'.pkl'
-    peval(results_file_dir,coco_instance,thresh=0.3,with_empty_images=False)
+    peval(results_file_dir,coco_instance,thresh=0.3,with_empty_images=True)
     
     

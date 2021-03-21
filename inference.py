@@ -7,7 +7,7 @@ import json
 import pickle
 from metric_polyp import Metric
 
-def test_data():
+def test_data(with_gt=False):
     # Specify the path to model config and checkpoint file
     model_name = 'reppoints_moment_r50_fpn_1x_coco'
     score_thr=0.3
@@ -57,10 +57,10 @@ def test_data():
         img = mmcv.imread(img_dir)
 
         result = inference_detector(model, img)
-
-        for ann in anns:
-            [x,y,w,h] = ann['bbox']
-            cv2.rectangle(img, (int(x), int(y)), (int(x+w), int(y+h)), (0,255,0), 2)
+        if with_gt:
+            for ann in anns:
+                [x,y,w,h] = ann['bbox']
+                cv2.rectangle(img, (int(x), int(y)), (int(x+w), int(y+h)), (0,255,0), 2)
         
         model.show_result(img, result,score_thr=score_thr,bbox_color =(255,0,0),
                         text_color = (255,0,0),font_size=5, 
@@ -166,7 +166,7 @@ def peval(result_dir,coco_instance,thresh = 0.3,with_empty_images=True):
 if __name__=="__main__":
     # test images and show the results
     test_data()
-    '''
+    
     sets = ['train','test']
     set_name = sets[0] #
     anns_file = '/data1/qilei_chen/DATA/erosive/annotations/'+set_name+'.json'
@@ -178,5 +178,5 @@ if __name__=="__main__":
     model_name = 'reppoints_moment_r50_fpn_1x_coco'
     results_file_dir = '/data1/qilei_chen/DATA/erosive/work_dirs/'+model_name+'/epoch_83.pth'+'_'+set_name+'.pkl'
     peval(results_file_dir,coco_instance,thresh=0.3,with_empty_images=False)
-    '''
+    
     

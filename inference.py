@@ -10,13 +10,13 @@ from metric_polyp import Metric
 def test_data():
     # Specify the path to model config and checkpoint file
     model_name = 'reppoints_moment_r50_fpn_1x_coco'
-    score_thr=0.25
+    score_thr=0.3
 
     config_file = 'configs/erosive/'+model_name+'.py'
     checkpoint_file = '/data1/qilei_chen/DATA/erosive/work_dirs/'+model_name+'/epoch_83.pth'
 
     # build the model from a config file and a checkpoint file
-    #model = init_detector(config_file, checkpoint_file, device='cuda:0')
+    model = init_detector(config_file, checkpoint_file, device='cuda:0')
 
 
     # test images and show the results
@@ -46,12 +46,12 @@ def test_data():
             img_file_name_list[img_file_name] = []
             img_file_name_list[img_file_name].append(anns)
         else:
-            print(img_file_name)
-            print(img_file_name_list[img_file_name])
+            #print(img_file_name)
+            #print(img_file_name_list[img_file_name])
             if len(img_file_name_list[img_file_name][0])==0:
                 count_zero_ann+=1
-            print(anns)
-        '''
+            #print(anns)
+        
         img_file_name = coco_imgs[key]["file_name"]
         img_dir = os.path.join("/data1/qilei_chen/DATA/erosive/images",img_file_name)
         img = mmcv.imread(img_dir)
@@ -65,7 +65,7 @@ def test_data():
         model.show_result(img, result,score_thr=score_thr,bbox_color =(255,0,0),
                         text_color = (255,0,0),font_size=5, 
                         out_file='/data1/qilei_chen/DATA/erosive/work_dirs/'+model_name+'/'+set_name+'_result_'+str(score_thr)+'/'+img_file_name)
-        '''
+    
     print(count_images_with_anns)
     print(count_anns)
     print(count_images_without_anns)
@@ -165,8 +165,8 @@ def peval(result_dir,coco_instance,thresh = 0.3,with_empty_images=True):
 
 if __name__=="__main__":
     # test images and show the results
-    #test_data()
-    
+    test_data()
+    '''
     sets = ['train','test']
     set_name = sets[0] #
     anns_file = '/data1/qilei_chen/DATA/erosive/annotations/'+set_name+'.json'
@@ -174,7 +174,7 @@ if __name__=="__main__":
     
     generate_result(coco_instance,set_name)
     
-    '''
+    
     model_name = 'reppoints_moment_r50_fpn_1x_coco'
     results_file_dir = '/data1/qilei_chen/DATA/erosive/work_dirs/'+model_name+'/epoch_83.pth'+'_'+set_name+'.pkl'
     peval(results_file_dir,coco_instance,thresh=0.3,with_empty_images=False)

@@ -94,12 +94,12 @@ def inference_and_save_result(model,coco_instance,img_folder_dir,result_save_dir
     with open(result_save_dir, 'wb') as fp:
         pickle.dump(results, fp)
 
-def generate_result(coco_instance,set_name = 'test'):
+def generate_result(model_name,work_dir,model_epoch,coco_instance,set_name = 'test'):
     # Specify the path to model config and checkpoint file
-    model_name = 'reppoints_moment_r50_fpn_1x_coco'
+    #model_name = 'reppoints_moment_r50_fpn_1x_coco'
 
     config_file = 'configs/erosive/'+model_name+'.py'
-    checkpoint_file = '/data1/qilei_chen/DATA/erosive/work_dirs/'+model_name+'/epoch_83.pth'
+    checkpoint_file = os.path.join(work_dir,model_name,model_epoch)
 
     # build the model from a config file and a checkpoint file
 
@@ -172,11 +172,13 @@ if __name__=="__main__":
     anns_file = '/data1/qilei_chen/DATA/erosive/annotations/'+set_name+'.json'
     coco_instance = COCO(anns_file)
     
-    #generate_result(coco_instance,set_name)
-    
-    
+
     model_name = 'reppoints_moment_r50_fpn_1x_coco'
-    results_file_dir = '/data1/qilei_chen/DATA/erosive/work_dirs/'+model_name+'/epoch_83.pth'+'_'+set_name+'.pkl'
+    work_dir = '/data1/qilei_chen/DATA/erosive/work_dirs/'
+    model_epoch = 'epoch_83.pth'
+    generate_result(model_name,work_dir,model_epoch,coco_instance,set_name)
+    
+    results_file_dir = os.path.join(work_dir,model_name,model_epoch+'_'+set_name+'.pkl')
     peval(results_file_dir,coco_instance,thresh=0.3,with_empty_images=True)
     
     

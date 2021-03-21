@@ -32,8 +32,8 @@ def test_data():
     count_zero_ann = 0
 
     for key in coco_imgs:
-        print(key)
-        print(coco_imgs[key]['id'])
+        #print(key)
+        #print(coco_imgs[key]['id'])
         annIds = coco_instance.getAnnIds(imgIds= coco_imgs[key]['id'])
         anns = coco_instance.loadAnns(annIds)
         if not len(anns)==0:

@@ -84,6 +84,16 @@ model = dict(
                     loss_weight=1.0),
                 loss_bbox=dict(type='SmoothL1Loss', beta=1.0, loss_weight=1.0))
         ]),
+    test_cfg=dict(
+        rpn=dict(
+            nms_pre=1000,
+            max_per_img=1000,
+            nms=dict(type='nms', iou_threshold=0.7),
+            min_bbox_size=0),
+        rcnn=dict(
+            score_thr=0.05,
+            nms=dict(type='nms', iou_threshold=0.01),
+            max_per_img=100))
 )# explicitly over-write all the `num_classes` field from default 80 to 1.
 runner = dict(type='EpochBasedRunner', max_epochs=24)
 resume_from = "/data1/qilei_chen/DATA/erosive/work_dirs/cascade_rcnn_r50_fpn_1x_coco/latest.pth"

@@ -179,6 +179,45 @@ def peval(result_dir,coco_instance,thresh = 0.3,with_empty_images=True):
         .format(precision, recall, F1, F2, thresh, len(eval.TPs), len(eval.FPs), len(eval.FNs), len(eval.FPs)+len(eval.FNs))
     print (out)
 
+def getResult(imgid,json_results):
+    results = []
+    for result in json_results:
+        if imgid==result["image_id"]:
+            box = xywh2xyxy(result["bbox"])
+            box.append(result['score'])
+            results.append(box)
+
+    return results
+
+
+def peval_yolof(result_dir,coco_instance,thresh = 0.3,with_empty_images=True):
+    
+    fp = open(result_dir,'rb')
+    results = json.load(fp)
+    eval = Metric()
+    coco_imgs = coco_instance.imgs
+    for img_id in coco_imgs:
+        filed_boxes = filt_boxes(getResult(img_id,results),thresh)
+        gtannIds = coco_instance.getAnnIds(imgIds= img_id)
+        gtanns = coco_instance.loadAnns(gtannIds)  
+        gtboxes = anns2gtboxes(gtanns)  
+        if len(gtboxes)==0 and (not with_empty_images):
+            continue
+        eval.eval_add_result(gtboxes,filed_boxes)   
+     
+    precision, recall = eval.get_result()
+    F1 = 2 * (precision * recall) / max((precision + recall), 1e-5)
+    F2 = 5 * (precision * recall) / max((4 * precision + recall), 1e-5)
+    out = "precision: {:.4f}  recall:  {:.4f} F1: {:.4f} F2: {:.4f} thresh: {:.4f} TP: {:3} FP: {:3} FN: {:3} FP+FN: {:3}" \
+        .format(precision, recall, F1, F2, thresh, len(eval.TPs), len(eval.FPs), len(eval.FNs), len(eval.FPs)+len(eval.FNs))
+    print (out)
+
+
+def eval_yolof(coco_instance):
+
+    results_file_dir = "/data1/qilei_chen/DATA/erosive/work_dirs_yolof/R_50_C5_1x/inference/coco_instances_results.json"
+    peval_yolof(results_file_dir,coco_instance)
+
 if __name__=="__main__":
     # test images and show the results
     #test_data()
@@ -188,7 +227,7 @@ if __name__=="__main__":
     anns_file = '/data1/qilei_chen/DATA/erosive/annotations/'+set_name+'.json'
     coco_instance = COCO(anns_file)
     
-
+    '''
     model_name = 'cascade_rcnn_r50_fpn_1x_coco_with_empty'
     work_dir = '/data1/qilei_chen/DATA/erosive/work_dirs/'
     model_epoch = 'epoch_10.pth'
@@ -197,5 +236,6 @@ if __name__=="__main__":
     results_file_dir = generate_result(model_name,work_dir,model_epoch,coco_instance,set_name,imshow=True)
 
     peval(results_file_dir,coco_instance,thresh=0.3,with_empty_images=False)
-    
+    '''
+    eval_yolof(coco_instance)
     

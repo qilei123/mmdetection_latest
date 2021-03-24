@@ -228,7 +228,7 @@ if __name__=="__main__":
     coco_instance = COCO(anns_file)
     
     
-    model_name = 'reppoints_moment_r50_fpn_1x'
+    model_name = 'reppoints_moment_r50_fpn_1x_coco'
     work_dir = '/data1/qilei_chen/DATA/erosive/work_dirs/'
     model_epoch = 'epoch_83.pth'
     

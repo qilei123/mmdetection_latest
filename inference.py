@@ -158,7 +158,7 @@ def anns2gtboxes(gtanns):
     return gtboxes
 
 def peval(result_dir,coco_instance,thresh = 0.3,with_empty_images=True):
-    
+    print(result_dir)
     fp = open(result_dir,'rb')
     results = pickle.load(fp)
     eval = Metric()

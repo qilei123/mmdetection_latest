@@ -216,7 +216,7 @@ def peval_yolof(result_dir,coco_instance,thresh = 0.3,with_empty_images=True):
 def eval_yolof(coco_instance):
 
     results_file_dir = "/data1/qilei_chen/DATA/erosive/work_dirs_yolof/R_50_C5_1x/inference/coco_instances_results.json"
-    peval_yolof(results_file_dir,coco_instance)
+    peval_yolof(results_file_dir,coco_instance,with_empty_images=False)
 
 if __name__=="__main__":
     # test images and show the results

@@ -158,8 +158,7 @@ def anns2gtboxes(gtanns):
     return gtboxes
 
 def peval(result_dir,coco_instance,thresh = 0.3,with_empty_images=True):
-    print(result_dir)
-    result_dir = '/data1/qilei_chen/DATA/erosive/work_dirs/reppoints_moment_r50_fpn_1x_coco/epoch_83.pth.pkl'
+    
     fp = open(result_dir,'rb')
     results = pickle.load(fp)
     eval = Metric()
@@ -229,9 +228,9 @@ if __name__=="__main__":
     coco_instance = COCO(anns_file)
     
     
-    model_name = 'reppoints_moment_r50_fpn_1x'
+    model_name = 'faster_rcnn_r50_fpn_1x_coco'
     work_dir = '/data1/qilei_chen/DATA/erosive/work_dirs/'
-    model_epoch = 'epoch_83.pth'
+    model_epoch = 'epoch_10.pth'
     
     results_file_dir = os.path.join(work_dir,model_name,model_epoch+"_"+set_name+".pkl")
     #results_file_dir = generate_result(model_name,work_dir,model_epoch,coco_instance,set_name,imshow=True)

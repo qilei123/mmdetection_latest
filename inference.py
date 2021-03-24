@@ -159,7 +159,7 @@ def anns2gtboxes(gtanns):
 
 def peval(result_dir,coco_instance,thresh = 0.3,with_empty_images=True):
     print(result_dir)
-    result_dir = 'data1/qilei_chen/DATA/erosive/work_dirs/reppoints_moment_r50_fpn_1x_coco/epoch_83.pth.pkl'
+    result_dir = '/data1/qilei_chen/DATA/erosive/work_dirs/reppoints_moment_r50_fpn_1x_coco/epoch_83.pth.pkl'
     fp = open(result_dir,'rb')
     results = pickle.load(fp)
     eval = Metric()

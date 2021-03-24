@@ -190,7 +190,7 @@ def getResult(imgid,json_results):
     return results
 
 
-def peval_yolof(result_dir,coco_instance,thresh = 0.3,with_empty_images=True):
+def peval_yolof(result_dir,coco_instance,thresh = 0.2,with_empty_images=True):
     
     fp = open(result_dir,'rb')
     results = json.load(fp)
@@ -227,7 +227,7 @@ if __name__=="__main__":
     anns_file = '/data1/qilei_chen/DATA/erosive/annotations/'+set_name+'.json'
     coco_instance = COCO(anns_file)
     
-    
+    '''
     model_name = 'faster_rcnn_mobilev2_fpn_1x_coco'
     work_dir = '/data1/qilei_chen/DATA/erosive/work_dirs/'
     model_epoch = 'epoch_10.pth'
@@ -236,6 +236,6 @@ if __name__=="__main__":
     results_file_dir = generate_result(model_name,work_dir,model_epoch,coco_instance,set_name,imshow=True)
 
     peval(results_file_dir,coco_instance,thresh=0.3,with_empty_images=True)
-    
-    #eval_yolof(coco_instance)
+    '''
+    eval_yolof(coco_instance)
     

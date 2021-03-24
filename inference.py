@@ -190,8 +190,8 @@ def getResult(imgid,json_results):
     return results
 
 
-def peval_yolof(result_dir,coco_instance,thresh = 0.05,with_empty_images=True):
-    
+def peval_yolof(result_dir,coco_instance,thresh = 0.00,with_empty_images=True):
+    print("-------"+str(thresh)+"-------")
     fp = open(result_dir,'rb')
     results = json.load(fp)
     eval = Metric()

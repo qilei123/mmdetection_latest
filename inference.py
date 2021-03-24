@@ -235,7 +235,7 @@ if __name__=="__main__":
     results_file_dir = os.path.join(work_dir,model_name,model_epoch+"_"+set_name+".pkl")
     results_file_dir = generate_result(model_name,work_dir,model_epoch,coco_instance,set_name,imshow=True)
 
-    peval(results_file_dir,coco_instance,thresh=0.3,with_empty_images=True)
+    peval(results_file_dir,coco_instance,thresh=0.05,with_empty_images=True)
     
     #eval_yolof(coco_instance)
     

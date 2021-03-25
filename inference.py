@@ -220,6 +220,7 @@ def eval_yolof(coco_instance):
 
 def getResultbyName(file_name,json_results):
     results = []
+    print(file_name)
     for result in json_results:
         if file_name==result["image_id"]:
             box = xywh2xyxy(result["bbox"])
@@ -241,10 +242,6 @@ def peval_yolov5(result_dir,coco_instance,thresh = 0.00,with_empty_images=True):
         gtboxes = anns2gtboxes(gtanns)  
         if len(gtboxes)==0 and (not with_empty_images):
             continue
-        print("-----------")
-        print(gtboxes)
-        print("*********")
-        print(filed_boxes)
         eval.eval_add_result(gtboxes,filed_boxes)   
      
     precision, recall = eval.get_result()

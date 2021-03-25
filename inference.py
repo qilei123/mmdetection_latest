@@ -119,7 +119,7 @@ def generate_result(model_name,work_dir,model_epoch,
     model = init_detector(config_file, checkpoint_file, device='cuda:0')
 
    
-    inference_and_save_result(model,coco_instance,"/data1/qilei_chen/DATA/erosive/images",
+    inference_and_save_result(model,coco_instance,"/data1/qilei_chen/DATA/erosive/images_equalhist",
                     checkpoint_file+"_"+set_name+".pkl",imshow=imshow,score_thr = score_thr)
 
     return checkpoint_file+"_"+set_name+".pkl"
@@ -268,12 +268,12 @@ if __name__=="__main__":
     coco_instance = COCO(anns_file)
     
     
-    model_name = 'cascade_rcnn_r50_fpn_1x_coco'
+    model_name = 'faster_rcnn_r50_fpn_1x_coco_equalhist'
     work_dir = '/data1/qilei_chen/DATA/erosive/work_dirs/'
     model_epoch = 'epoch_10.pth'
     
     results_file_dir = os.path.join(work_dir,model_name,model_epoch+"_"+set_name+".pkl")
-    #results_file_dir = generate_result(model_name,work_dir,model_epoch,coco_instance,set_name,imshow=True)
+    results_file_dir = generate_result(model_name,work_dir,model_epoch,coco_instance,set_name,imshow=True)
     for thresh in np.linspace(0,1,10,endpoint=False):
         peval(results_file_dir,coco_instance,thresh=thresh,with_empty_images=False)
     

@@ -250,10 +250,12 @@ def peval_yolov5(result_dir,coco_instance,thresh = 0.3,with_empty_images=True):
         .format(precision, recall, F1, F2, thresh, len(eval.TPs), len(eval.FPs), len(eval.FNs), len(eval.FPs)+len(eval.FNs))
     print (out)
 
+import numpy as np
 
 def eval_yolov5(coco_instance):
     results_file_dir = "/data1/qilei_chen/DEVELOPMENTS/yolov5/runs/test/exp5/best_predictions.json"
-    peval_yolov5(results_file_dir,coco_instance,with_empty_images=False)
+    for thresh in np.linspace(0,1,10,endpoint=False)
+        peval_yolov5(results_file_dir,coco_instance,thresh=thresh,with_empty_images=False)
 
 if __name__=="__main__":
     # test images and show the results

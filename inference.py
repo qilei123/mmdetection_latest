@@ -220,7 +220,6 @@ def eval_yolof(coco_instance):
 
 def getResultbyName(file_name,json_results):
     results = []
-    print(file_name)
     for result in json_results:
         if file_name==result["image_id"]:
             box = xywh2xyxy(result["bbox"])

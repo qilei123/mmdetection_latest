@@ -216,7 +216,8 @@ def peval_yolof(result_dir,coco_instance,thresh = 0.00,with_empty_images=True):
 def eval_yolof(coco_instance):
 
     results_file_dir = "/data1/qilei_chen/DATA/erosive/work_dirs_yolof/R_50_C5_1x/inference/coco_instances_results.json"
-    peval_yolof(results_file_dir,coco_instance,with_empty_images=False)
+    for thresh in np.linspace(0,1,10,endpoint=False):
+        peval_yolof(results_file_dir,coco_instance,thresh=thresh,with_empty_images=False)
 
 def getResultbyName(file_name,json_results):
     results = []
@@ -276,5 +277,5 @@ if __name__=="__main__":
 
     peval(results_file_dir,coco_instance,thresh=0.3,with_empty_images=True)
     '''
-    #eval_yolof(coco_instance)
-    eval_yolov5(coco_instance)    
+    eval_yolof(coco_instance)
+    #eval_yolov5(coco_instance)    

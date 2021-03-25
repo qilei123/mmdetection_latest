@@ -261,7 +261,7 @@ if __name__=="__main__":
     #test_data()
     
     sets = ['train','test']
-    set_name = sets[0] #
+    set_name = sets[1] #
     anns_file = '/data1/qilei_chen/DATA/erosive/annotations/'+set_name+'.json'
     coco_instance = COCO(anns_file)
     

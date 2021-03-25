@@ -227,7 +227,7 @@ def getResultbyName(file_name,json_results):
             results.append(box)
 
     return results
-def peval_yolov5(result_dir,coco_instance,thresh = 0.00,with_empty_images=True):
+def peval_yolov5(result_dir,coco_instance,thresh = 0.3,with_empty_images=True):
     print("-------"+str(thresh)+"-------")
     fp = open(result_dir,'rb')
     results = json.load(fp)

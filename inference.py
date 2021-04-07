@@ -129,7 +129,7 @@ def draw_result(show_result,coco_instance,img_folder_dir,
                         out_file=out_file)            
 
 def generate_result(model_name,work_dir,model_epoch,
-                coco_instance,set_name = 'test',imshow = False,score_thr = 0.15):
+                coco_instance,set_name = 'test',imshow = False,score_thr = 0.0):
     # Specify the path to model config and checkpoint file
     #model_name = 'reppoints_moment_r50_fpn_1x_coco'
 

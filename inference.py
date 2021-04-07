@@ -93,6 +93,7 @@ def inference_and_save_result(model,coco_instance,img_folder_dir,
             anns = coco_instance.loadAnns(annIds)            
             for ann in anns:
                 [x,y,w,h] = ann['bbox']
+                cv2.putText(img,str(ann['category_id']),(int(x), int(y)),cv2.FONT_HERSHEY_SIMPLEX, 1,colors[ann['category_id']],2,cv2.LINE_AA)
                 cv2.rectangle(img, (int(x), int(y)), (int(x+w), int(y+h)), colors[ann['category_id']], 2)
             out_file = result_save_dir+'_result_'+str(score_thr)+'/'+img_file_name
             model.show_result(img, result,score_thr=score_thr,bbox_color =colors[2],

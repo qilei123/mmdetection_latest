@@ -109,8 +109,29 @@ def inference_and_save_result(model,coco_instance,img_folder_dir,
     with open(result_save_dir, 'wb') as fp:
         pickle.dump(results, fp)
 
+def draw_result(show_result,coco_instance,img_folder_dir,
+                        result_save_dir,imshow = False,score_thr=0.3):
+    coco_imgs = coco_instance.imgs
+    results = pickle.load(open(result_save_dir))
+    for key in coco_imgs:
+        img_file_name = coco_imgs[key]["file_name"]
+        img_dir = os.path.join(img_folder_dir,img_file_name)
+        img = mmcv.imread(img_dir)
+
+
+        annIds = coco_instance.getAnnIds(imgIds= coco_imgs[key]['id'])
+        anns = coco_instance.loadAnns(annIds)            
+        for ann in anns:
+            [x,y,w,h] = ann['bbox']
+            cv2.putText(img,classes[ann['category_id']-1],(int(x), int(y)),cv2.FONT_HERSHEY_SIMPLEX, 1,colors[ann['category_id']-1],2,cv2.LINE_AA)
+            cv2.rectangle(img, (int(x), int(y)), (int(x+w), int(y+h)), colors[ann['category_id']-1], 2)
+        out_file = result_save_dir+'_result_'+str(score_thr)+'/'+img_file_name
+        show_result(img, results[coco_imgs[key]['id']]['result'],score_thr=score_thr,bbox_color =colors[2],
+                        text_color = colors[2],font_size=10, 
+                        out_file=out_file)            
+
 def generate_result(model_name,work_dir,model_epoch,
-                coco_instance,set_name = 'test',imshow = False,score_thr = 0.3):
+                coco_instance,set_name = 'test',imshow = False,score_thr = 0.15):
     # Specify the path to model config and checkpoint file
     #model_name = 'reppoints_moment_r50_fpn_1x_coco'
 
@@ -121,8 +142,11 @@ def generate_result(model_name,work_dir,model_epoch,
 
     model = init_detector(config_file, checkpoint_file, device='cuda:0')
 
-   
-    inference_and_save_result(model,coco_instance,"/data1/qilei_chen/DATA/erosive_ulcer/images",
+    if os.path.exists(checkpoint_file+"_"+set_name+".pkl"):
+        draw_result(model.show_result,coco_instance,"/data1/qilei_chen/DATA/erosive_ulcer/images",
+                    checkpoint_file+"_"+set_name+".pkl",imshow=imshow,score_thr = score_thr)
+    else:
+        inference_and_save_result(model,coco_instance,"/data1/qilei_chen/DATA/erosive_ulcer/images",
                     checkpoint_file+"_"+set_name+".pkl",imshow=imshow,score_thr = score_thr)
 
     return checkpoint_file+"_"+set_name+".pkl"

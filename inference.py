@@ -112,7 +112,7 @@ def inference_and_save_result(model,coco_instance,img_folder_dir,
 def draw_result(show_result,coco_instance,img_folder_dir,
                         result_save_dir,imshow = False,score_thr=0.3):
     coco_imgs = coco_instance.imgs
-    results = pickle.load(open(result_save_dir))
+    results = pickle.load(open(result_save_dir,'rb'))
     for key in coco_imgs:
         img_file_name = coco_imgs[key]["file_name"]
         img_dir = os.path.join(img_folder_dir,img_file_name)

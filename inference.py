@@ -117,8 +117,6 @@ def draw_result(show_result,coco_instance,img_folder_dir,
         img_file_name = coco_imgs[key]["file_name"]
         img_dir = os.path.join(img_folder_dir,img_file_name)
         img = mmcv.imread(img_dir)
-
-
         annIds = coco_instance.getAnnIds(imgIds= coco_imgs[key]['id'])
         anns = coco_instance.loadAnns(annIds)            
         for ann in anns:
@@ -295,9 +293,9 @@ if __name__=="__main__":
     coco_instance = COCO(anns_file)
     
     
-    model_name = 'reppoints_moment_r50_fpn_1x_coco'
+    model_name = 'faster_rcnn_r50_fpn_1x_coco'
     work_dir = '/data1/qilei_chen/DATA/erosive_ulcer/work_dirs/'
-    model_epoch = 'epoch_96.pth'
+    model_epoch = 'epoch_17.pth'
     
     results_file_dir = os.path.join(work_dir,model_name,model_epoch+"_"+set_name+".pkl")
     results_file_dir = generate_result(model_name,work_dir,model_epoch,coco_instance,set_name,imshow=True)

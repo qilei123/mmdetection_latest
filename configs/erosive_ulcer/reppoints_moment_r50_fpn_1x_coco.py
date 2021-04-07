@@ -1,6 +1,6 @@
 _base_ = '../reppoints/reppoints_moment_r50_fpn_1x_coco.py'
 # 1. dataset settings
-classes = ('erosive','ulcer')
+classes = ('ulcer','erosive')
 num_classes = 2
 data_root = '/data1/qilei_chen/DATA/erosive_ulcer/'
 data = dict(

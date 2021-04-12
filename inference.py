@@ -292,7 +292,6 @@ if __name__=="__main__":
     anns_file = '/data1/qilei_chen/DATA/erosive_ulcer/annotations/'+set_name+'.json'
     coco_instance = COCO(anns_file)
     
-    
     model_name = 'reppoints_moment_r50_fpn_1x_coco'
     work_dir = '/data1/qilei_chen/DATA/erosive_ulcer/work_dirs/'
     model_epoch = 'epoch_96.pth'

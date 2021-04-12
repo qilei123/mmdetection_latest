@@ -2,7 +2,7 @@ _base_ = '../faster_rcnn/faster_rcnn_r50_fpn_1x_coco.py'
 
 # 1. dataset settings
 dataset_type = 'CocoDataset'
-classes = ('ulcer')
+classes = ('ulcer',)
 num_classes=1
 data_root = '/data1/qilei_chen/DATA/ulcer/'
 data = dict(

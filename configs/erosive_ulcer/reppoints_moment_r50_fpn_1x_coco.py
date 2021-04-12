@@ -34,4 +34,4 @@ model = dict(
         max_per_img=100))# explicitly over-write all the `num_classes` field from default 80 to 1.
 
 runner = dict(type='EpochBasedRunner', max_epochs=96)
-resume_from = "/data1/qilei_chen/DATA/erosive_ulcer/work_dirs/reppoints_moment_r50_fpn_1x_coco/latest.pth"
+#resume_from = "/data1/qilei_chen/DATA/erosive_ulcer/work_dirs/reppoints_moment_r50_fpn_1x_coco/latest.pth"

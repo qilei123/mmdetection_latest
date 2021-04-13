@@ -344,9 +344,9 @@ def test_images():
 
 
 def test_video():
-    model_shresh={"faster_rcnn_r50_fpn_1x_coco":0.4,"cascade_rcnn_r50_fpn_1x_coco":0.3}
+    model_shresh={"faster_rcnn_r50_fpn_1x_coco":0.3,"cascade_rcnn_r50_fpn_1x_coco":0.3}
     video_dir = "/data0/dataset/Xiangya_Gastric_data/2021_gastric_video_annotation/20191111-1120/20191120080002-00.23.16.084-00.27.17.158-seg2.avi"
-    model_name = "cascade_rcnn_r50_fpn_1x_coco"
+    model_name = "faster_rcnn_r50_fpn_1x_coco"
     categories = ["ulcer","erosive"]
     category = categories[1]
     
@@ -355,7 +355,7 @@ def test_video():
     score_thr = model_shresh[model_name]
     # build the model from a config file and a checkpoint file
 
-    model = init_detector(config_file, checkpoint_file, device='cuda:0')
+    model = init_detector(config_file, checkpoint_file, device='cuda:1')
 
     src_cap = cv2.VideoCapture(video_dir)
 

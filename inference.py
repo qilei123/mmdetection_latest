@@ -305,7 +305,7 @@ if __name__=="__main__":
     
     sets = ['train','test']
     set_name = sets[1] #
-    anns_file = '/data1/qilei_chen/DATA/ulcer/annotations/'+set_name+'.json'
+    anns_file = '/data1/qilei_chen/DATA/ulcer/annotations/'+set_name+'_ulcer.json'
     coco_instance = COCO(anns_file)
     
     

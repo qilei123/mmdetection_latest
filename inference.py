@@ -342,10 +342,10 @@ def test_images():
     # eval_yolov5(coco_instance)
 
 
-def test_video(model_name, video_dir):
+def test_video():
 
     video_dir = "/data0/dataset/Xiangya_Gastric_data/2021_gastric_video_annotation/20191111-1120/20191120080002-00.23.16.084-00.27.17.158-seg2.avi"
-
+    model_name = "faster_rcnn_r50_fpn_1x_coco"
     config_file = 'configs/ulcer/'+model_name+'.py'
     checkpoint_file = "/data1/qilei_chen/DATA/ulcer/work_dirs/"+model_name+"/epoch_10.pth"
     score_thr = 0.3
@@ -386,4 +386,5 @@ def test_video(model_name, video_dir):
 
 if __name__ == "__main__":
 
-    test_images()
+    #test_images()
+    test_video()

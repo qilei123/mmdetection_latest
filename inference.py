@@ -283,18 +283,35 @@ def eval_yolov5(coco_instance):
     for thresh in np.linspace(0,1,10,endpoint=False):
         peval_yolov5(results_file_dir,coco_instance,thresh=thresh,with_empty_images=False)
 
+def video_test(model_name,video_dir):
+    config_file = 'configs/erosive_ulcer/'+model_name+'.py'
+    checkpoint_file = ""
+
+    # build the model from a config file and a checkpoint file
+
+    model = init_detector(config_file, checkpoint_file, device='cuda:0')
+
+    src_cap = cv2.VideoCapture(video_dir)
+    
+    success,frame = src_cap.read()
+    while success:
+        result = inference_detector(model, frame)
+        success,frame = src_cap.read()
+    
+
 if __name__=="__main__":
     # test images and show the results
     #test_data()
     
     sets = ['train','test']
     set_name = sets[1] #
-    anns_file = '/data1/qilei_chen/DATA/erosive_ulcer/annotations/'+set_name+'.json'
+    anns_file = '/data1/qilei_chen/DATA/ulcer/annotations/'+set_name+'.json'
     coco_instance = COCO(anns_file)
     
+    
     model_name = 'reppoints_moment_r50_fpn_1x_coco'
-    work_dir = '/data1/qilei_chen/DATA/erosive_ulcer/work_dirs/'
-    model_epoch = 'epoch_96.pth'
+    work_dir = '/data1/qilei_chen/DATA/ulcer/work_dirs/'
+    model_epoch = 'epoch_10.pth'
     
     results_file_dir = os.path.join(work_dir,model_name,model_epoch+"_"+set_name+".pkl")
     results_file_dir = generate_result(model_name,work_dir,model_epoch,coco_instance,set_name,imshow=True)

@@ -347,8 +347,11 @@ def test_video():
     model_shresh={"faster_rcnn_r50_fpn_1x_coco":0.4,"cascade_rcnn_r50_fpn_1x_coco":0.3}
     video_dir = "/data0/dataset/Xiangya_Gastric_data/2021_gastric_video_annotation/20191111-1120/20191120080002-00.23.16.084-00.27.17.158-seg2.avi"
     model_name = "cascade_rcnn_r50_fpn_1x_coco"
-    config_file = 'configs/ulcer/'+model_name+'.py'
-    checkpoint_file = "/data1/qilei_chen/DATA/ulcer/work_dirs/"+model_name+"/epoch_10.pth"
+    categories = ["ulcer","erosive"]
+    category = categories[1]
+    
+    config_file = 'configs/'+category+'/'+model_name+'.py'
+    checkpoint_file = '/data1/qilei_chen/DATA/'+category+'/work_dirs/'+model_name+"/epoch_10.pth"
     score_thr = model_shresh[model_name]
     # build the model from a config file and a checkpoint file
 
@@ -359,9 +362,9 @@ def test_video():
     fps = src_cap.get(cv2.CAP_PROP_FPS)
     frame_size = (int(src_cap.get(cv2.CAP_PROP_FRAME_WIDTH)/2),
                   int(src_cap.get(cv2.CAP_PROP_FRAME_HEIGHT)))
-    if not os.path.exists("/data1/qilei_chen/DATA/ulcer/video_test_results/"+model_name):
-        os.makedirs("/data1/qilei_chen/DATA/ulcer/video_test_results/"+model_name)
-    save_dir = os.path.join("/data1/qilei_chen/DATA/ulcer/video_test_results/",model_name, os.path.basename(video_dir))
+    if not os.path.exists('/data1/qilei_chen/DATA/'+category+'/video_test_results/'+model_name):
+        os.makedirs('/data1/qilei_chen/DATA/'+category+'/video_test_results/'+model_name)
+    save_dir = os.path.join('/data1/qilei_chen/DATA/'+category+'/video_test_results/',model_name, os.path.basename(video_dir))
     dst_writer = cv2.VideoWriter(save_dir, cv2.VideoWriter_fourcc(
         "P", "I", "M", "1"), fps, frame_size)
     

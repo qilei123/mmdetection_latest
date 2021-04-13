@@ -35,8 +35,8 @@ def crop_img(img):
             break
 
     cropped_arr = cropped_arr[:toolbar_end, :, :]
-
-    return Image.fromarray(cropped_arr)
+    return cropped_arr
+    #return Image.fromarray(cropped_arr)
 
 
 def change_size(read_file):

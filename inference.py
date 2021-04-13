@@ -370,7 +370,7 @@ def test_video():
     src_cap = cv2.VideoCapture(video_dir)
 
     fps = src_cap.get(cv2.CAP_PROP_FPS)
-    frame_size = (int(src_cap.get(cv2.CAP_PROP_FRAME_WIDTH)/2),
+    frame_size = (int(src_cap.get(cv2.CAP_PROP_FRAME_WIDTH)),
                   int(src_cap.get(cv2.CAP_PROP_FRAME_HEIGHT)))
     if not os.path.exists('/data1/qilei_chen/DATA/'+category+'/video_test_results/'+model_name):
         os.makedirs('/data1/qilei_chen/DATA/'+category+'/video_test_results/'+model_name)

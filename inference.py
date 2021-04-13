@@ -378,7 +378,7 @@ def test_video():
                             text_color=colors[2], font_size=10)
         
         print(result)
-
+        cv2.imwrite("/data1/qilei_chen/DATA/ulcer/video_test_results/test.jpg",frame)
         dst_writer.write(frame)
         positive_records.write(str(count)+" "+str(len(result))+"\n")        
         count +=1

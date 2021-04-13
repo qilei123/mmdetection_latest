@@ -133,7 +133,7 @@ def generate_result(model_name,work_dir,model_epoch,
     # Specify the path to model config and checkpoint file
     #model_name = 'reppoints_moment_r50_fpn_1x_coco'
 
-    config_file = 'configs/erosive_ulcer/'+model_name+'.py'
+    config_file = 'configs/ulcer/'+model_name+'.py'
     checkpoint_file = os.path.join(work_dir,model_name,model_epoch)
 
     # build the model from a config file and a checkpoint file
@@ -141,10 +141,10 @@ def generate_result(model_name,work_dir,model_epoch,
     model = init_detector(config_file, checkpoint_file, device='cuda:0')
 
     if os.path.exists(checkpoint_file+"_"+set_name+".pkl"):
-        draw_result(model.show_result,coco_instance,"/data1/qilei_chen/DATA/erosive_ulcer/images",
+        draw_result(model.show_result,coco_instance,"/data1/qilei_chen/DATA/ulcer/images",
                     checkpoint_file+"_"+set_name+".pkl",imshow=imshow,score_thr = score_thr)
     else:
-        inference_and_save_result(model,coco_instance,"/data1/qilei_chen/DATA/erosive_ulcer/images",
+        inference_and_save_result(model,coco_instance,"/data1/qilei_chen/DATA/ulcer/images",
                     checkpoint_file+"_"+set_name+".pkl",imshow=imshow,score_thr = score_thr)
 
     return checkpoint_file+"_"+set_name+".pkl"

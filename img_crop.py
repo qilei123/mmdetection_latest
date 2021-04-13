@@ -2,7 +2,7 @@ import cv2
 import os
 import datetime
 import numpy as np
-from util import *
+#from util import *
 from tqdm import tqdm
 from collections import Counter
 from PIL import Image
@@ -74,7 +74,7 @@ def change_size(read_file):
 
     return pre1_picture  # 返回图片数据
 
-
+'''
 source_path = "gastric_data_5cls"
 # source_path = "crop_test"
 # 图片来源路径
@@ -91,3 +91,4 @@ for i in tqdm(file_names):
     x = crop_img(i)
     x.save(i)
 print("裁剪完毕")
+'''

@@ -349,6 +349,10 @@ def test_video():
     model_name = "cascade_rcnn_r50_fpn_1x_coco"
     categories = ["ulcer","erosive"]
     category = categories[0]
+    print("-----------------")
+    print(model_name)
+    print(category)
+    print("-----------------")
     if category==categories[0]:
         #for ulcer
         model_shresh={"faster_rcnn_r50_fpn_1x_coco":0.4,"cascade_rcnn_r50_fpn_1x_coco":0.3}

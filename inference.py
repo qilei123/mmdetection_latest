@@ -378,11 +378,17 @@ def test_video():
         model.show_result(frame, result, score_thr=score_thr, bbox_color=colors[2],
                             text_color=colors[2], font_size=10)
         
-        print(result)
+        
         cv2.imwrite("/data1/qilei_chen/DATA/ulcer/video_test_results/test.jpg",frame)
+        
+        box_count=0
         print(len(result[0]))
+        for box in result[0]:
+            if box[4]>=score_thr:
+                box_count+=1
+        print(box_count)
         dst_writer.write(frame)
-        positive_records.write(str(count)+" "+str(len(result))+"\n")        
+        positive_records.write(str(count)+" "+str(box_count)+"\n")        
         count +=1
         success, frame = src_cap.read()
 

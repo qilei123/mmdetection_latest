@@ -344,11 +344,17 @@ def test_images():
 
 
 def test_video():
-    model_shresh={"faster_rcnn_r50_fpn_1x_coco":0.3,"cascade_rcnn_r50_fpn_1x_coco":0.3}
-    video_dir = "/data0/dataset/Xiangya_Gastric_data/2021_gastric_video_annotation/20191111-1120/20191120080002-00.23.16.084-00.27.17.158-seg2.avi"
+    #video_dir = "/data0/dataset/Xiangya_Gastric_data/2021_gastric_video_annotation/20191111-1120/20191120080002-00.23.16.084-00.27.17.158-seg2.avi"
+    video_dir = "/data1/qilei_chen/DATA/20191120080002-00.23.16.084-00.27.17.158-seg2.avi"
     model_name = "faster_rcnn_r50_fpn_1x_coco"
     categories = ["ulcer","erosive"]
-    category = categories[1]
+    category = categories[0]
+    if category==categories[0]:
+        #for ulcer
+        model_shresh={"faster_rcnn_r50_fpn_1x_coco":0.4,"cascade_rcnn_r50_fpn_1x_coco":0.3}
+    else:
+        #for erosive
+        model_shresh={"faster_rcnn_r50_fpn_1x_coco":0.3,"cascade_rcnn_r50_fpn_1x_coco":0.3}
     
     config_file = 'configs/'+category+'/'+model_name+'.py'
     checkpoint_file = '/data1/qilei_chen/DATA/'+category+'/work_dirs/'+model_name+"/epoch_10.pth"
@@ -364,7 +370,7 @@ def test_video():
                   int(src_cap.get(cv2.CAP_PROP_FRAME_HEIGHT)))
     if not os.path.exists('/data1/qilei_chen/DATA/'+category+'/video_test_results/'+model_name):
         os.makedirs('/data1/qilei_chen/DATA/'+category+'/video_test_results/'+model_name)
-    save_dir = os.path.join('/data1/qilei_chen/DATA/'+category+'/video_test_results/',model_name, os.path.basename(video_dir))
+    save_dir = os.path.join('/data1/qilei_chen/DATA/'+category+'/video_test_results/',model_name+"_l", os.path.basename(video_dir))
     dst_writer = cv2.VideoWriter(save_dir, cv2.VideoWriter_fourcc(
         "P", "I", "M", "1"), fps, frame_size)
     

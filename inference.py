@@ -378,7 +378,7 @@ def test_video():
         frame = model.show_result(frame, result, score_thr=score_thr, bbox_color=colors[2],
                             text_color=colors[2], font_size=10)
         
-        
+        cv2.putText(frame,str(count),(20,20),cv2.FONT_HERSHEY_SIMPLEX, 1,colors[2],1,cv2.LINE_AA)
         cv2.imwrite("/data1/qilei_chen/DATA/ulcer/video_test_results/test.jpg",frame)
         
         box_count=0

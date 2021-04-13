@@ -403,7 +403,7 @@ def test_video():
 
         #print(box_count)
         dst_writer.write(frame)
-        positive_records.write(str(count)+" "+str(box_count)+"\n")        
+        positive_records.write(str(count)+" "+str(box_count)+" "+str(box_count!=0)+"\n")        
         count +=1
         success, frame = src_cap.read()
 

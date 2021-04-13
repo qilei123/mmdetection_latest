@@ -402,7 +402,7 @@ def test_video():
                 box_count+=1
 
         #print(box_count)
-        dst_writer.write(frame)
+        dst_writer.write(cv2.resize(frame,frame_size))
         #print(str(count)+" "+str(box_count)+" "+str(box_count!=0)+"\n")
         positive_records.write(str(count)+" "+str(box_count)+" "+str(box_count!=0)+"\n")   
 

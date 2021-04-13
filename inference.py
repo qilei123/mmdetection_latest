@@ -408,8 +408,7 @@ def test_video():
 
         count +=1
         success, frame = src_cap.read()
-        if count==100:
-            break
+
 
 if __name__ == "__main__":
 

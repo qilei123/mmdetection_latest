@@ -7,7 +7,7 @@ import cv2
 import json
 import pickle
 from metric_polyp import Metric
-
+from img_crop import crop_img
 
 def test_data(with_gt=False):
     # Specify the path to model config and checkpoint file
@@ -370,6 +370,7 @@ def test_video(model_name, video_dir):
     while success:
         
         ##preprocess todo
+        frame = crop_img(frame)
 
         result = inference_detector(model, frame)
         
@@ -386,42 +387,3 @@ def test_video(model_name, video_dir):
 if __name__ == "__main__":
 
     test_images()
-
-
-./2021_gastric_video_annotation/20191217/20191217085058-00.00.00.000-00.04.31.999-seg1.avi
-./2021_gastric_video_annotation/20191217/20191217085058-00.06.28.578-00.13.45.685-seg2.avi
-./2021_gastric_video_annotation/20191217/20191217085058-00.17.11.064-00.28.34.262-seg3.avi
-./2021_gastric_video_annotation/20191217/20191217085058-00.32.05.715-00.37.18.920-seg4.avi
-./2021_gastric_video_annotation/20191217/20191217085058-00.43.07.927-00.54.17.903-seg5.avi
-./2021_gastric_video_annotation/20191217/20191217085058-01.00.47.602-01.04.52.414-seg6.avi
-./2021_gastric_video_annotation/20191217/20191217085058-01.08.39.300-01.12.17.578-seg7.avi
-./2021_gastric_video_annotation/20191217/20191217085058-01.15.41.212-01.20.14.489-seg8.avi
-./2021_gastric_video_annotation/20191217/20191217085058-01.21.48.957-01.29.22.436-seg9.avi
-./2021_gastric_video_annotation/20191217/20191217143325-00.16.30.097-00.26.41.181-seg1.avi
-./2021_gastric_video_annotation/20191217/20191217143325-00.28.39.062-00.36.52.012-seg2.avi
-./2021_gastric_video_annotation/20191217/20191217143325-02.09.16.001-02.23.59.656-seg3.avi
-./2021_gastric_video_annotation/20191217/20191217143325-03.15.27.635-03.21.49.874-seg4.avi
-./2021_gastric_video_annotation/20191217/20191217143325-03.23.18.711-03.26.25.133-seg5.avi
-./2021_gastric_video_annotation/20191217/20191217085058-01.33.49.451-01.38.19.742-seg10.avi
-./2021_gastric_video_annotation/20191217/20191217085058-01.39.29.370-01.44.47.372-seg11.avi
-./2021_gastric_video_annotation/20191217/20191217085058-02.01.08.294-02.07.29.415-seg12.avi
-./2021_gastric_video_annotation/20191217/20191217085058-02.08.59.206-02.14.23.281-seg13.avi
-./2021_gastric_video_annotation/20191218
-./2021_gastric_video_annotation/20191218/20191218081020-00.17.57.432-00.21.12.096-seg1.avi
-./2021_gastric_video_annotation/20191218/20191218081020-00.31.57.473-00.37.03.963-seg2.avi
-./2021_gastric_video_annotation/20191218/20191218081020-01.08.58.230-01.30.18.689-seg3.avi
-./2021_gastric_video_annotation/20191218/20191218081020-01.32.45.502-01.38.32.437-seg4.avi
-./2021_gastric_video_annotation/20191218/20191218081020-02.43.23.244-02.47.21.754-seg5.avi
-./2021_gastric_video_annotation/20191218/20191218081020-02.51.42.574-02.59.43.490-seg6.avi
-./2021_gastric_video_annotation/20191218/20191218081020-03.08.30.611-03.11.06.684-seg7.avi
-./2021_gastric_video_annotation/20191218/20191218081020-03.16.37.596-03.21.55.415-seg8.avi
-./2021_gastric_video_annotation/20191218/20191218081020-03.27.23.003-03.31.22.024-seg9.avi
-./2021_gastric_video_annotation/20191218/20191218081020-05.25.02.852-05.29.36.066-seg10.avi
-./2021_gastric_video_annotation/20191218/20191218081020-06.02.39.357-06.06.25.491-seg11.avi
-./2021_gastric_video_annotation/20191218/20191218081020-06.22.51.087-06.28.30.459-seg12.avi
-./2021_gastric_video_annotation/20191218/20191218081020-06.44.00.222-06.51.34.253-seg13.avi
-./2021_gastric_video_annotation/20191218/20191218081020-06.57.02.106-07.04.58.057-seg14.avi
-./2021_gastric_video_annotation/20191218/20191218081020-07.08.56.475-07.20.38.570-seg15.avi
-./2021_gastric_video_annotation/20191218/20191218081020-07.24.47.599-07.29.20.087-seg16.avi
-./2021_gastric_video_annotation/20191218/20191218081020-07.32.25.443-07.37.50.490-seg17.avi
-./2021_gastric_video_annotation/20191218/20191218081020-07.40.28.602-07.50.28.457-seg18.avi

@@ -8,8 +8,9 @@ from collections import Counter
 from PIL import Image
 
 
-def crop_img(path):
-    img = Image.open(path)
+def crop_img(img):
+    if isinstance(img,str):
+        img = Image.open(img)
     arr = np.asarray(img)
     combined_arr = arr.sum(axis=-1) / (255 * 3)
     truth_map = np.logical_or(combined_arr < 0.07, combined_arr > 0.95)

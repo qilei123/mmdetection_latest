@@ -393,7 +393,7 @@ def test_video():
                             text_color=colors[2], font_size=10)
         
         cv2.putText(frame,str(count),(30,30),cv2.FONT_HERSHEY_SIMPLEX, 1,colors[2],1,cv2.LINE_AA)
-        cv2.imwrite('/data1/qilei_chen/DATA/'+category+'/video_test_results/test.jpg',frame)
+        #cv2.imwrite('/data1/qilei_chen/DATA/'+category+'/video_test_results/test.jpg',frame)
         
         box_count=0
         #print(len(result[0]))
@@ -403,11 +403,13 @@ def test_video():
 
         #print(box_count)
         dst_writer.write(frame)
-        print(str(count)+" "+str(box_count)+" "+str(box_count!=0)+"\n")
+        #print(str(count)+" "+str(box_count)+" "+str(box_count!=0)+"\n")
         positive_records.write(str(count)+" "+str(box_count)+" "+str(box_count!=0)+"\n")   
 
         count +=1
         success, frame = src_cap.read()
+        if count==100:
+            break
 
 if __name__ == "__main__":
 

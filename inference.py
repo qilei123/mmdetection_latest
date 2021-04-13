@@ -365,7 +365,7 @@ def test_video():
     score_thr = model_shresh[model_name]
     # build the model from a config file and a checkpoint file
 
-    model = init_detector(config_file, checkpoint_file, device='cuda:1')
+    model = init_detector(config_file, checkpoint_file, device='cuda:0')
 
     src_cap = cv2.VideoCapture(video_dir)
 

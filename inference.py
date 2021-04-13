@@ -380,7 +380,7 @@ def test_video():
         
         print(result)
         cv2.imwrite("/data1/qilei_chen/DATA/ulcer/video_test_results/test.jpg",frame)
-        print(list(result[0]))
+        print(len(result[0]))
         dst_writer.write(frame)
         positive_records.write(str(count)+" "+str(len(result))+"\n")        
         count +=1

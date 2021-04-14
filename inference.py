@@ -125,7 +125,9 @@ def draw_result(show_result, coco_instance, img_folder_dir,
                 result_save_dir, imshow=False, score_thr=0.3):
     coco_imgs = coco_instance.imgs
     results = pickle.load(open(result_save_dir, 'rb'))
-    for key in coco_imgs:
+    ids_with_ann = set(_['image_id'] for _ in coco_instance.anns.values())
+    #for key in coco_imgs:
+    for key in ids_with_ann:
         img_file_name = coco_imgs[key]["file_name"]
         img_dir = os.path.join(img_folder_dir, img_file_name)
         img = mmcv.imread(img_dir)
@@ -137,14 +139,14 @@ def draw_result(show_result, coco_instance, img_folder_dir,
                 y)), cv2.FONT_HERSHEY_SIMPLEX, 1, colors[ann['category_id']-1], 2, cv2.LINE_AA)
             cv2.rectangle(img, (int(x), int(y)), (int(x+w),
                                                   int(y+h)), colors[ann['category_id']-1], 2)
-        out_file = result_save_dir+'_result_'+str(score_thr)+'/'+img_file_name
+        out_file = result_save_dir+'_result_'+str(score_thr)+'_withoutempty/'+img_file_name
         show_result(img, results[coco_imgs[key]['id']]['result'], score_thr=score_thr, bbox_color=colors[2],
                     text_color=colors[2], font_size=10,
                     out_file=out_file)
 
 
 def generate_result(model_name, work_dir, model_epoch,
-                    coco_instance, set_name='test', imshow=False, score_thr=0.05):
+                    coco_instance, set_name='test', imshow=False, score_thr=0.3):
     # Specify the path to model config and checkpoint file
     #model_name = 'reppoints_moment_r50_fpn_1x_coco'
 
@@ -412,5 +414,5 @@ def test_video():
 
 if __name__ == "__main__":
 
-    #test_images()
-    test_video()
+    test_images()
+    #test_video()

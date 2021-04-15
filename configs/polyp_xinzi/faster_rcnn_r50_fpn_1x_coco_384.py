@@ -5,7 +5,7 @@ dataset_type = 'CocoDataset'
 classes = ('Adenomatous','non-Adenomatous')
 num_classes=2
 data_root = '/data1/qilei_chen/DATA/polyp_xinzi/'
-img_scale=(500, 384)
+img_scale=(384,384)
 data = dict(
     samples_per_gpu=2,
     workers_per_gpu=2,
@@ -51,7 +51,7 @@ model = dict(
 train_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(type='LoadAnnotations', with_bbox=True),
-    dict(type='Resize', img_scale=img_scale, keep_ratio=True),
+    dict(type='Resize', img_scale=img_scale, keep_ratio=False),
     dict(type='RandomFlip', flip_ratio=0.5),
     dict(
         type='Normalize',
@@ -69,7 +69,7 @@ test_pipeline = [
         img_scale=img_scale,
         flip=False,
         transforms=[
-            dict(type='Resize', keep_ratio=True),
+            dict(type='Resize', keep_ratio=False),
             dict(type='RandomFlip'),
             dict(
                 type='Normalize',

@@ -325,11 +325,11 @@ def test_images():
 
     sets = ['train', 'test']
     set_name = sets[1]
-    anns_file = '/data1/qilei_chen/DATA/ulcer/annotations/'+set_name+'_ulcer.json'
+    anns_file = '/data1/qilei_chen/DATA/erosive/annotations/'+set_name+'.json'
     coco_instance = COCO(anns_file)
 
     model_name = 'cascade_rcnn_r50_fpn_1x_coco'
-    work_dir = '/data1/qilei_chen/DATA/ulcer/work_dirs/'
+    work_dir = '/data1/qilei_chen/DATA/erosive/work_dirs/'
     model_epoch = 'epoch_10.pth'
 
     results_file_dir = os.path.join(

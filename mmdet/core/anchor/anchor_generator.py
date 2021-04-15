@@ -388,7 +388,7 @@ class SSDAnchorGenerator(AnchorGenerator):
         for ratio in range(int(min_ratio), int(max_ratio) + 1, step):
             min_sizes.append(int(self.input_size * ratio / 100))
             max_sizes.append(int(self.input_size * (ratio + step) / 100))
-        if self.input_size == 300:
+        if self.input_size == 300 or self.input_size == 384:
             if basesize_ratio_range[0] == 0.15:  # SSD300 COCO
                 min_sizes.insert(0, int(self.input_size * 7 / 100))
                 max_sizes.insert(0, int(self.input_size * 15 / 100))

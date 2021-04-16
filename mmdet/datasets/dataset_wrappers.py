@@ -144,7 +144,8 @@ class RepeatDataset(object):
         self.CLASSES = dataset.CLASSES
         if hasattr(self.dataset, 'flag'):
             self.flag = np.tile(self.dataset.flag, times)
-
+        print("------------RepeatDataset---------------")
+        print(self.CLASSES)
         self._ori_len = len(self.dataset)
 
     def __getitem__(self, idx):

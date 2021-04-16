@@ -9,7 +9,7 @@ input_size = 384
 data_root = '/data1/qilei_chen/DATA/polyp_xinzi/'
 img_scale=(input_size,input_size)
 img_norm_cfg = dict(mean=[123.675, 116.28, 103.53], std=[1, 1, 1], to_rgb=True)
-
+classes = ('Adenomatous','non-Adenomatous')
 model = dict(
     backbone=dict(
         input_size=input_size,),
@@ -83,4 +83,3 @@ data = dict(
 # optimizer
 optimizer = dict(type='SGD', lr=2e-3, momentum=0.9, weight_decay=5e-4)
 optimizer_config = dict(_delete_=True)
-classes = ('Adenomatous','non-Adenomatous')

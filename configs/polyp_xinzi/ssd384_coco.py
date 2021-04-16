@@ -1,4 +1,4 @@
-classes = ('Adenomatous','non-Adenomatous')
+
 input_size = 384
 model = dict(
     type='SingleStageDetector',
@@ -49,6 +49,7 @@ model = dict(
         max_per_img=200))
 cudnn_benchmark = True
 dataset_type = 'CocoDataset'
+classes = ('Adenomatous','non-Adenomatous')
 data_root = '/data1/qilei_chen/DATA/polyp_xinzi/'
 img_norm_cfg = dict(mean=[123.675, 116.28, 103.53], std=[1, 1, 1], to_rgb=True)
 train_pipeline = [

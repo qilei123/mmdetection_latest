@@ -247,6 +247,7 @@ class CustomDataset(Dataset):
         Returns:
             tuple[str] or list[str]: Names of categories of the dataset.
         """
+        print("---------------------------")
         print(classes)
         if classes is None:
             return cls.CLASSES

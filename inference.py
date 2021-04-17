@@ -116,6 +116,7 @@ def inference_and_save_result(model, coco_instance, img_folder_dir,
         results[coco_imgs[key]['id']] = dict()
         results[coco_imgs[key]['id']]['file_name'] = img_file_name
         results[coco_imgs[key]['id']]['result'] = result
+        print(result)
 
     with open(result_save_dir, 'wb') as fp:
         pickle.dump(results, fp)

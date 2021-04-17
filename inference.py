@@ -146,11 +146,11 @@ def draw_result(show_result, coco_instance, img_folder_dir,
 
 
 def generate_result(model_name, work_dir, model_epoch,
-                    coco_instance, set_name='test', imshow=False, score_thr=0.3):
+                    coco_instance,data_set_name="ulcer", set_name='test', imshow=False, score_thr=0.3):
     # Specify the path to model config and checkpoint file
     #model_name = 'reppoints_moment_r50_fpn_1x_coco'
 
-    config_file = 'configs/ulcer/'+model_name+'.py'
+    config_file = 'configs/'+data_set_name+'/'+model_name+'.py'
     checkpoint_file = os.path.join(work_dir, model_name, model_epoch)
 
     # build the model from a config file and a checkpoint file
@@ -158,10 +158,10 @@ def generate_result(model_name, work_dir, model_epoch,
     model = init_detector(config_file, checkpoint_file, device='cuda:0')
 
     if os.path.exists(checkpoint_file+"_"+set_name+".pkl"):
-        draw_result(model.show_result, coco_instance, "/data1/qilei_chen/DATA/ulcer/images",
+        draw_result(model.show_result, coco_instance, '/data1/qilei_chen/DATA/'+data_set_name+'/images',
                     checkpoint_file+"_"+set_name+".pkl", imshow=imshow, score_thr=score_thr)
     else:
-        inference_and_save_result(model, coco_instance, "/data1/qilei_chen/DATA/ulcer/images",
+        inference_and_save_result(model, coco_instance, '/data1/qilei_chen/DATA/'+data_set_name+'/images',
                                   checkpoint_file+"_"+set_name+".pkl", imshow=imshow, score_thr=score_thr)
 
     return checkpoint_file+"_"+set_name+".pkl"
@@ -325,12 +325,12 @@ def test_images():
 
     sets = ['train', 'test']
     set_name = sets[1]
-    anns_file = '/data1/qilei_chen/DATA/erosive/annotations/'+set_name+'.json'
+    anns_file = '/data1/qilei_chen/DATA/polyp_xinzi/annotations/'+set_name+'.json'
     coco_instance = COCO(anns_file)
 
-    model_name = 'cascade_rcnn_r50_fpn_1x_coco'
-    work_dir = '/data1/qilei_chen/DATA/erosive/work_dirs/'
-    model_epoch = 'epoch_10.pth'
+    model_name = 'faster_rcnn_r50_fpn_1x_coco_384'
+    work_dir = '/data1/qilei_chen/DATA/polyp_xinzi/work_dirs/'
+    model_epoch = 'epoch_14.pth'
 
     results_file_dir = os.path.join(
         work_dir, model_name, model_epoch+"_"+set_name+".pkl")

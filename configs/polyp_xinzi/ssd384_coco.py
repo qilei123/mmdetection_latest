@@ -15,7 +15,8 @@ model = dict(
         input_size=input_size,),
     bbox_head=dict(
         num_classes=num_classes,
-        anchor_generator=dict(input_size=input_size),)
+        anchor_generator=dict(input_size=input_size),),
+    test_cfg=dict(nms=dict(type='nms', iou_threshold=0.1),)
 )
 train_pipeline = [
     dict(type='LoadImageFromFile', to_float32=True),

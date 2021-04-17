@@ -329,9 +329,9 @@ def test_images():
     anns_file = '/data1/qilei_chen/DATA/polyp_xinzi/annotations/'+set_name+'.json'
     coco_instance = COCO(anns_file)
 
-    model_name = 'faster_rcnn_r50_fpn_1x_coco_384'
+    model_name = 'ssd384_coco'
     work_dir = '/data1/qilei_chen/DATA/polyp_xinzi/work_dirs/'
-    model_epoch = 'epoch_14.pth'
+    model_epoch = 'epoch_17.pth'
 
     results_file_dir = os.path.join(
         work_dir, model_name, model_epoch+"_"+set_name+".pkl")

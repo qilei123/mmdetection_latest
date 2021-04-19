@@ -286,8 +286,7 @@ def peval_m(result_dir, coco_instance, thresh=0.3, with_empty_images=True,catego
         if len(gtanns) == 0 and (not with_empty_images):
             continue
         gtboxes = anns2gtboxes(gtanns,categories)
-        print(gtboxes)
-        print(filed_boxes)
+
         eval_m.eval_add_result(gtboxes, filed_boxes)
 
     evaluation = eval_m.get_result()

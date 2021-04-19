@@ -221,7 +221,7 @@ def filt_boxes(boxes_with_scores, categories,thres):
 def anns2gtboxes(gtanns,categories):
     gtboxes = []
     for ann in gtanns:
-        if ann['category_id'] in calculates:
+        if ann['category_id'] in categories:
             gtboxes.append(xywh2xyxy(ann['bbox']))
     return gtboxes
 

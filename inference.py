@@ -359,7 +359,7 @@ def test_images():
     # test_data()
 
     sets = ['train', 'test']
-    set_name = sets[1]
+    set_name = sets[2]
     anns_file = '/data1/qilei_chen/DATA/polyp_xinzi/annotations/'+set_name+'.json'
     coco_instance = COCO(anns_file)
     '''

@@ -115,12 +115,14 @@ class MetricMulticlass(object):
         for index_gt_box, gt_box in enumerate(ground_truth):
             hasTP = False
             gt = gt_box
+            '''
             if gt[4] == 1:
                 self.adenomatous_size.append(
                     (gt[2] - gt[0]) * (gt[3] - gt[1]) * 512 * 512 / (image.shape[0] * image.shape[1]))
             else:
                 self.non_adenomatous_size.append(
                     (gt[2] - gt[0]) * (gt[3] - gt[1]) * 512 * 512 / (image.shape[0] * image.shape[1]))
+            '''
             not_matched = []
             for index_pred, j in enumerate(pred_points):
                 if self.mode == 'center':
@@ -147,11 +149,13 @@ class MetricMulticlass(object):
                     # 如果match到GT 但是 class不一样 添加到候选框，等待下一轮GT match
                     elif gt[4] != j[4]:
                         not_matched.append(j)
+                        '''
                         gt_area = (gt[2] - gt[0]) * (gt[3] - gt[1]) * 512 * 512 / (image.shape[0] * image.shape[1])
                         if gt[4] == 1:
                             self.adenomatous_to_non_adenomatous_size.append(gt_area)
                         else:
                             self.non_adenomatous_to_adenomatous_size.append(gt_area)
+                        '''
                     # 不管gt match的唯一性， 所有的match的prediction都要添加到confusion matrix
                     gt_cls = int(j[4])
                     pred_cls = int(gt[4])

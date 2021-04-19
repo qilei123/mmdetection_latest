@@ -10,7 +10,7 @@ from metric_polyp import Metric
 from img_crop import crop_img
 from extra_nms import *
 
-NMS_ALL = True
+NMS_ALL = False
 
 def convert_result(bbox_result):
     json_result = dict()

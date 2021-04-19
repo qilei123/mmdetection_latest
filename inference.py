@@ -14,6 +14,7 @@ NMS_ALL = True
 
 def convert_result(bbox_result):
     json_result = dict()
+    json_result['results'] = []
     for label in range(len(bbox_result)):
         bboxes = bbox_result[label]
         for i in range(bboxes.shape[0]):

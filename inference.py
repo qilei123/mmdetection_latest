@@ -223,7 +223,7 @@ def filt_boxes(boxes_with_scores, categories,thres):
 
         for jr in json_result["results"]:
             all_nms_locs.append(jr['location'])
-    
+        print(all_nms_locs)
 
     for category in categories:
         for box,i in zip(boxes_with_scores[category-1],range(boxes_with_scores[category-1].shape[0])):

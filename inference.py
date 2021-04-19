@@ -348,6 +348,10 @@ def test_images():
     work_dir = '/data1/qilei_chen/DATA/polyp_xinzi/work_dirs/'
     model_epoch = 'epoch_17.pth'
 
+    print("----------------")
+    print(model_name)
+    print("----------------")
+
     results_file_dir = os.path.join(
         work_dir, model_name, model_epoch+"_"+set_name+".pkl")
     results_file_dir = generate_result(

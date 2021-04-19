@@ -245,7 +245,7 @@ def anns2gtboxes(gtanns,categories):
 
 
 def peval(result_dir, coco_instance, thresh=0.3, with_empty_images=True):
-    categories = [1]
+    categories = [2]
     print(categories)
     fp = open(result_dir, 'rb')
     results = pickle.load(fp)
@@ -359,7 +359,7 @@ def test_images():
     # test_data()
 
     sets = ['train', 'test']
-    set_name = sets[2]
+    set_name = sets[1]
     anns_file = '/data1/qilei_chen/DATA/polyp_xinzi/annotations/'+set_name+'.json'
     coco_instance = COCO(anns_file)
     '''

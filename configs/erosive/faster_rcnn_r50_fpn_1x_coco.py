@@ -11,19 +11,19 @@ data = dict(
         type=dataset_type,
         # explicitly add your class names to the field `classes`
         classes=classes,
-        ann_file= data_root+'annotations/train.json',
+        ann_file= data_root+'annotations/train4.19.json',
         img_prefix=data_root+'images/'),
     val=dict(
         type=dataset_type,
         # explicitly add your class names to the field `classes`
         classes=classes,
-        ann_file= data_root+'annotations/test.json',
+        ann_file= data_root+'annotations/test4.19.json',
         img_prefix=data_root+'images/'),
     test=dict(
         type=dataset_type,
         # explicitly add your class names to the field `classes`
         classes=classes,
-        ann_file= data_root+'annotations/test.json',
+        ann_file= data_root+'annotations/test4.19.json',
         img_prefix=data_root+'images/'),)
 
 # 2. model settings
@@ -46,4 +46,4 @@ model = dict(
             max_per_img=100)))# explicitly over-write all the `num_classes` field from default 80 to 1.
 
 runner = dict(type='EpochBasedRunner', max_epochs=24)
-resume_from = "/data1/qilei_chen/DATA/erosive/work_dirs/faster_rcnn_r50_fpn_1x_coco_with_empty/latest.pth"
+#resume_from = "/data1/qilei_chen/DATA/erosive/work_dirs/faster_rcnn_r50_fpn_1x_coco_with_empty/latest.pth"

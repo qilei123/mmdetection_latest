@@ -439,6 +439,7 @@ def test_images():
     #    model_name, work_dir, model_epoch, coco_instance,data_set_name = 'polyp_xinzi', set_name = set_name, imshow=True)
     for thresh in range(0,100,5):
         thresh = float(thresh)/100
+        print('------------threshold:'+str(thresh)+'--------------')
         peval_m(results_file_dir, coco_instance,
               thresh=thresh, with_empty_images=False)
 

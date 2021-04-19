@@ -7,6 +7,7 @@ import cv2
 import json
 import pickle
 from metric_polyp import Metric
+from metric_polyp_multiclass import MetricMulticlass
 from img_crop import crop_img
 from extra_nms import *
 
@@ -228,11 +229,12 @@ def filt_boxes(boxes_with_scores, categories,thres):
     for category in categories:
         for box,i in zip(boxes_with_scores[category-1],range(boxes_with_scores[category-1].shape[0])):
             if box[4] >= thres:
+                box[4] = category #replace score with category
                 if NMS_ALL:
                     if (category,i) in all_nms_locs:
-                        filted_boxes.append(box[0:4])
+                        filted_boxes.append(box)
                 else:
-                    filted_boxes.append(box[0:4])
+                    filted_boxes.append(box)
     return filted_boxes
 
 
@@ -240,7 +242,7 @@ def anns2gtboxes(gtanns,categories):
     gtboxes = []
     for ann in gtanns:
         if ann['category_id'] in categories:
-            gtboxes.append(xywh2xyxy(ann['bbox']))
+            gtboxes.append(xywh2xyxy(ann['bbox']).append( ann['category_id']))
     return gtboxes
 
 
@@ -267,6 +269,59 @@ def peval(result_dir, coco_instance, thresh=0.3, with_empty_images=True):
         .format(precision, recall, F1, F2, thresh, len(eval.TPs), len(eval.FPs), len(eval.FNs), len(eval.FPs)+len(eval.FNs))
     print(out)
 
+def peval_m(result_dir, coco_instance, thresh=0.3, with_empty_images=True,categories = [1,2]):
+    
+    fp = open(result_dir, 'rb')
+    results = pickle.load(fp)
+    eval_m = MetricMulticlass()
+
+    category = eval_m.classes
+
+    for img_id in results:
+        filed_boxes = filt_boxes(results[img_id]['result'],categories, thresh)
+        gtannIds = coco_instance.getAnnIds(imgIds=img_id)
+        gtanns = coco_instance.loadAnns(gtannIds)
+        if len(gtanns) == 0 and (not with_empty_images):
+            continue
+        gtboxes = anns2gtboxes(gtanns,categories)
+        eval_m.eval_add_result(gtboxes, filed_boxes)
+
+    evaluation = eval_m.get_result()
+    for key in evaluation:
+        if key in ['overall', 'binary']:
+            print('\n==================== {} ====================='.format(key))
+        elif key == 'confusion_matrix':
+            continue
+        else:
+            print('\n==================== {} ====================='.format(
+                category[key - 1]))
+        print("Precision: {:.4f}  Recall: {:.4f}  F1: {:.4f}  F2: {:.4f}  "
+            "TP: {:3}  FP: {:3}  FN: {:3}  FP+FN: {:3}"
+            .format(evaluation[key]['precision'],
+                    evaluation[key]['recall'],
+                    evaluation[key]['F1'],
+                    evaluation[key]['F2'],
+                    evaluation[key]['TP'],
+                    evaluation[key]['FP'],
+                    evaluation[key]['FN'],
+                    evaluation[key]['FN'] + evaluation[key]['FP']))
+    template = "{:^20}"
+    out_t = ''
+    out = []
+    for i in range(len(category) + 1):
+        out_t = out_t + template
+    out.append(out_t.format('\n  gt class -->', *[i for i in category]))
+    total_proposal = 0
+    for i in range(1, len(category) + 1):
+        cm = []
+        for j in range(1, len(category) + 1):
+            cm.append(evaluation['confusion_matrix'][i][j])
+            total_proposal += evaluation['confusion_matrix'][i][j]
+        out.append(out_t.format(category[i - 1], *cm))
+    print('\n'.join(out))
+    print('\nTotal proposals: {}, Accuracy: {:.4f}'.format(total_proposal,
+                                                        (evaluation['confusion_matrix'][1][1] +
+                                                            evaluation['confusion_matrix'][2][2]) / total_proposal))
 
 def getResult(imgid, json_results):
     results = []

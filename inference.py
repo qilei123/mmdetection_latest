@@ -242,7 +242,9 @@ def anns2gtboxes(gtanns,categories):
     gtboxes = []
     for ann in gtanns:
         if ann['category_id'] in categories:
-            gtboxes.append(xywh2xyxy(ann['bbox']).append( ann['category_id']))
+            xyxy = xywh2xyxy(ann['bbox'])
+            xyxy.append( ann['category_id'])
+            gtboxes.append(xyxy)
     return gtboxes
 
 

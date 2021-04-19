@@ -366,12 +366,9 @@ def test_images():
     model_name = 'ssd384_coco'
     model_epoch = 'epoch_17.pth'
     '''
-    model_name = 'ssd384_coco'
-    model_epoch = 'epoch_17.pth'
-    '''
     model_name = 'faster_rcnn_r50_fpn_1x_coco_384'
     model_epoch = 'epoch_14.pth'
-
+    '''
     work_dir = '/data1/qilei_chen/DATA/polyp_xinzi/work_dirs/'
 
     print("----------------")

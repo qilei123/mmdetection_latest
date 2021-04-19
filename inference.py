@@ -236,9 +236,9 @@ def peval(result_dir, coco_instance, thresh=0.3, with_empty_images=True):
         filed_boxes = filt_boxes(results[img_id]['result'],categories, thresh)
         gtannIds = coco_instance.getAnnIds(imgIds=img_id)
         gtanns = coco_instance.loadAnns(gtannIds)
-        gtboxes = anns2gtboxes(gtanns,categories)
-        if len(gtboxes) == 0 and (not with_empty_images):
+        if len(gtanns) == 0 and (not with_empty_images):
             continue
+        gtboxes = anns2gtboxes(gtanns,categories)
         eval.eval_add_result(gtboxes, filed_boxes)
 
     precision, recall = eval.get_result()

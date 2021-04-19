@@ -245,7 +245,7 @@ def anns2gtboxes(gtanns,categories):
 
 
 def peval(result_dir, coco_instance, thresh=0.3, with_empty_images=True):
-    categories = [1]
+    categories = [2]
     fp = open(result_dir, 'rb')
     results = pickle.load(fp)
     eval = Metric()

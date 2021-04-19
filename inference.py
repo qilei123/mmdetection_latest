@@ -212,7 +212,7 @@ def center_in_xywhrule(Point, Bbox):
 def filt_boxes(boxes_with_scores, categories,thres):
     filted_boxes = []
     for category in categories:
-        for box in boxes_with_scores[category]:
+        for box in boxes_with_scores[category-1]:
             if box[4] >= thres:
                 filted_boxes.append(box[0:4])
     return filted_boxes
@@ -221,13 +221,13 @@ def filt_boxes(boxes_with_scores, categories,thres):
 def anns2gtboxes(gtanns,categories):
     gtboxes = []
     for ann in gtanns:
-        print(ann)
-        gtboxes.append(xywh2xyxy(ann['bbox']))
+        if ann['category_id'] in calculates:
+            gtboxes.append(xywh2xyxy(ann['bbox']))
     return gtboxes
 
 
 def peval(result_dir, coco_instance, thresh=0.3, with_empty_images=True):
-    categories = [0]
+    categories = [1,2]
     fp = open(result_dir, 'rb')
     results = pickle.load(fp)
     eval = Metric()

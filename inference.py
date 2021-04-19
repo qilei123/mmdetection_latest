@@ -217,19 +217,13 @@ def filt_boxes(boxes_with_scores, categories,thres):
     filted_boxes = []
     if NMS_ALL:
         json_result = convert_result(boxes_with_scores)
-        print('----------------')
-        all_nms_locs = []
 
-        for jr in json_result["results"]:
-            all_nms_locs.append(jr['location'])        
-        print(all_nms_locs)
         nms_result(json_result)
 
         all_nms_locs = []
 
         for jr in json_result["results"]:
             all_nms_locs.append(jr['location'])
-        print(all_nms_locs)
 
     for category in categories:
         for box,i in zip(boxes_with_scores[category-1],range(boxes_with_scores[category-1].shape[0])):

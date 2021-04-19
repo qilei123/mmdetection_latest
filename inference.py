@@ -10,6 +10,8 @@ from metric_polyp import Metric
 from img_crop import crop_img
 from extra_nms import *
 
+NMS_ALL = True
+
 def convert_result(bbox_result):
     json_result = dict()
     for label in range(len(bbox_result)):
@@ -19,6 +21,7 @@ def convert_result(bbox_result):
             data['bbox'] = xyxy2xywh(bboxes[i])
             data['score'] = float(bboxes[i][4])
             data['label'] = int(label+1)
+            data['location'] = (label+1,i)
             json_result['results'].append(data) 
     return json_result
 
@@ -211,10 +214,24 @@ def center_in_xywhrule(Point, Bbox):
 
 def filt_boxes(boxes_with_scores, categories,thres):
     filted_boxes = []
+    if NMS_ALL:
+        json_result = convert_result(boxes_with_scores)
+        nms_result(json_result)
+
+        all_nms_locs = []
+
+        for jr in json_result["results"]:
+            all_nms_locs.append(jr['location'])
+    
+
     for category in categories:
-        for box in boxes_with_scores[category-1]:
+        for box,i in zip(boxes_with_scores[category-1],range(boxes_with_scores[category-1].shape[0])):
             if box[4] >= thres:
-                filted_boxes.append(box[0:4])
+                if NMS_ALL:
+                    if (category,i) in all_nms_locs:
+                        filted_boxes.append(box[0:4])
+                else:
+                    filted_boxes.append(box[0:4])
     return filted_boxes
 
 

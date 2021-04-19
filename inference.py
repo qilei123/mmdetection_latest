@@ -8,6 +8,19 @@ import json
 import pickle
 from metric_polyp import Metric
 from img_crop import crop_img
+from extra_nms import *
+
+def convert_result(bbox_result):
+    json_result = dict()
+    for label in range(len(bbox_result)):
+        bboxes = bbox_result[label]
+        for i in range(bboxes.shape[0]):
+            data = dict()
+            data['bbox'] = xyxy2xywh(bboxes[i])
+            data['score'] = float(bboxes[i][4])
+            data['label'] = int(label+1)
+            json_result['results'].append(data) 
+    return json_result
 
 def test_data(with_gt=False):
     # Specify the path to model config and checkpoint file
@@ -196,32 +209,34 @@ def center_in_xywhrule(Point, Bbox):
     return False
 
 
-def filt_boxes(boxes_with_scores, thres):
+def filt_boxes(boxes_with_scores, categories,thres):
     filted_boxes = []
-    for box in boxes_with_scores:
-        if box[4] >= thres:
-            filted_boxes.append(box[0:4])
+    for category in categories:
+        for box in boxes_with_scores[category]:
+            if box[4] >= thres:
+                filted_boxes.append(box[0:4])
     return filted_boxes
 
 
-def anns2gtboxes(gtanns):
+def anns2gtboxes(gtanns,categories):
     gtboxes = []
     for ann in gtanns:
+        print(ann)
         gtboxes.append(xywh2xyxy(ann['bbox']))
     return gtboxes
 
 
 def peval(result_dir, coco_instance, thresh=0.3, with_empty_images=True):
-
+    categories = [0]
     fp = open(result_dir, 'rb')
     results = pickle.load(fp)
     eval = Metric()
 
     for img_id in results:
-        filed_boxes = filt_boxes(results[img_id]['result'][0], thresh)
+        filed_boxes = filt_boxes(results[img_id]['result'],categories, thresh)
         gtannIds = coco_instance.getAnnIds(imgIds=img_id)
         gtanns = coco_instance.loadAnns(gtannIds)
-        gtboxes = anns2gtboxes(gtanns)
+        gtboxes = anns2gtboxes(gtanns,categories)
         if len(gtboxes) == 0 and (not with_empty_images):
             continue
         eval.eval_add_result(gtboxes, filed_boxes)

@@ -419,7 +419,7 @@ def test_images():
     sets = ['train', 'test']
     set_name = sets[1]
     #anns_file = '/data1/qilei_chen/DATA/polyp_xinzi/annotations/'+set_name+'.json'
-    anns_file = '/data1/qilei_chen/DATA/erosive/annotations/'+set_name+'4_19.json'
+    anns_file = '/data1/qilei_chen/DATA/erosive/annotations/'+set_name+'4.19.json'
     coco_instance = COCO(anns_file)
 
     model_name = 'cascade_rcnn_r50_fpn_1x_coco_4_19'

@@ -442,7 +442,7 @@ def test_images():
     results_file_dir = os.path.join(
         work_dir, model_name, model_epoch+"_"+set_name+".pkl")
     results_file_dir = generate_result(
-        model_name, work_dir, model_epoch, coco_instance,data_set_name = 'polyp_xinzi', set_name = set_name, imshow=True)
+        model_name, work_dir, model_epoch, coco_instance,data_set_name = 'erosive', set_name = set_name, imshow=True)
     for thresh in range(0,100,5):
         thresh = float(thresh)/100
         print('------------threshold:'+str(thresh)+'--------------')

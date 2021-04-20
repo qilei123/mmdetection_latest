@@ -169,7 +169,7 @@ def generate_result(model_name, work_dir, model_epoch,
     # Specify the path to model config and checkpoint file
     #model_name = 'reppoints_moment_r50_fpn_1x_coco'
 
-    config_file = 'configs/'+data_set_name+'/'+model_name+'.py'
+    config_file = 'configs/'+data_set_name+'/'+model_name.replace("_4_19","")+'.py'
     checkpoint_file = os.path.join(work_dir, model_name, model_epoch)
 
     # build the model from a config file and a checkpoint file
@@ -418,16 +418,22 @@ def test_images():
 
     sets = ['train', 'test']
     set_name = sets[1]
-    anns_file = '/data1/qilei_chen/DATA/polyp_xinzi/annotations/'+set_name+'.json'
+    #anns_file = '/data1/qilei_chen/DATA/polyp_xinzi/annotations/'+set_name+'.json'
+    anns_file = '/data1/qilei_chen/DATA/erosive/annotations/'+set_name+'4_19.json'
     coco_instance = COCO(anns_file)
-    
+
+    model_name = 'cascade_rcnn_r50_fpn_1x_coco_4_19'
+    model_epoch = 'epoch_9.pth'
+    '''
     model_name = 'ssd384_coco'
     model_epoch = 'epoch_17.pth'
+    '''
     '''
     model_name = 'faster_rcnn_r50_fpn_1x_coco_384'
     model_epoch = 'epoch_14.pth'
     '''
-    work_dir = '/data1/qilei_chen/DATA/polyp_xinzi/work_dirs/'
+    #work_dir = '/data1/qilei_chen/DATA/polyp_xinzi/work_dirs/'
+    work_dir = '/data1/qilei_chen/DATA/erosive/work_dirs/'
 
     print("----------------")
     print(model_name)
@@ -435,8 +441,8 @@ def test_images():
 
     results_file_dir = os.path.join(
         work_dir, model_name, model_epoch+"_"+set_name+".pkl")
-    #results_file_dir = generate_result(
-    #    model_name, work_dir, model_epoch, coco_instance,data_set_name = 'polyp_xinzi', set_name = set_name, imshow=True)
+    results_file_dir = generate_result(
+        model_name, work_dir, model_epoch, coco_instance,data_set_name = 'polyp_xinzi', set_name = set_name, imshow=True)
     for thresh in range(0,100,5):
         thresh = float(thresh)/100
         print('------------threshold:'+str(thresh)+'--------------')

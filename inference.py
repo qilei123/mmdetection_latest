@@ -249,7 +249,7 @@ def anns2gtboxes(gtanns,categories):
 
 
 def peval(result_dir, coco_instance, thresh=0.3, with_empty_images=True):
-    categories = [1,2]
+    categories = [1]
     print(categories)
     fp = open(result_dir, 'rb')
     results = pickle.load(fp)
@@ -446,7 +446,7 @@ def test_images():
     for thresh in range(0,100,5):
         thresh = float(thresh)/100
         print('------------threshold:'+str(thresh)+'--------------')
-        peval_m(results_file_dir, coco_instance,
+        peval(results_file_dir, coco_instance,
               thresh=thresh, with_empty_images=False)
 
     # eval_yolof(coco_instance)

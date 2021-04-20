@@ -98,6 +98,7 @@ def test_data(with_gt=False):
 colors = [(255, 0, 0), (0, 255, 0), (0, 0, 255)]
 classes = ('ulcer', 'erosive')
 classes = ('Adenomatous','non-Adenomatous')
+classes = ('erosive',)
 
 def inference_and_save_result(model, coco_instance, img_folder_dir,
                               result_save_dir, imshow=False, score_thr=0.3):

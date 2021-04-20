@@ -423,7 +423,7 @@ def test_images():
     anns_file = '/data1/qilei_chen/DATA/erosive/annotations/'+set_name+'4.19.json'
     coco_instance = COCO(anns_file)
 
-    model_name = 'cascade_rcnn_r50_fpn_1x_coco_4_19'
+    model_name = 'faster_rcnn_r50_fpn_1x_coco_4_19'
     model_epoch = 'epoch_9.pth'
     '''
     model_name = 'ssd384_coco'

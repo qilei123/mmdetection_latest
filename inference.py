@@ -423,8 +423,8 @@ def test_images():
     anns_file = '/data1/qilei_chen/DATA/erosive/annotations/'+set_name+'4.19.json'
     coco_instance = COCO(anns_file)
 
-    #model_name = 'faster_rcnn_r50_fpn_1x_coco_4_19'
-    #model_epoch = 'epoch_9.pth'
+    model_name = 'faster_rcnn_r50_fpn_1x_coco_4_19'
+    model_epoch = 'epoch_9.pth'
     '''
     model_name = 'ssd384_coco'
     model_epoch = 'epoch_17.pth'
@@ -434,8 +434,8 @@ def test_images():
     model_epoch = 'epoch_14.pth'
     '''
 
-    model_name = 'reppoints_moment_r50_fpn_1x_coco_4_19'
-    model_epoch = 'epoch_61.pth'
+    #model_name = 'reppoints_moment_r50_fpn_1x_coco_4_19'
+    #model_epoch = 'epoch_61.pth'
 
     #work_dir = '/data1/qilei_chen/DATA/polyp_xinzi/work_dirs/'
     work_dir = '/data1/qilei_chen/DATA/erosive/work_dirs/'

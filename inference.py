@@ -490,10 +490,10 @@ def test_video():
     fps = src_cap.get(cv2.CAP_PROP_FPS)
     frame_size = (int(src_cap.get(cv2.CAP_PROP_FRAME_WIDTH)),
                   int(src_cap.get(cv2.CAP_PROP_FRAME_HEIGHT)))
-    if not os.path.exists('/data1/qilei_chen/DATA/'+category+'/video_test_results/'+model_name+"_4_9"):
-        os.makedirs('/data1/qilei_chen/DATA/'+category+'/video_test_results/'+model_name+"_4_9")
+    if not os.path.exists('/data1/qilei_chen/DATA/'+category+'/video_test_results/'+model_name+anno_date):
+        os.makedirs('/data1/qilei_chen/DATA/'+category+'/video_test_results/'+model_name+anno_date)
     
-    save_dir = os.path.join('/data1/qilei_chen/DATA/'+category+'/video_test_results/',model_name+"_4_9", os.path.basename(video_dir))
+    save_dir = os.path.join('/data1/qilei_chen/DATA/'+category+'/video_test_results/',model_name+anno_date, os.path.basename(video_dir))
     dst_writer = cv2.VideoWriter(save_dir, cv2.VideoWriter_fourcc("P", "I", "M", "1"), fps, frame_size)
     
     positive_records = open(save_dir+".txt","w")
@@ -530,5 +530,5 @@ def test_video():
 
 if __name__ == "__main__":
 
-    test_images()
-    #test_video()
+    #test_images()
+    test_video()

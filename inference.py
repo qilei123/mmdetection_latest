@@ -171,7 +171,7 @@ def generate_result(model_name, work_dir, model_epoch,
     #model_name = 'reppoints_moment_r50_fpn_1x_coco'
 
     config_file = 'configs/'+data_set_name+'/'+model_name.replace("_4_19","")+'.py'
-    checkpoint_file = os.path.join(work_dir, model_name, model_epoch)
+    checkpoint_file = os.path.join(work_dir, model_name.replace("_4_19",""), model_epoch)
 
     # build the model from a config file and a checkpoint file
 
@@ -423,7 +423,7 @@ def test_images():
     anns_file = '/data1/qilei_chen/DATA/erosive/annotations/'+set_name+'4.19.json'
     coco_instance = COCO(anns_file)
 
-    model_name = 'faster_rcnn_r50_fpn_1x_coco_4_19'
+    model_name = 'cascade_rcnn_r50_fpn_1x_coco_4_19'
     model_epoch = 'epoch_9.pth'
     '''
     model_name = 'ssd384_coco'

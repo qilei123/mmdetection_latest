@@ -500,13 +500,16 @@ def test_video():
 
     success, frame = src_cap.read()
     count = 0
+
+    results = dict()
+
     while success:
         
         ##preprocess todo
         frame = crop_img(frame)
 
         result = inference_detector(model, frame)
-        
+        results[count] =convert_result(result)
         frame = model.show_result(frame, result, score_thr=score_thr, bbox_color=colors[2],
                             text_color=colors[2], font_size=10)
         
@@ -526,7 +529,8 @@ def test_video():
 
         count +=1
         success, frame = src_cap.read()
-
+    with open(save_dir+".json", 'w') as outfile:
+        json.dump(results, outfile)
 
 if __name__ == "__main__":
 

@@ -529,9 +529,6 @@ def test_video():
 
         count +=1
 
-        if count==10:
-            break
-
         success, frame = src_cap.read()
     with open(save_dir+".pkl", 'wb') as outfile:
         pickle.dump(results, outfile)

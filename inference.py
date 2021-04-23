@@ -528,9 +528,12 @@ def test_video():
         positive_records.write(str(count)+" "+str(box_count)+" "+str(box_count!=0)+"\n")   
 
         count +=1
+
         success, frame = src_cap.read()
-    with open(save_dir+".json", 'w') as outfile:
-        json.dump(results, outfile)
+    with open(save_dir+".pkl", 'wb') as outfile:
+        pickle.dump(results, outfile)
+    #with open(save_dir+".json", 'w') as outfile:
+    #    json.dump(results, outfile)
 
 if __name__ == "__main__":
 

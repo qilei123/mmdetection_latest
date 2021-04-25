@@ -495,7 +495,7 @@ def test_video():
         file_name = os.path.basename(line[:-1])
         video_dir = os.path.join("/data1/qilei_chen/DATA",file_name)
         if not os.path.exists(video_dir):
-            command = "cp /data0/dataset/Xiangya_Gastric_data/"+line+" /data1/qilei_chen/DATA"
+            command = "cp /data0/dataset/Xiangya_Gastric_data/"+line[:-1]+" /data1/qilei_chen/DATA/"
             os.system(command)
         print(video_dir)
         src_cap = cv2.VideoCapture(video_dir)

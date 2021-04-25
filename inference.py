@@ -488,7 +488,7 @@ def test_video():
     score_thr = model_shresh[model_name]
     # build the model from a config file and a checkpoint file
 
-    model = init_detector(config_file, checkpoint_file, device='cuda:0')
+    model = init_detector(config_file, checkpoint_file, device='cuda:1')
 
     line = source_list.readline()
     while line:

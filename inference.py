@@ -468,7 +468,7 @@ def test_video():
     #video_dir = "/data1/qilei_chen/DATA/20191120080002-00.23.16.084-00.27.17.158-seg2.avi"
     model_name = "cascade_rcnn_r50_fpn_1x_coco"
     categories = ["ulcer","erosive"]
-    category = categories[0]
+    category = categories[1]
     print("-----------------")
     print(model_name)
     print(category)
@@ -488,7 +488,7 @@ def test_video():
     score_thr = model_shresh[model_name]
     # build the model from a config file and a checkpoint file
 
-    model = init_detector(config_file, checkpoint_file, device='cuda:1')
+    model = init_detector(config_file, checkpoint_file, device='cuda:0')
 
     line = source_list.readline()
     while line:

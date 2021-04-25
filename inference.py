@@ -468,7 +468,7 @@ def test_video():
     #video_dir = "/data1/qilei_chen/DATA/20191120080002-00.23.16.084-00.27.17.158-seg2.avi"
     model_name = "cascade_rcnn_r50_fpn_1x_coco"
     categories = ["ulcer","erosive"]
-    category = categories[1]
+    category = categories[0]
     print("-----------------")
     print(model_name)
     print(category)

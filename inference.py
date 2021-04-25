@@ -465,7 +465,7 @@ def test_video():
     
     source_list = open("video_list.txt")
 
-    video_dir = "/data1/qilei_chen/DATA/20191120080002-00.23.16.084-00.27.17.158-seg2.avi"
+    #video_dir = "/data1/qilei_chen/DATA/20191120080002-00.23.16.084-00.27.17.158-seg2.avi"
     model_name = "cascade_rcnn_r50_fpn_1x_coco"
     categories = ["ulcer","erosive"]
     category = categories[1]
@@ -496,7 +496,7 @@ def test_video():
         if not os.path.exists(video_dir):
             command = "cp /data0/dataset/Xiangya_Gastric_data/"+line+" /data1/qilei_chen/DATA"
             os.system(command)
-
+        print(video_dir)
         src_cap = cv2.VideoCapture(video_dir)
 
         fps = src_cap.get(cv2.CAP_PROP_FPS)

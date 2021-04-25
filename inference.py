@@ -481,7 +481,8 @@ def test_video():
         model_shresh={"faster_rcnn_r50_fpn_1x_coco":0.3,"cascade_rcnn_r50_fpn_1x_coco":0.3}
     
     config_file = 'configs/'+category+'/'+model_name+'.py'
-    anno_date = "_4_19"
+    #anno_date = "_4_19"
+    anno_date = ""
     checkpoint_file = '/data1/qilei_chen/DATA/'+category+'/work_dirs/'+model_name+anno_date+"/epoch_9.pth"
     
     score_thr = model_shresh[model_name]

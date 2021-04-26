@@ -491,7 +491,11 @@ def test_video():
     model = init_detector(config_file, checkpoint_file, device='cuda:0')
 
     line = source_list.readline()
+    count =0
     while line:
+        if count<3:
+            continue
+        count+=1
         file_name = os.path.basename(line[:-1])
         video_dir = os.path.join("/data1/qilei_chen/DATA",file_name)
         if not os.path.exists(video_dir):

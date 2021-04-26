@@ -468,7 +468,7 @@ def test_video():
     #video_dir = "/data1/qilei_chen/DATA/20191120080002-00.23.16.084-00.27.17.158-seg2.avi"
     model_name = "cascade_rcnn_r50_fpn_1x_coco"
     categories = ["ulcer","erosive"]
-    category = categories[0]
+    category = categories[1]
     print("-----------------")
     print(model_name)
     print(category)
@@ -482,7 +482,7 @@ def test_video():
     
     config_file = 'configs/'+category+'/'+model_name+'.py'
     anno_date = "_4_19"
-    anno_date = ""
+    #anno_date = ""
     checkpoint_file = '/data1/qilei_chen/DATA/'+category+'/work_dirs/'+model_name+anno_date+"/epoch_9.pth"
     
     score_thr = model_shresh[model_name]
@@ -495,7 +495,7 @@ def test_video():
     while line:
         
         count_video+=1
-        if count_video<3:
+        if count_video<8:
             continue
         file_name = os.path.basename(line[:-1])
         video_dir = os.path.join("/data1/qilei_chen/DATA",file_name)

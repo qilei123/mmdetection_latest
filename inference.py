@@ -493,9 +493,10 @@ def test_video():
     line = source_list.readline()
     count_video =0
     while line:
+        
+        count_video+=1
         if count_video<3:
             continue
-        count_video+=1
         file_name = os.path.basename(line[:-1])
         video_dir = os.path.join("/data1/qilei_chen/DATA",file_name)
         if not os.path.exists(video_dir):

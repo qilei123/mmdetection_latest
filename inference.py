@@ -495,9 +495,7 @@ def test_video():
     while line:
         
         count_video+=1
-        if count_video<5:
-            continue
-        else:
+        if count_video>=5:
             file_name = os.path.basename(line[:-1])
             video_dir = os.path.join("/data1/qilei_chen/DATA",file_name)
             if not os.path.exists(video_dir):

@@ -553,7 +553,102 @@ def test_video():
         
         line = source_list.readline()
 
+def test_video_batch(batch_size = 8):
 
+    #video_dir = "/data0/dataset/Xiangya_Gastric_data/2021_gastric_video_annotation/20191111-1120/20191120080002-00.23.16.084-00.27.17.158-seg2.avi"
+    
+    source_list = open("video_list.txt")
+
+    #video_dir = "/data1/qilei_chen/DATA/20191120080002-00.23.16.084-00.27.17.158-seg2.avi"
+    model_name = "cascade_rcnn_r50_fpn_1x_coco"
+    categories = ["ulcer","erosive"]
+    category = categories[1]
+    print("-----------------")
+    print(model_name)
+    print(category)
+    print("-----------------")
+    if category==categories[0]:
+        #for ulcer
+        model_shresh={"faster_rcnn_r50_fpn_1x_coco":0.4,"cascade_rcnn_r50_fpn_1x_coco":0.3}
+    else:
+        #for erosive
+        model_shresh={"faster_rcnn_r50_fpn_1x_coco":0.3,"cascade_rcnn_r50_fpn_1x_coco":0.3}
+    
+    config_file = 'configs/'+category+'/'+model_name+'.py'
+    anno_date = "_4_19"
+    #anno_date = ""
+    checkpoint_file = '/data1/qilei_chen/DATA/'+category+'/work_dirs/'+model_name+anno_date+"/epoch_9.pth"
+    
+    score_thr = model_shresh[model_name]
+    # build the model from a config file and a checkpoint file
+
+    model = init_detector(config_file, checkpoint_file, device='cuda:0')
+
+    line = source_list.readline()
+    while line:
+        
+        file_name = os.path.basename(line[:-1])
+        video_dir = os.path.join("/data1/qilei_chen/DATA",file_name)
+        if not os.path.exists(video_dir):
+            command = "cp /data0/dataset/Xiangya_Gastric_data/"+line[:-1]+" /data1/qilei_chen/DATA/"
+            os.system(command)
+        
+        src_cap = cv2.VideoCapture(video_dir)
+
+        fps = src_cap.get(cv2.CAP_PROP_FPS)
+        frame_size = (int(src_cap.get(cv2.CAP_PROP_FRAME_WIDTH)),
+                    int(src_cap.get(cv2.CAP_PROP_FRAME_HEIGHT)))
+        if not os.path.exists('/data1/qilei_chen/DATA/'+category+'/video_test_results/'+model_name+anno_date):
+            os.makedirs('/data1/qilei_chen/DATA/'+category+'/video_test_results/'+model_name+anno_date)
+        
+        save_dir = os.path.join('/data1/qilei_chen/DATA/'+category+'/video_test_results/',model_name+anno_date, os.path.basename(video_dir))
+        if not os.path.exists(save_dir+".pkl"):
+            print(file_name)
+            dst_writer = cv2.VideoWriter(save_dir, cv2.VideoWriter_fourcc("P", "I", "M", "1"), fps, frame_size)
+            
+            positive_records = open(save_dir+".txt","w")
+
+            success, frame = src_cap.read()
+            count = 0
+
+            results = dict()
+
+            frame_batch = []
+            frame_batch.append(frame)
+
+            while success:
+                
+                ##preprocess todo
+                frame = crop_img(frame)
+
+                result = inference_detector(model, frame)
+                results[count] =convert_result(result)
+                frame = model.show_result(frame, result, score_thr=score_thr, bbox_color=colors[2],
+                                    text_color=colors[2], font_size=10)
+                
+                cv2.putText(frame,str(count),(30,30),cv2.FONT_HERSHEY_SIMPLEX, 1,colors[2],1,cv2.LINE_AA)
+                #cv2.imwrite('/data1/qilei_chen/DATA/'+category+'/video_test_results/test.jpg',frame)
+                
+                box_count=0
+                #print(len(result[0]))
+                for box in result[0]:
+                    if box[4]>=score_thr:
+                        box_count+=1
+
+                #print(box_count)
+                dst_writer.write(cv2.resize(frame,frame_size))
+                #print(str(count)+" "+str(box_count)+" "+str(box_count!=0)+"\n")
+                positive_records.write(str(count)+" "+str(box_count)+" "+str(box_count!=0)+"\n")   
+
+                count +=1
+
+                success, frame = src_cap.read()
+            with open(save_dir+".pkl", 'wb') as outfile:
+                pickle.dump(results, outfile)
+            #with open(save_dir+".json", 'w') as outfile:
+            #    json.dump(results, outfile)        
+        
+        line = source_list.readline()
 
 if __name__ == "__main__":
 

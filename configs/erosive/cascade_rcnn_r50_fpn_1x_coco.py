@@ -6,17 +6,17 @@ data = dict(
     train=dict(
         # explicitly add your class names to the field `classes`
         classes=classes,
-        ann_file= data_root+'annotations/train4.19.json',
+        ann_file= data_root+'annotations/fine_train.json',
         img_prefix=data_root+'images/'),
     val=dict(
         # explicitly add your class names to the field `classes`
         classes=classes,
-        ann_file= data_root+'annotations/test4.19.json',
+        ann_file= data_root+'annotations/fine_test.json',
         img_prefix=data_root+'images/'),
     test=dict(
         # explicitly add your class names to the field `classes`
         classes=classes,
-        ann_file= data_root+'annotations/test4.19.json',
+        ann_file= data_root+'annotations/fine_test.json',
         img_prefix=data_root+'images/'),)
 
 # 2. model settings

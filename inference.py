@@ -550,7 +550,7 @@ def test_video():
                 pickle.dump(results, outfile)
             #with open(save_dir+".json", 'w') as outfile:
             #    json.dump(results, outfile)        
-        src_cap.close()
+        
         line = source_list.readline()
 
 

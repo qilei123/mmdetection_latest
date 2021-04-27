@@ -491,26 +491,24 @@ def test_video():
     model = init_detector(config_file, checkpoint_file, device='cuda:0')
 
     line = source_list.readline()
-    count_video =0
     while line:
         
-        count_video+=1
-        if count_video>=5:
-            file_name = os.path.basename(line[:-1])
-            video_dir = os.path.join("/data1/qilei_chen/DATA",file_name)
-            if not os.path.exists(video_dir):
-                command = "cp /data0/dataset/Xiangya_Gastric_data/"+line[:-1]+" /data1/qilei_chen/DATA/"
-                os.system(command)
-            print(video_dir)
-            src_cap = cv2.VideoCapture(video_dir)
+        file_name = os.path.basename(line[:-1])
+        video_dir = os.path.join("/data1/qilei_chen/DATA",file_name)
+        if not os.path.exists(video_dir):
+            command = "cp /data0/dataset/Xiangya_Gastric_data/"+line[:-1]+" /data1/qilei_chen/DATA/"
+            os.system(command)
+        print(video_dir)
+        src_cap = cv2.VideoCapture(video_dir)
 
-            fps = src_cap.get(cv2.CAP_PROP_FPS)
-            frame_size = (int(src_cap.get(cv2.CAP_PROP_FRAME_WIDTH)),
-                        int(src_cap.get(cv2.CAP_PROP_FRAME_HEIGHT)))
-            if not os.path.exists('/data1/qilei_chen/DATA/'+category+'/video_test_results/'+model_name+anno_date):
-                os.makedirs('/data1/qilei_chen/DATA/'+category+'/video_test_results/'+model_name+anno_date)
-            
-            save_dir = os.path.join('/data1/qilei_chen/DATA/'+category+'/video_test_results/',model_name+anno_date, os.path.basename(video_dir))
+        fps = src_cap.get(cv2.CAP_PROP_FPS)
+        frame_size = (int(src_cap.get(cv2.CAP_PROP_FRAME_WIDTH)),
+                    int(src_cap.get(cv2.CAP_PROP_FRAME_HEIGHT)))
+        if not os.path.exists('/data1/qilei_chen/DATA/'+category+'/video_test_results/'+model_name+anno_date):
+            os.makedirs('/data1/qilei_chen/DATA/'+category+'/video_test_results/'+model_name+anno_date)
+        
+        save_dir = os.path.join('/data1/qilei_chen/DATA/'+category+'/video_test_results/',model_name+anno_date, os.path.basename(video_dir))
+        if not os.path.exists(save_dir+".pkl"):
             dst_writer = cv2.VideoWriter(save_dir, cv2.VideoWriter_fourcc("P", "I", "M", "1"), fps, frame_size)
             
             positive_records = open(save_dir+".txt","w")
@@ -551,7 +549,7 @@ def test_video():
                 pickle.dump(results, outfile)
             #with open(save_dir+".json", 'w') as outfile:
             #    json.dump(results, outfile)        
-
+        src_cap.close()
         line = source_list.readline()
 
 

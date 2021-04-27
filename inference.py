@@ -614,34 +614,41 @@ def test_video_batch(batch_size = 8):
             results = dict()
 
             frame_batch = []
-            frame_batch.append(frame)
+            
 
             while success:
                 
                 ##preprocess todo
                 frame = crop_img(frame)
-
-                result = inference_detector(model, frame)
-                results[count] =convert_result(result)
-                frame = model.show_result(frame, result, score_thr=score_thr, bbox_color=colors[2],
-                                    text_color=colors[2], font_size=10)
                 
-                cv2.putText(frame,str(count),(30,30),cv2.FONT_HERSHEY_SIMPLEX, 1,colors[2],1,cv2.LINE_AA)
-                #cv2.imwrite('/data1/qilei_chen/DATA/'+category+'/video_test_results/test.jpg',frame)
-                
-                box_count=0
-                #print(len(result[0]))
-                for box in result[0]:
-                    if box[4]>=score_thr:
-                        box_count+=1
+                frame_batch.append(frame)
 
-                #print(box_count)
-                dst_writer.write(cv2.resize(frame,frame_size))
-                #print(str(count)+" "+str(box_count)+" "+str(box_count!=0)+"\n")
-                positive_records.write(str(count)+" "+str(box_count)+" "+str(box_count!=0)+"\n")   
+                if len(frame_batch)==batch_size:
 
-                count +=1
+                    result = inference_detector(model, frame_batch)
 
+                    for i in range(batch_size):
+                        results[count] =convert_result(result[i])
+                        frame = model.show_result(frame_batch[i], result[i], score_thr=score_thr, bbox_color=colors[2],
+                                            text_color=colors[2], font_size=10)
+                        
+                        cv2.putText(frame_batch[i],str(count),(30,30),cv2.FONT_HERSHEY_SIMPLEX, 1,colors[2],1,cv2.LINE_AA)
+                        #cv2.imwrite('/data1/qilei_chen/DATA/'+category+'/video_test_results/test.jpg',frame)
+                        
+                        box_count=0
+                        #print(len(result[0]))
+                        for box in result[0]:
+                            if box[4]>=score_thr:
+                                box_count+=1
+
+                        #print(box_count)
+                        dst_writer.write(cv2.resize(frame_batch[i],frame_size))
+                        #print(str(count)+" "+str(box_count)+" "+str(box_count!=0)+"\n")
+                        positive_records.write(str(count)+" "+str(box_count)+" "+str(box_count!=0)+"\n")   
+
+                        count +=1
+                    
+                    frame_batch = []
                 success, frame = src_cap.read()
             with open(save_dir+".pkl", 'wb') as outfile:
                 pickle.dump(results, outfile)

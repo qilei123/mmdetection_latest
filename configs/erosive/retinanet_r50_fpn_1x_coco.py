@@ -10,19 +10,19 @@ data = dict(
         type=dataset_type,
         # explicitly add your class names to the field `classes`
         classes=classes,
-        ann_file= data_root+'annotations/train.json',
+        ann_file= data_root+'annotations/fine_train.json',
         img_prefix=data_root+'images/'),
     val=dict(
         type=dataset_type,
         # explicitly add your class names to the field `classes`
         classes=classes,
-        ann_file= data_root+'annotations/test.json',
+        ann_file= data_root+'annotations/fine_test.json',
         img_prefix=data_root+'images/'),
     test=dict(
         type=dataset_type,
         # explicitly add your class names to the field `classes`
         classes=classes,
-        ann_file= data_root+'annotations/test.json',
+        ann_file= data_root+'annotations/fine_test.json',
         img_prefix=data_root+'images/'),)
 
 # explicitly over-write all the `num_classes` field from default 80 to 1.

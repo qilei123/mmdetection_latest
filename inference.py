@@ -498,7 +498,7 @@ def test_video():
         if not os.path.exists(video_dir):
             command = "cp /data0/dataset/Xiangya_Gastric_data/"+line[:-1]+" /data1/qilei_chen/DATA/"
             os.system(command)
-        print(video_dir)
+        
         src_cap = cv2.VideoCapture(video_dir)
 
         fps = src_cap.get(cv2.CAP_PROP_FPS)
@@ -509,6 +509,7 @@ def test_video():
         
         save_dir = os.path.join('/data1/qilei_chen/DATA/'+category+'/video_test_results/',model_name+anno_date, os.path.basename(video_dir))
         if not os.path.exists(save_dir+".pkl"):
+            print(file_name)
             dst_writer = cv2.VideoWriter(save_dir, cv2.VideoWriter_fourcc("P", "I", "M", "1"), fps, frame_size)
             
             positive_records = open(save_dir+".txt","w")

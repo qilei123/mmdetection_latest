@@ -170,8 +170,8 @@ def generate_result(model_name, work_dir, model_epoch,
     # Specify the path to model config and checkpoint file
     #model_name = 'reppoints_moment_r50_fpn_1x_coco'
 
-    config_file = 'configs/'+data_set_name+'/'+model_name.replace("_4_19","")+'.py'
-    checkpoint_file = os.path.join(work_dir, model_name.replace("_4_19",""), model_epoch)
+    config_file = 'configs/'+data_set_name+'/'+model_name.replace("_fine","")+'.py'
+    checkpoint_file = os.path.join(work_dir, model_name, model_epoch)
 
     # build the model from a config file and a checkpoint file
 
@@ -413,18 +413,19 @@ def eval_yolov5(coco_instance):
 
 
 
-def test_images():
+def test_images(model_name = 'cascade_rcnn_r50_fpn_1x_coco_fine',model_epoch = 'epoch_9.pth'):
     # test images and show the results
     # test_data()
 
     sets = ['train', 'test']
     set_name = sets[1]
     #anns_file = '/data1/qilei_chen/DATA/polyp_xinzi/annotations/'+set_name+'.json'
-    anns_file = '/data1/qilei_chen/DATA/erosive/annotations/'+set_name+'4.19.json'
+    #anns_file = '/data1/qilei_chen/DATA/erosive/annotations/'+set_name+'4.19.json'
+    anns_file = '/data1/qilei_chen/DATA/erosive/annotations/fine_'+set_name+'.json'
     coco_instance = COCO(anns_file)
 
-    model_name = 'cascade_rcnn_r50_fpn_1x_coco_4_19'
-    model_epoch = 'epoch_9.pth'
+    
+    
     '''
     model_name = 'ssd384_coco'
     model_epoch = 'epoch_17.pth'
@@ -663,5 +664,9 @@ def test_video_batch(batch_size = 8):
 
 if __name__ == "__main__":
 
-    #test_images()
-    test_video_batch(16)
+    test_images(model_name = 'cascade_rcnn_r50_fpn_1x_coco_fine',model_epoch = 'epoch_9.pth')
+    test_images(model_name = 'reppoints_moment_r50_fpn_1x_coco_fine',model_epoch = 'epoch_32.pth')
+    test_images(model_name = 'retinanet_r50_fpn_1x_coco_fine',model_epoch = 'epoch_22.pth')
+    test_images(model_name = 'faster_rcnn_mobilev2_fpn_1x_coco_fine',model_epoch = 'epoch_22.pth')
+    test_images(model_name = 'faster_rcnn_r50_fpn_1x_coco_fine',model_epoch = 'epoch_9.pth')
+    #test_video_batch(16)

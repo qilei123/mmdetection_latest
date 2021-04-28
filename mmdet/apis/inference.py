@@ -125,8 +125,8 @@ def inference_detector(model, imgs):
         data = test_pipeline(data)
         datas.append(data)
     time1=datetime.datetime.now()
-    #print("test_pipeline process")
-    #print((time1-time0).microseconds/1000)  
+    print("test_pipeline process")
+    print((time1-time0).microseconds/1000)  
 
     import datetime
     time0=datetime.datetime.now()  
@@ -143,16 +143,16 @@ def inference_detector(model, imgs):
                 m, RoIPool
             ), 'CPU inference with RoIPool is not supported currently.'
     time1=datetime.datetime.now()
-    #print("data cpu2gpu process")
-    #print((time1-time0).microseconds/1000)  
+    print("data cpu2gpu process")
+    print((time1-time0).microseconds/1000)  
     # forward the model
     with torch.no_grad():
         import datetime
         time0=datetime.datetime.now()
         results = model(return_loss=False, rescale=True, **data)
         time1=datetime.datetime.now()
-        #print("model process")
-        #print((time1-time0).microseconds/1000)        
+        print("model process")
+        print((time1-time0).microseconds/1000)        
 
     if not is_batch:
         return results[0]

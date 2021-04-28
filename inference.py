@@ -630,6 +630,7 @@ def test_video_batch(batch_size = 8):
                     if show_time:
                         print("inference batch time:")
                         print((end_time-start_time).microseconds/1000)
+                        print("--------------------------")
                     for i in range(batch_size):
                         results[count] =convert_result(result[i])
                         '''

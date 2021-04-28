@@ -561,7 +561,7 @@ def test_video_batch(batch_size = 8):
     source_list = open("video_list.txt")
 
     #video_dir = "/data1/qilei_chen/DATA/20191120080002-00.23.16.084-00.27.17.158-seg2.avi"
-    model_name = "cascade_rcnn_r50_fpn_1x_coco"
+    model_name = "faster_rcnn_r50_fpn_1x_coco"
     categories = ["ulcer","erosive"]
     category = categories[1]
     print("-----------------")
@@ -573,11 +573,12 @@ def test_video_batch(batch_size = 8):
         model_shresh={"faster_rcnn_r50_fpn_1x_coco":0.4,"cascade_rcnn_r50_fpn_1x_coco":0.3}
     else:
         #for erosive
-        model_shresh={"faster_rcnn_r50_fpn_1x_coco":0.3,"cascade_rcnn_r50_fpn_1x_coco":0.3}
+        model_shresh={"faster_rcnn_r50_fpn_1x_coco":0.5,"cascade_rcnn_r50_fpn_1x_coco":0.3}
     
     config_file = 'configs/'+category+'/'+model_name+'.py'
-    anno_date = "_4_19"
-    #anno_date = ""
+    #anno_date = "_4_19"
+    anno_date = ""
+    anno_date = "_fine"
     checkpoint_file = '/data1/qilei_chen/DATA/'+category+'/work_dirs/'+model_name+anno_date+"/epoch_9.pth"
     
     score_thr = model_shresh[model_name]
@@ -633,7 +634,7 @@ def test_video_batch(batch_size = 8):
                         print("--------------------------")
                     for i in range(batch_size):
                         results[count] =convert_result(result[i])
-                        '''
+                        
                         frame = model.show_result(frame_batch[i], result[i], score_thr=score_thr, bbox_color=colors[2],
                                             text_color=colors[2], font_size=10)
                         
@@ -650,7 +651,7 @@ def test_video_batch(batch_size = 8):
                         dst_writer.write(cv2.resize(frame_batch[i],frame_size))
                         #print(str(count)+" "+str(box_count)+" "+str(box_count!=0)+"\n")
                         positive_records.write(str(count)+" "+str(box_count)+" "+str(box_count!=0)+"\n")   
-                        '''
+                        
                         count +=1
                     
                     frame_batch = []
@@ -663,10 +664,11 @@ def test_video_batch(batch_size = 8):
         line = source_list.readline()
 
 if __name__ == "__main__":
-
+    '''
     test_images(model_name = 'cascade_rcnn_r50_fpn_1x_coco_fine',model_epoch = 'epoch_9.pth')
     test_images(model_name = 'reppoints_moment_r50_fpn_1x_coco_fine',model_epoch = 'epoch_32.pth')
     test_images(model_name = 'retinanet_r50_fpn_1x_coco_fine',model_epoch = 'epoch_22.pth')
     test_images(model_name = 'faster_rcnn_mobilev2_fpn_1x_coco_fine',model_epoch = 'epoch_22.pth')
     test_images(model_name = 'faster_rcnn_r50_fpn_1x_coco_fine',model_epoch = 'epoch_9.pth')
-    #test_video_batch(16)
+    '''
+    test_video_batch()

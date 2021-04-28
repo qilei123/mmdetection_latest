@@ -10,9 +10,9 @@ from metric_polyp import Metric
 from metric_polyp_multiclass import MetricMulticlass
 from img_crop import crop_img
 from extra_nms import *
-
+import datetime
 NMS_ALL = True
-
+show_time = True
 def convert_result(bbox_result):
     json_result = dict()
     json_result['results'] = []
@@ -624,9 +624,12 @@ def test_video_batch(batch_size = 8):
                 frame_batch.append(frame)
 
                 if len(frame_batch)==batch_size:
-                    
+                    start_time=datetime.datetime.now()
                     result = inference_detector(model, frame_batch)
-
+                    end_time=datetime.datetime.now()
+                    if show_time:
+                        print("inference batch time:")
+                        print((end_time-start_time).microseconds/1000)
                     for i in range(batch_size):
                         results[count] =convert_result(result[i])
                         frame = model.show_result(frame_batch[i], result[i], score_thr=score_thr, bbox_color=colors[2],

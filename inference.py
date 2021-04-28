@@ -656,7 +656,7 @@ def test_video_batch(batch_size = 8):
                     
                     frame_batch = []
                 success, frame = src_cap.read()
-            dst_writer.close()
+            #dst_writer.close()
             with open(save_dir+".pkl", 'wb') as outfile:
                 pickle.dump(results, outfile)
             #with open(save_dir+".json", 'w') as outfile:

@@ -632,6 +632,7 @@ def test_video_batch(batch_size = 8):
                         print((end_time-start_time).microseconds/1000)
                     for i in range(batch_size):
                         results[count] =convert_result(result[i])
+                        '''
                         frame = model.show_result(frame_batch[i], result[i], score_thr=score_thr, bbox_color=colors[2],
                                             text_color=colors[2], font_size=10)
                         
@@ -648,7 +649,7 @@ def test_video_batch(batch_size = 8):
                         dst_writer.write(cv2.resize(frame_batch[i],frame_size))
                         #print(str(count)+" "+str(box_count)+" "+str(box_count!=0)+"\n")
                         positive_records.write(str(count)+" "+str(box_count)+" "+str(box_count!=0)+"\n")   
-
+                        '''
                         count +=1
                     
                     frame_batch = []

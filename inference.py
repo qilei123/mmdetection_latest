@@ -624,7 +624,7 @@ def test_video_batch(batch_size = 8):
                 frame_batch.append(frame)
 
                 if len(frame_batch)==batch_size:
-
+                    
                     result = inference_detector(model, frame_batch)
 
                     for i in range(batch_size):
@@ -637,7 +637,7 @@ def test_video_batch(batch_size = 8):
                         
                         box_count=0
                         #print(len(result[0]))
-                        for box in result[0]:
+                        for box in result[i][0]:
                             if box[4]>=score_thr:
                                 box_count+=1
 
@@ -660,4 +660,4 @@ def test_video_batch(batch_size = 8):
 if __name__ == "__main__":
 
     #test_images()
-    test_video()
+    test_video_batch()

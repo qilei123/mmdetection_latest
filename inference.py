@@ -615,7 +615,6 @@ def test_video_batch(batch_size = 8):
 
             frame_batch = []
             
-
             while success:
                 
                 ##preprocess todo
@@ -629,7 +628,7 @@ def test_video_batch(batch_size = 8):
                     end_time=datetime.datetime.now()
                     if show_time:
                         print("inference batch time:")
-                        print((end_time-start_time).microseconds/1000)
+                        print((end_time-start_time).seconds)
                         print("--------------------------")
                     for i in range(batch_size):
                         results[count] =convert_result(result[i])

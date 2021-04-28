@@ -12,7 +12,7 @@ from img_crop import crop_img
 from extra_nms import *
 import datetime
 NMS_ALL = True
-show_time = True
+show_time = False
 def convert_result(bbox_result):
     json_result = dict()
     json_result['results'] = []
@@ -656,6 +656,7 @@ def test_video_batch(batch_size = 8):
                     
                     frame_batch = []
                 success, frame = src_cap.read()
+            dst_writer.close()
             with open(save_dir+".pkl", 'wb') as outfile:
                 pickle.dump(results, outfile)
             #with open(save_dir+".json", 'w') as outfile:

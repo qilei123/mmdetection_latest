@@ -665,4 +665,4 @@ def test_video_batch(batch_size = 8):
 if __name__ == "__main__":
 
     #test_images()
-    test_video_batch(16)
+    test_video_batch(1)

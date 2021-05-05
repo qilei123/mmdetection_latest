@@ -563,14 +563,14 @@ def test_video_batch(batch_size = 8):
     #video_dir = "/data1/qilei_chen/DATA/20191120080002-00.23.16.084-00.27.17.158-seg2.avi"
     model_name = "faster_rcnn_r50_fpn_1x_coco"
     categories = ["ulcer","erosive"]
-    category = categories[1]
+    category = categories[0]
     print("-----------------")
     print(model_name)
     print(category)
     print("-----------------")
     if category==categories[0]:
         #for ulcer
-        model_shresh={"faster_rcnn_r50_fpn_1x_coco":0.4,"cascade_rcnn_r50_fpn_1x_coco":0.3}
+        model_shresh={"faster_rcnn_r50_fpn_1x_coco":0.5,"cascade_rcnn_r50_fpn_1x_coco":0.3}
     else:
         #for erosive
         model_shresh={"faster_rcnn_r50_fpn_1x_coco":0.5,"cascade_rcnn_r50_fpn_1x_coco":0.3}
@@ -578,7 +578,7 @@ def test_video_batch(batch_size = 8):
     config_file = 'configs/'+category+'/'+model_name+'.py'
     #anno_date = "_4_19"
     anno_date = ""
-    anno_date = "_fine"
+    #anno_date = "_fine"
     checkpoint_file = '/data1/qilei_chen/DATA/'+category+'/work_dirs/'+model_name+anno_date+"/epoch_9.pth"
     
     score_thr = model_shresh[model_name]

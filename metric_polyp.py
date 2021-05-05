@@ -35,7 +35,7 @@ class Metric(object):
             os.popen('rm -r ' + self.false_positive_folder + '*')
             os.popen('rm -r ' + self.false_negative_folder + '*')
 
-    def eval_add_result(self,ground_truth:list,pred_points:list, image:np.ndarray = None, image_name= None,dup_TP=False):
+    def eval_add_result(self,ground_truth:list,pred_points:list, image:np.ndarray = None, image_name= None, dup_TP=False):
         if self.visualize:
             FPimage = image.copy()
             FNimage = image.copy()

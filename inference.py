@@ -263,7 +263,7 @@ def peval(result_dir, coco_instance, thresh=0.3, with_empty_images=True):
         if len(gtanns) == 0 and (not with_empty_images):
             continue
         gtboxes = anns2gtboxes(gtanns,categories)
-        eval.eval_add_result(gtboxes, filed_boxes)
+        eval.eval_add_result(gtboxes, filed_boxes,dup_TP=False)
 
     precision, recall = eval.get_result()
     F1 = 2 * (precision * recall) / max((precision + recall), 1e-5)
@@ -665,8 +665,9 @@ def test_video_batch(batch_size = 8):
         line = source_list.readline()
 
 if __name__ == "__main__":
-    '''
+    
     test_images(model_name = 'cascade_rcnn_r50_fpn_1x_coco_fine',model_epoch = 'epoch_9.pth')
+    '''
     test_images(model_name = 'reppoints_moment_r50_fpn_1x_coco_fine',model_epoch = 'epoch_32.pth')
     test_images(model_name = 'retinanet_r50_fpn_1x_coco_fine',model_epoch = 'epoch_22.pth')
     test_images(model_name = 'faster_rcnn_mobilev2_fpn_1x_coco_fine',model_epoch = 'epoch_22.pth')

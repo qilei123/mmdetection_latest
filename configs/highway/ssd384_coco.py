@@ -6,7 +6,7 @@ _base_ = [
 dataset_type = 'CocoDataset'
 num_classes=3
 input_size = 384
-data_root = '/media/cql/DATA0/DATA/Highway_Dataset/'
+data_root = '/data2/qilei_chen/DATA/Highway_Dataset/'
 img_scale=(input_size,input_size)
 img_norm_cfg = dict(mean=[123.675, 116.28, 103.53], std=[1, 1, 1], to_rgb=True)
 classes = ('truck','bus','car')

@@ -648,7 +648,7 @@ def test_video_batch(batch_size = 8):
                                 box_count+=1
 
                         #print(box_count)
-                        dst_writer.write(cv2.resize(frame_batch[i],frame_size))
+                        dst_writer.write(cv2.resize(frame,frame_size))
                         #print(str(count)+" "+str(box_count)+" "+str(box_count!=0)+"\n")
                         positive_records.write(str(count)+" "+str(box_count)+" "+str(box_count!=0)+"\n")   
                         

@@ -100,6 +100,15 @@ classes = ('ulcer', 'erosive')
 classes = ('Adenomatous','non-Adenomatous')
 classes = ('erosive',)
 
+def draw_frame_result(frame,result,threshold=0.5):
+    for data in result['results']:
+        if data['score']>threshold:
+            box = xywh2xyxy( data['bbox'] )
+            cv2.rectangle(frame,(box[0],box[1]),(box[2],box[3]),colors[0],2)
+            cv2.putText(frame,str(data['label'])+'---'+str(data['score']),(box[0],box[1]), cv2.FONT_HERSHEY_SIMPLEX, 1, colors[0], 2, cv2.LINE_AA)
+
+    return frame
+
 def inference_and_save_result(model, coco_instance, img_folder_dir,
                               result_save_dir, imshow=False, score_thr=0.3):
     coco_imgs = coco_instance.imgs
@@ -196,7 +205,7 @@ def xyxycenter(box):
 
 
 def xywh2xyxy(box):
-    return [box[0], box[1], box[2]+box[0], box[3]+box[1]]
+    return [int(box[0]), int(box[1]), int(box[2]+box[0]), int(box[3]+box[1])]
 
 
 def xywhcenter(box):
@@ -554,6 +563,7 @@ def test_video():
         
         line = source_list.readline()
 
+
 def test_video_batch(batch_size = 8):
 
     #video_dir = "/data0/dataset/Xiangya_Gastric_data/2021_gastric_video_annotation/20191111-1120/20191120080002-00.23.16.084-00.27.17.158-seg2.avi"
@@ -661,7 +671,22 @@ def test_video_batch(batch_size = 8):
                 pickle.dump(results, outfile)
             #with open(save_dir+".json", 'w') as outfile:
             #    json.dump(results, outfile)        
-        
+        else:
+            dst_writer = cv2.VideoWriter(save_dir, cv2.VideoWriter_fourcc("P", "I", "M", "1"), fps, frame_size)
+            results = dict()
+            with open(save_dir+".pkl", 'b') as resultfile:
+                results = pickle.load(resultfile)
+
+            success, frame = src_cap.read()
+            count = 0
+            while success:
+                frame = crop_img(frame)
+                if count in results:
+                    frame = draw_frame_result(frame,results[count])
+
+                dst_writer.write(cv2.resize(frame,frame_size))
+                success, frame = src_cap.read()
+                count += 1                                    
         line = source_list.readline()
 
 if __name__ == "__main__":

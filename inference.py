@@ -672,6 +672,7 @@ def test_video_batch(batch_size = 8):
             #with open(save_dir+".json", 'w') as outfile:
             #    json.dump(results, outfile)        
         else:
+            print("---Drawing "+save_dir+"---")
             dst_writer = cv2.VideoWriter(save_dir, cv2.VideoWriter_fourcc("P", "I", "M", "1"), fps, frame_size)
             results = dict()
             with open(save_dir+".pkl", 'b') as resultfile:

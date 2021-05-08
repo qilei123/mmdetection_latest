@@ -675,7 +675,7 @@ def test_video_batch(batch_size = 8):
             print("---Drawing "+save_dir+"---")
             dst_writer = cv2.VideoWriter(save_dir, cv2.VideoWriter_fourcc("P", "I", "M", "1"), fps, frame_size)
             results = dict()
-            with open(save_dir+".pkl", 'b') as resultfile:
+            with open(save_dir+".pkl", 'rb') as resultfile:
                 results = pickle.load(resultfile)
 
             success, frame = src_cap.read()

@@ -30,4 +30,4 @@ model = dict(
     bbox_head=
         dict(num_classes=2))# explicitly over-write all the `num_classes` field from default 80 to 1.
 runner = dict(type='EpochBasedRunner', max_epochs=24)
-#resume_from = "/data1/qilei_chen/DATA/erosive/work_dirs/retinanet_r50_fpn_1x_coco_fine/latest.pth"
+resume_from = "/data1/qilei_chen/DATA/erosive_ulcer_mix/work_dirs/retinanet_r50_fpn_1x_coco/latest.pth"

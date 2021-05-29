@@ -333,7 +333,6 @@ class BaseDetector(nn.Module, metaclass=ABCMeta):
         # if out_file specified, do not show image in window
         if out_file is not None:
             show = False
-        print(self.CLASSES)
         # draw bounding boxes
         img = imshow_det_bboxes(
             img,

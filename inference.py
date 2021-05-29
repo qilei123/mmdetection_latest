@@ -462,8 +462,8 @@ def test_images(model_name = 'cascade_rcnn_r50_fpn_1x_coco_fine',model_epoch = '
         thresh = float(thresh)/100
         print('------------threshold:'+str(thresh)+'--------------')
         peval(results_file_dir, coco_instance,
-              thresh=thresh, with_empty_images=False)
-
+              thresh=thresh)
+        peval_m(results_file_dir, coco_instance, thresh=thresh)
     # eval_yolof(coco_instance)
     # eval_yolov5(coco_instance)
 

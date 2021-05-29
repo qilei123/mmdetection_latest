@@ -96,9 +96,11 @@ def test_data(with_gt=False):
 
 
 colors = [(255, 0, 0), (0, 255, 0), (0, 0, 255)]
+'''
 classes = ('ulcer', 'erosive')
 classes = ('Adenomatous','non-Adenomatous')
 classes = ('erosive',)
+'''
 classes = ( 'erosive','ulcer')
 def draw_frame_result(frame,result,threshold=0.5):
     for data in result['results']:

@@ -275,7 +275,7 @@ def peval(result_dir, coco_instance, thresh=0.3, with_empty_images=True):
         if len(gtanns) == 0 and (not with_empty_images):
             continue
         gtboxes = anns2gtboxes(gtanns,categories)
-        eval.eval_add_result(gtboxes, filed_boxes,dup_TP=False)
+        eval.eval_add_result(gtboxes, filed_boxes,dup_TP=True)
 
     precision, recall = eval.get_result()
     F1 = 2 * (precision * recall) / max((precision + recall), 1e-5)

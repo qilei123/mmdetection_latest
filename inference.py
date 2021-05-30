@@ -617,8 +617,8 @@ def test_video_batch(batch_size = 8):
             os.makedirs('/data2/qilei_chen/DATA/erosive_ulcer_videos/'+model_name)
         
         save_dir = os.path.join('/data1/qilei_chen/DATA/erosive_ulcer_videos/',model_name, os.path.basename(video_dir))
+        print(save_dir)
         if not os.path.exists(save_dir+".pkl"):
-            print(file_name)
             #dst_writer = cv2.VideoWriter(save_dir, cv2.VideoWriter_fourcc("P", "I", "M", "1"), fps, frame_size)
             
             positive_records = open(save_dir+".txt","w")

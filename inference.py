@@ -575,8 +575,8 @@ def test_video_batch(batch_size = 8):
 
     #video_dir = "/data1/qilei_chen/DATA/20191120080002-00.23.16.084-00.27.17.158-seg2.avi"
     model_name = "faster_rcnn_r50_fpn_1x_coco"
-    categories = ["ulcer","erosive"]
-    category = categories[0]
+    categories = ["erosive","ulcer"]
+    category = "erosive_ulcer_mix"
     print("-----------------")
     print(model_name)
     print(category)
@@ -592,7 +592,7 @@ def test_video_batch(batch_size = 8):
     #anno_date = "_4_19"
     anno_date = ""
     #anno_date = "_fine"
-    checkpoint_file = '/data1/qilei_chen/DATA/'+category+'/work_dirs/'+model_name+anno_date+"/epoch_9.pth"
+    checkpoint_file = '/data1/qilei_chen/DATA/'+category+'/work_dirs/'+model_name+anno_date+"/epoch_24.pth"
     
     score_thr = model_shresh[model_name]
     # build the model from a config file and a checkpoint file
@@ -603,20 +603,20 @@ def test_video_batch(batch_size = 8):
     while line:
         
         file_name = os.path.basename(line[:-1])
-        video_dir = os.path.join("/data1/qilei_chen/DATA",file_name)
-        if not os.path.exists(video_dir):
-            command = "cp /data0/dataset/Xiangya_Gastric_data/"+line[:-1]+" /data1/qilei_chen/DATA/"
-            os.system(command)
+        video_dir = os.path.join("/data2/qilei_chen/DATA/erosive_ulcer_videos",file_name)
+        #if not os.path.exists(video_dir):
+        #    command = "cp /data0/dataset/Xiangya_Gastric_data/"+line[:-1]+" /data1/qilei_chen/DATA/"
+        #    os.system(command)
         
         src_cap = cv2.VideoCapture(video_dir)
 
         fps = src_cap.get(cv2.CAP_PROP_FPS)
         frame_size = (int(src_cap.get(cv2.CAP_PROP_FRAME_WIDTH)),
                     int(src_cap.get(cv2.CAP_PROP_FRAME_HEIGHT)))
-        if not os.path.exists('/data1/qilei_chen/DATA/'+category+'/video_test_results/'+model_name+anno_date):
-            os.makedirs('/data1/qilei_chen/DATA/'+category+'/video_test_results/'+model_name+anno_date)
+        if not os.path.exists('/data2/qilei_chen/DATA/erosive_ulcer_videos/'+model_name):
+            os.makedirs('/data2/qilei_chen/DATA/erosive_ulcer_videos/'+model_name)
         
-        save_dir = os.path.join('/data1/qilei_chen/DATA/'+category+'/video_test_results/',model_name+anno_date, os.path.basename(video_dir))
+        save_dir = os.path.join('/data1/qilei_chen/DATA/erosive_ulcer_videos/',model_name, os.path.basename(video_dir))
         if not os.path.exists(save_dir+".pkl"):
             print(file_name)
             #dst_writer = cv2.VideoWriter(save_dir, cv2.VideoWriter_fourcc("P", "I", "M", "1"), fps, frame_size)
@@ -695,7 +695,7 @@ def test_video_batch(batch_size = 8):
 
 if __name__ == "__main__":
     
-    test_images(model_name = 'faster_rcnn_r50_fpn_1x_coco',model_epoch = 'epoch_13.pth')
+    #test_images(model_name = 'faster_rcnn_r50_fpn_1x_coco',model_epoch = 'epoch_13.pth')
     '''
     test_images(model_name = 'reppoints_moment_r50_fpn_1x_coco_fine',model_epoch = 'epoch_32.pth')
     test_images(model_name = 'retinanet_r50_fpn_1x_coco_fine',model_epoch = 'epoch_22.pth')
@@ -703,4 +703,4 @@ if __name__ == "__main__":
     test_images(model_name = 'faster_rcnn_mobilev2_fpn_1x_coco_fine',model_epoch = 'epoch_22.pth')
     test_images(model_name = 'faster_rcnn_r50_fpn_1x_coco_fine',model_epoch = 'epoch_9.pth')
     '''
-    #test_video_batch()
+    test_video_batch()

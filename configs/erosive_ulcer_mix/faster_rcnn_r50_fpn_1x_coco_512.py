@@ -227,7 +227,7 @@ custom_hooks = [dict(type='NumClassCheckHook')]
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
 load_from = None
-resume_from = '/data1/qilei_chen/DATA/erosive_ulcer_mix/work_dirs/faster_rcnn_r50_fpn_1x_coco/latest.pth'
+#resume_from = '/data1/qilei_chen/DATA/erosive_ulcer_mix/work_dirs/faster_rcnn_r50_fpn_1x_coco/latest.pth'
 workflow = [('train', 1)]
 classes = ('erosive', 'ulcer')
 num_classes = 2

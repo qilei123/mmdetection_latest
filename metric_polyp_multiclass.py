@@ -15,7 +15,7 @@ import json
 # import json
 class MetricMulticlass(object):
     def __init__(self, mode='center', iou_thresh=0, visualize=False, visualization_root='demo/',
-                 image_classification=False, classes=('Adenomatous', 'non-Adenomatous')):
+                 image_classification=False, classes=('1', '2')):
 
         self.classes = classes
         self.TPs = defaultdict(list)

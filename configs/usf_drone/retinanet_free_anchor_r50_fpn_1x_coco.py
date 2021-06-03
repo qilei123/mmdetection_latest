@@ -93,7 +93,7 @@ data = dict(
     train=dict(
         type='CocoDataset',
         ann_file=
-        '/data2/qilei_chen/DATA/usf_drone/annotations/train_mix.json',
+        '/data2/qilei_chen/DATA/usf_drone/annotations/USF_drone_train.json',
         img_prefix='/data2/qilei_chen/DATA/usf_drone/images/',
         pipeline=[
             dict(type='LoadImageFromFile'),
@@ -113,7 +113,7 @@ data = dict(
     val=dict(
         type='CocoDataset',
         ann_file=
-        '/data2/qilei_chen/DATA/usf_drone/annotations/test_mix.json',
+        '/data2/qilei_chen/DATA/usf_drone/annotations/USF_drone_test.json',
         img_prefix='/data2/qilei_chen/DATA/usf_drone/images/',
         pipeline=[
             dict(type='LoadImageFromFile'),
@@ -138,7 +138,7 @@ data = dict(
     test=dict(
         type='CocoDataset',
         ann_file=
-        '/data2/qilei_chen/DATA/usf_drone/annotations/test_mix.json',
+        '/data2/qilei_chen/DATA/usf_drone/annotations/USF_drone_test.json',
         img_prefix='/data2/qilei_chen/DATA/usf_drone/images/',
         pipeline=[
             dict(type='LoadImageFromFile'),

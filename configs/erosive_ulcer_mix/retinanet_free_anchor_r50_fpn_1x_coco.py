@@ -108,7 +108,8 @@ data = dict(
             dict(type='Pad', size_divisor=32),
             dict(type='DefaultFormatBundle'),
             dict(type='Collect', keys=['img', 'gt_bboxes', 'gt_labels'])
-        ]),
+        ],
+        classes=('erosive', 'ulcer')),
     val=dict(
         type='CocoDataset',
         ann_file=
@@ -132,7 +133,8 @@ data = dict(
                     dict(type='ImageToTensor', keys=['img']),
                     dict(type='Collect', keys=['img'])
                 ])
-        ]),
+        ],
+        classes=('erosive', 'ulcer')),
     test=dict(
         type='CocoDataset',
         ann_file=
@@ -156,7 +158,8 @@ data = dict(
                     dict(type='ImageToTensor', keys=['img']),
                     dict(type='Collect', keys=['img'])
                 ])
-        ]))
+        ],
+        classes=('erosive', 'ulcer')))
 evaluation = dict(interval=1, metric='bbox')
 optimizer = dict(type='SGD', lr=0.001, momentum=0.9, weight_decay=0.0001)
 optimizer_config = dict(grad_clip=dict(max_norm=35, norm_type=2))

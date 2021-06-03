@@ -4,8 +4,8 @@ dataset_type = 'CocoDataset'
 classes = ('car','truck')
 data_root = '/data2/qilei_chen/DATA/usf_drone/'
 data = dict(
-    samples_per_gpu=4,
-    workers_per_gpu=4,
+    samples_per_gpu=2,
+    workers_per_gpu=2,
     train=dict(
         type=dataset_type,
         # explicitly add your class names to the field `classes`

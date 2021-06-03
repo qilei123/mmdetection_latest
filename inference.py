@@ -707,4 +707,4 @@ if __name__ == "__main__":
     test_images(model_name = 'faster_rcnn_r50_fpn_1x_coco_fine',model_epoch = 'epoch_9.pth')
     '''
     #test_video_batch(16)
-    test_images(model_name = 'retinanet_r50_fpn_1x_coco_fine',model_epoch = 'epoch_22.pth')
+    test_images(model_name = 'retinanet_r50_fpn_1x_coco',model_epoch = 'epoch_22.pth')

@@ -126,7 +126,7 @@ test_pipeline = [
         img_scale=(512, 512),
         flip=False,
         transforms=[
-            dict(type='Resize', keep_ratio=True),
+            dict(type='Resize', keep_ratio=False),
             dict(type='RandomFlip'),
             dict(
                 type='Normalize',
@@ -187,7 +187,7 @@ data = dict(
                 img_scale=(512, 512),
                 flip=False,
                 transforms=[
-                    dict(type='Resize', keep_ratio=True),
+                    dict(type='Resize', keep_ratio=False),
                     dict(type='RandomFlip'),
                     dict(
                         type='Normalize',
@@ -212,7 +212,7 @@ data = dict(
                 img_scale=(512, 512),
                 flip=False,
                 transforms=[
-                    dict(type='Resize', keep_ratio=True),
+                    dict(type='Resize', keep_ratio=False),
                     dict(type='RandomFlip'),
                     dict(
                         type='Normalize',

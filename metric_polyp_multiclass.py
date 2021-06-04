@@ -143,7 +143,8 @@ class MetricMulticlass(object):
                 # 如果打中GT框
                 if bbox_matched:
                     # 如果GT框没有被match 过， 并且pred和GT 的class一样 判定为TP +1
-                    if not hasTP and gt[4] == j[4]:
+                    #if not hasTP and gt[4] == j[4]:
+                    if gt[4] == j[4]:
                         self.TPs[int(j[4])].append(j)
                         hasTP = True
                     # 如果match到GT 但是 class不一样 添加到候选框，等待下一轮GT match

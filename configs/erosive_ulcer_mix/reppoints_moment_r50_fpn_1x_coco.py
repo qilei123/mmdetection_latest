@@ -41,7 +41,7 @@ data = dict(
     train=dict(
         type='CocoDataset',
         ann_file=
-        '/data1/qilei_chen/DATA/erosive_ulcer_mix/annotations/train_mix.json',
+        '/data1/qilei_chen/DATA/erosive_ulcer_mix/annotations/test_mix.json',
         img_prefix='/data1/qilei_chen/DATA/erosive_ulcer_mix/images/',
         pipeline=[
             dict(type='LoadImageFromFile'),
@@ -61,7 +61,7 @@ data = dict(
     val=dict(
         type='CocoDataset',
         ann_file=
-        '/data1/qilei_chen/DATA/erosive_ulcer_mix/annotations/train_mix.json',
+        '/data1/qilei_chen/DATA/erosive_ulcer_mix/annotations/test_mix.json',
         img_prefix='/data1/qilei_chen/DATA/erosive_ulcer_mix/images/',
         pipeline=[
             dict(type='LoadImageFromFile'),
@@ -86,7 +86,7 @@ data = dict(
     test=dict(
         type='CocoDataset',
         ann_file=
-        '/data1/qilei_chen/DATA/erosive_ulcer_mix/annotations/train_mix.json',
+        '/data1/qilei_chen/DATA/erosive_ulcer_mix/annotations/test_mix.json',
         img_prefix='/data1/qilei_chen/DATA/erosive_ulcer_mix/images/',
         pipeline=[
             dict(type='LoadImageFromFile'),

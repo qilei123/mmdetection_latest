@@ -434,8 +434,8 @@ def test_images(model_name = 'cascade_rcnn_r50_fpn_1x_coco_fine',model_epoch = '
     set_name = sets[1]
     #anns_file = '/data1/qilei_chen/DATA/polyp_xinzi/annotations/'+set_name+'.json'
     #anns_file = '/data1/qilei_chen/DATA/erosive/annotations/'+set_name+'4.19.json'
-    #anns_file = '/data1/qilei_chen/DATA/erosive_ulcer_mix/annotations/'+set_name+'_mix'+'.json'
-    anns_file = "/data2/qilei_chen/DATA/usf_drone/annotations/USF_drone_test.json"
+    anns_file = '/data1/qilei_chen/DATA/erosive_ulcer_mix/annotations/'+set_name+'_mix'+'.json'
+    #anns_file = "/data2/qilei_chen/DATA/usf_drone/annotations/USF_drone_test.json"
     coco_instance = COCO(anns_file)
 
     
@@ -453,8 +453,8 @@ def test_images(model_name = 'cascade_rcnn_r50_fpn_1x_coco_fine',model_epoch = '
     #model_epoch = 'epoch_61.pth'
 
     #work_dir = '/data1/qilei_chen/DATA/polyp_xinzi/work_dirs/'
-    #work_dir = '/data1/qilei_chen/DATA/erosive_ulcer_mix/work_dirs/'
-    work_dir = "/data2/qilei_chen/DATA/usf_drone/work_dirs/"
+    work_dir = '/data1/qilei_chen/DATA/erosive_ulcer_mix/work_dirs/'
+    #work_dir = "/data2/qilei_chen/DATA/usf_drone/work_dirs/"
 
     print("----------------")
     print(model_name)
@@ -463,7 +463,7 @@ def test_images(model_name = 'cascade_rcnn_r50_fpn_1x_coco_fine',model_epoch = '
     results_file_dir = os.path.join(
         work_dir, model_name, model_epoch+"_"+set_name+".pkl")
     results_file_dir = generate_result(
-        model_name, work_dir, model_epoch, coco_instance,data_set_name = 'usf_drone', set_name = set_name, imshow=True)
+        model_name, work_dir, model_epoch, coco_instance,data_set_name = 'erosive_ulcer_mix', set_name = set_name, imshow=True)
     for thresh in range(0,100,5):
         thresh = float(thresh)/100
         print('------------threshold:'+str(thresh)+'--------------')
@@ -707,4 +707,4 @@ if __name__ == "__main__":
     test_images(model_name = 'faster_rcnn_r50_fpn_1x_coco_fine',model_epoch = 'epoch_9.pth')
     '''
     #test_video_batch(16)
-    test_images(model_name = 'faster_rcnn_r50_fpn_1x_coco',model_epoch = 'epoch_9.pth')
+    test_images(model_name = 'retinanet_free_anchor_r50_fpn_1x_coco',model_epoch = 'epoch_22.pth')

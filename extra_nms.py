@@ -128,7 +128,7 @@ def py_cpu_softnms(dets, sc, Nt=0.3, sigma=0.5, thresh=0.001, method=2):
     keep = inds.astype(int)
 
     return keep
-nms_threshold = 0.0
+nms_threshold = 0.3
 def nms_result(json_result):
     boxes  = []
     boxscores = []

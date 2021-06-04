@@ -102,7 +102,7 @@ classes = ('Adenomatous','non-Adenomatous')
 classes = ('erosive',)
 '''
 classes = ( 'erosive','ulcer')
-classes = ('car','truck')
+#classes = ('car','truck')
 def draw_frame_result(frame,result,threshold=0.5):
     for data in result['results']:
         if data['score']>threshold:

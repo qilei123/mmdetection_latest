@@ -294,9 +294,9 @@ def peval_m(result_dir, coco_instance, thresh=0.3, with_empty_images=True,catego
     category = eval_m.classes
 
     for img_id in results:
-        #print(results[img_id]['result'])
+        print(results[img_id]['result'])
         filed_boxes = filt_boxes(results[img_id]['result'],categories, thresh)
-        #print(filed_boxes)
+        print(filed_boxes)
         gtannIds = coco_instance.getAnnIds(imgIds=img_id)
         gtanns = coco_instance.loadAnns(gtannIds)
         if len(gtanns) == 0 and (not with_empty_images):

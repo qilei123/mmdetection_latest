@@ -306,9 +306,9 @@ def peval_m(result_dir, coco_instance, thresh=0.3, with_empty_images=True,catego
             continue
         gtboxes = anns2gtboxes(gtanns,categories)
         if visual_eval:
-            print(os.path.join(img_dir, coco_instance.imgs[img_id]["file_name"]))
+            #print(os.path.join(img_dir, coco_instance.imgs[img_id]["file_name"]))
             image = cv2.imread(os.path.join(img_dir, coco_instance.imgs[img_id]["file_name"]))
-            eval_m.eval_add_result(gtboxes, filed_boxes,image=image)
+            eval_m.eval_add_result(gtboxes, filed_boxes,image=image,image_name=coco_instance.imgs[img_id]["file_name"])
         else:
             eval_m.eval_add_result(gtboxes, filed_boxes)
 

@@ -589,7 +589,7 @@ def test_video_batch(batch_size = 8):
     source_list = open("video_list.txt")
 
     #video_dir = "/data1/qilei_chen/DATA/20191120080002-00.23.16.084-00.27.17.158-seg2.avi"
-    model_name = "faster_rcnn_r50_fpn_1x_coco"
+    model_name = "retinanet_free_anchor_r50_fpn_1x_coco_512"
     categories = ["erosive","ulcer"]
     category = "erosive_ulcer_mix"
     print("-----------------")
@@ -601,13 +601,14 @@ def test_video_batch(batch_size = 8):
         model_shresh={"faster_rcnn_r50_fpn_1x_coco":0.5,"cascade_rcnn_r50_fpn_1x_coco":0.3}
     else:
         #for erosive
-        model_shresh={"faster_rcnn_r50_fpn_1x_coco":0.5,"cascade_rcnn_r50_fpn_1x_coco":0.3}
+        model_shresh={"faster_rcnn_r50_fpn_1x_coco":0.5,"cascade_rcnn_r50_fpn_1x_coco":0.3,
+                "retinanet_free_anchor_r50_fpn_1x_coco_512":0.5}
     
     config_file = 'configs/'+category+'/'+model_name+'.py'
     #anno_date = "_4_19"
     anno_date = ""
     #anno_date = "_fine"
-    checkpoint_file = '/data1/qilei_chen/DATA/'+category+'/work_dirs/'+model_name+anno_date+"/epoch_24.pth"
+    checkpoint_file = '/data1/qilei_chen/DATA/'+category+'/work_dirs/'+model_name+anno_date+"/epoch_13.pth"
     
     score_thr = model_shresh[model_name]
     # build the model from a config file and a checkpoint file
@@ -718,5 +719,5 @@ if __name__ == "__main__":
     test_images(model_name = 'faster_rcnn_mobilev2_fpn_1x_coco_fine',model_epoch = 'epoch_22.pth')
     test_images(model_name = 'faster_rcnn_r50_fpn_1x_coco_fine',model_epoch = 'epoch_9.pth')
     '''
-    #test_video_batch(16)
-    test_images(model_name = 'retinanet_free_anchor_r50_fpn_1x_coco_512',model_epoch = 'epoch_13.pth')
+    test_video_batch(16)
+    #test_images(model_name = 'retinanet_free_anchor_r50_fpn_1x_coco_512',model_epoch = 'epoch_13.pth')

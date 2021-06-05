@@ -285,12 +285,15 @@ def peval(result_dir, coco_instance, thresh=0.3, with_empty_images=True):
         .format(precision, recall, F1, F2, thresh, len(eval.TPs), len(eval.FPs), len(eval.FNs), len(eval.FPs)+len(eval.FNs))
     print(out)
 
-def peval_m(result_dir, coco_instance, thresh=0.3, with_empty_images=True,categories = [1,2]):
+def peval_m(result_dir, coco_instance, thresh=0.3, with_empty_images=True,categories = [1,2],visual_eval=False,img_dir = ""):
     
     fp = open(result_dir, 'rb')
     results = pickle.load(fp)
-    eval_m = MetricMulticlass()
-
+    
+    if visual_eval:
+        eval_m = MetricMulticlass(visualize=True,visualization_root="/data1/qilei_chen/DATA/erosive_ulcer_mix/work_dirs/retinanet_free_anchor_r50_fpn_1x_coco_512/epoch_13.pth_test.pkl_result_0.5")
+    else:
+        eval_m = MetricMulticlass()
     category = eval_m.classes
 
     for img_id in results:
@@ -302,8 +305,11 @@ def peval_m(result_dir, coco_instance, thresh=0.3, with_empty_images=True,catego
         if len(gtanns) == 0 and (not with_empty_images):
             continue
         gtboxes = anns2gtboxes(gtanns,categories)
-
-        eval_m.eval_add_result(gtboxes, filed_boxes)
+        if visual_eval:
+            image = cv2.imread(os.path.join(img_dir, coco_instance.imgs[img_id]["file_name"]))
+            eval_m.eval_add_result(gtboxes, filed_boxes,image=image)
+        else:
+            eval_m.eval_add_result(gtboxes, filed_boxes)
 
     evaluation = eval_m.get_result()
     for key in evaluation:
@@ -466,14 +472,17 @@ def test_images(model_name = 'cascade_rcnn_r50_fpn_1x_coco_fine',model_epoch = '
         work_dir, model_name, model_epoch+"_"+set_name+".pkl")
     #esults_file_dir = generate_result(
     #    model_name, work_dir, model_epoch, coco_instance,data_set_name = 'erosive_ulcer_mix', set_name = set_name, imshow=True)
+    '''
     for thresh in range(0,100,5):
         thresh = float(thresh)/100
         print('------------threshold:'+str(thresh)+'--------------')
         #peval(results_file_dir, coco_instance,
         #      thresh=thresh)
         peval_m(results_file_dir, coco_instance, thresh=thresh)
+    '''
     # eval_yolof(coco_instance)
     # eval_yolov5(coco_instance)
+    peval_m(results_file_dir, coco_instance, thresh=0.5,visual_eval=True,img_dir="/data1/qilei_chen/DATA/erosive_ulcer_mix/images/")
 
 
 

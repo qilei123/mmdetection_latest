@@ -291,7 +291,7 @@ def peval_m(result_dir, coco_instance, thresh=0.3, with_empty_images=True,catego
     results = pickle.load(fp)
     
     if visual_eval:
-        eval_m = MetricMulticlass(visualize=True,visualization_root="/data1/qilei_chen/DATA/erosive_ulcer_mix/work_dirs/retinanet_free_anchor_r50_fpn_1x_coco_512/epoch_13.pth_test.pkl_result_0.5")
+        eval_m = MetricMulticlass(visualize=True,visualization_root="/data1/qilei_chen/DATA/erosive_ulcer_mix/work_dirs/retinanet_free_anchor_r50_fpn_1x_coco_512/epoch_13.pth_test.pkl_result_0.5/")
     else:
         eval_m = MetricMulticlass()
     category = eval_m.classes

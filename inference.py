@@ -102,13 +102,14 @@ classes = ('Adenomatous','non-Adenomatous')
 classes = ('erosive',)
 '''
 classes = ( 'erosive','ulcer')
+
 #classes = ('car','truck')
 def draw_frame_result(frame,result,threshold=0.5):
     for data in result['results']:
         if data['score']>threshold:
             box = xywh2xyxy( data['bbox'] )
-            cv2.rectangle(frame,(box[0],box[1]),(box[2],box[3]),colors[0],2)
-            cv2.putText(frame,str(data['label'])+'---'+str(data['score']),(box[0],box[1]), cv2.FONT_HERSHEY_SIMPLEX, 1, colors[0], 2, cv2.LINE_AA)
+            cv2.rectangle(frame,(box[0],box[1]),(box[2],box[3]),colors[int(data['label']-1)],2)
+            #cv2.putText(frame,str(data['label'])+'---'+str(data['score']),(box[0],box[1]), cv2.FONT_HERSHEY_SIMPLEX, 1, colors[0], 2, cv2.LINE_AA)
 
     return frame
 

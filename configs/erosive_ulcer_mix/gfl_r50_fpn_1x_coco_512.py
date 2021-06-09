@@ -41,7 +41,7 @@ data = dict(
     train=dict(
         type='CocoDataset',
         ann_file=data_root+'annotations/train_mix.json',
-        img_prefix='images',
+        img_prefix=data_root+'images/',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(type='LoadAnnotations', with_bbox=True),
@@ -59,7 +59,7 @@ data = dict(
     val=dict(
         type='CocoDataset',
         ann_file=data_root+'annotations/test_mix.json',
-        img_prefix='images',
+        img_prefix=data_root+'images/',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(
@@ -82,7 +82,7 @@ data = dict(
     test=dict(
         type='CocoDataset',
         ann_file=data_root+'annotations/test_mix.json',
-        img_prefix='images',
+        img_prefix=data_root+'images/',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(
@@ -141,7 +141,7 @@ model = dict(
         num_outs=5),
     bbox_head=dict(
         type='GFLHead',
-        num_classes=80,
+        num_classes=2,
         in_channels=256,
         stacked_convs=4,
         feat_channels=256,

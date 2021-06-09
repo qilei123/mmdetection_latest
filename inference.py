@@ -603,7 +603,7 @@ def test_video_batch(batch_size = 8):
     else:
         #for erosive
         model_shresh={"faster_rcnn_r50_fpn_1x_coco":0.5,"cascade_rcnn_r50_fpn_1x_coco":0.3,
-                "retinanet_free_anchor_r50_fpn_1x_coco_512":0.5}
+                      "retinanet_free_anchor_r50_fpn_1x_coco_512": 0.7}
     
     config_file = 'configs/'+category+'/'+model_name+'.py'
     #anno_date = "_4_19"

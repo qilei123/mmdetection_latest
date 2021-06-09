@@ -96,7 +96,7 @@ data = dict(
         '/data1/qilei_chen/DATA/erosive_ulcer_mix/annotations/train_mix.json',
         img_prefix='/data1/qilei_chen/DATA/erosive_ulcer_mix/images/',
         pipeline=[
-            dict(type='LoadImageFromFile'),
+            dict(type='LoadImageFromFile',to_float32=True),
             dict(type='LoadAnnotations', with_bbox=True),
             dict(
                 type='PhotoMetricDistortion',

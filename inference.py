@@ -472,19 +472,19 @@ def test_images(model_name = 'cascade_rcnn_r50_fpn_1x_coco_fine',model_epoch = '
 
     results_file_dir = os.path.join(
         work_dir, model_name, model_epoch+"_"+set_name+".pkl")
-    results_file_dir = generate_result(
-        model_name, work_dir, model_epoch, coco_instance,data_set_name = 'erosive_ulcer_mix', set_name = set_name, imshow=True)
-    '''
+    #results_file_dir = generate_result(
+    #    model_name, work_dir, model_epoch, coco_instance,data_set_name = 'erosive_ulcer_mix', set_name = set_name, imshow=True)
+    
     for thresh in range(0,100,5):
         thresh = float(thresh)/100
         print('------------threshold:'+str(thresh)+'--------------')
         #peval(results_file_dir, coco_instance,
         #      thresh=thresh)
         peval_m(results_file_dir, coco_instance, thresh=thresh)
-    '''
+    
     # eval_yolof(coco_instance)
     # eval_yolov5(coco_instance)
-    peval_m(results_file_dir, coco_instance, thresh=0.5,visual_eval=True,img_dir="/data1/qilei_chen/DATA/erosive_ulcer_mix/images/")
+    #peval_m(results_file_dir, coco_instance, thresh=0.5,visual_eval=True,img_dir="/data1/qilei_chen/DATA/erosive_ulcer_mix/images/")
 
 
 

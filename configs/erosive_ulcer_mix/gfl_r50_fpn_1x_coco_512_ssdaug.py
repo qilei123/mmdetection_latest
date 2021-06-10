@@ -126,7 +126,7 @@ lr_config = dict(
     warmup='linear',
     warmup_iters=500,
     warmup_ratio=0.001,
-    step=[20, 22])
+    step=[12, 14])
 runner = dict(type='EpochBasedRunner', max_epochs=24)
 checkpoint_config = dict(interval=1)
 log_config = dict(interval=50, hooks=[dict(type='TextLoggerHook')])
@@ -144,7 +144,7 @@ model = dict(
         depth=50,
         num_stages=4,
         out_indices=(0, 1, 2, 3),
-        frozen_stages=1,
+        frozen_stages=-1,
         norm_cfg=dict(type='BN', requires_grad=True),
         norm_eval=True,
         style='pytorch'),
@@ -164,9 +164,9 @@ model = dict(
         anchor_generator=dict(
             type='AnchorGenerator',
             ratios=[1.0],
-            octave_base_scale=8,
+            octave_base_scale=4,
             scales_per_octave=1,
-            strides=[8, 16, 32, 64, 128]),
+            strides=[4, 8, 16, 32, 64]),
         loss_cls=dict(
             type='QualityFocalLoss',
             use_sigmoid=True,

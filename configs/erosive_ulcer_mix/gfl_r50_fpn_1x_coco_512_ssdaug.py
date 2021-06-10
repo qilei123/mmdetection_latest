@@ -164,9 +164,9 @@ model = dict(
         anchor_generator=dict(
             type='AnchorGenerator',
             ratios=[1.0],
-            octave_base_scale=4,
+            octave_base_scale=8,
             scales_per_octave=1,
-            strides=[4, 8, 16, 32, 64]),
+            strides=[8, 16, 32, 64, 128]),
         loss_cls=dict(
             type='QualityFocalLoss',
             use_sigmoid=True,
@@ -184,5 +184,5 @@ model = dict(
         nms_pre=1000,
         min_bbox_size=0,
         score_thr=0.05,
-        nms=dict(type='nms', iou_threshold=0.1),
+        nms=dict(type='nms', iou_threshold=0.3),
         max_per_img=100))

@@ -110,7 +110,7 @@ lr_config = dict(
     warmup='linear',
     warmup_iters=500,
     warmup_ratio=0.001,
-    step=[20, 22])
+    step=[8, 11])
 runner = dict(type='EpochBasedRunner', max_epochs=24)
 checkpoint_config = dict(interval=1)
 log_config = dict(interval=50, hooks=[dict(type='TextLoggerHook')])
@@ -118,7 +118,7 @@ custom_hooks = [dict(type='NumClassCheckHook')]
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
 load_from = None
-resume_from = data_root+"work_dirs/gfl_r50_fpn_1x_coco_512/latest.pth"
+resume_from = data_root+"work_dirs/gfl_r50_fpn_1x_coco_512/latest.model"
 workflow = [('train', 1)]
 model = dict(
     type='GFL',

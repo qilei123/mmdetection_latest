@@ -133,7 +133,7 @@ custom_hooks = [dict(type='NumClassCheckHook')]
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
 load_from = None
-resume_from = data_root+"work_dirs/gfl_r50_fpn_1x_coco_512/latest.pth"
+resume_from = None # data_root+"work_dirs/gfl_r50_fpn_1x_coco_512/latest.pth"
 workflow = [('train', 1)]
 model = dict(
     type='GFL',

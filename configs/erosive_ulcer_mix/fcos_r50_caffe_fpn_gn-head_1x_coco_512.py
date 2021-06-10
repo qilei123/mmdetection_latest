@@ -55,7 +55,7 @@ data = dict(
             dict(type='Pad', size_divisor=32),
             dict(type='DefaultFormatBundle'),
             dict(type='Collect', keys=['img', 'gt_bboxes', 'gt_labels'])
-        ]),
+        ],classes=('erosive', 'ulcer')),
     val=dict(
         type='CocoDataset',
         ann_file=data_root+'annotations/test_mix.json',
@@ -78,7 +78,7 @@ data = dict(
                     dict(type='ImageToTensor', keys=['img']),
                     dict(type='Collect', keys=['img'])
                 ])
-        ]),
+        ],classes=('erosive', 'ulcer')),
     test=dict(
         type='CocoDataset',
         ann_file=data_root+'annotations/test_mix.json',
@@ -101,7 +101,7 @@ data = dict(
                     dict(type='ImageToTensor', keys=['img']),
                     dict(type='Collect', keys=['img'])
                 ])
-        ]))
+        ]),classes=('erosive', 'ulcer'))
 evaluation = dict(interval=1, metric='bbox')
 optimizer = dict(
     type='SGD',

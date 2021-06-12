@@ -34,7 +34,7 @@ model = dict(
             gamma=2.0,
             alpha=0.25,
             loss_weight=1.0),
-        loss_bbox=dict(type='CIoULoss', loss_weight=1.0)),
+        loss_bbox=dict(type='CIoULoss', loss_weight=2.0)),
     roi_head=dict(
         type='StandardRoIHead',
         bbox_roi_extractor=dict(
@@ -59,7 +59,7 @@ model = dict(
                 gamma=2.0,
                 alpha=0.25,
                 loss_weight=1.0),
-            loss_bbox=dict(type='CIoULoss', loss_weight=1.0))),
+            loss_bbox=dict(type='CIoULoss', loss_weight=2.0))),
     train_cfg=dict(
         rpn=dict(
             assigner=dict(

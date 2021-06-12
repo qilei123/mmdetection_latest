@@ -62,13 +62,7 @@ model = dict(
             loss_bbox=dict(type='CIoULoss', loss_weight=1.0))),
     train_cfg=dict(
         rpn=dict(
-            assigner=dict(
-                type='MaxIoUAssigner',
-                pos_iou_thr=0.7,
-                neg_iou_thr=0.3,
-                min_pos_iou=0.3,
-                match_low_quality=True,
-                ignore_iof_thr=-1),
+assigner=dict(type='ATSSAssigner', topk=9),
             sampler=dict(
                 type='RandomSampler',
                 num=256,
@@ -84,13 +78,7 @@ model = dict(
             nms=dict(type='nms', iou_threshold=0.7),
             min_bbox_size=0),
         rcnn=dict(
-            assigner=dict(
-                type='MaxIoUAssigner',
-                pos_iou_thr=0.5,
-                neg_iou_thr=0.5,
-                min_pos_iou=0.5,
-                match_low_quality=False,
-                ignore_iof_thr=-1),
+assigner=dict(type='ATSSAssigner', topk=9),
             sampler=dict(
                 type='RandomSampler',
                 num=512,

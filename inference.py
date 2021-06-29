@@ -11,6 +11,8 @@ from metric_polyp_multiclass import MetricMulticlass
 from img_crop import crop_img
 from extra_nms import *
 import datetime
+import glob
+
 NMS_ALL = True
 show_time = False
 def convert_result(bbox_result):
@@ -710,6 +712,25 @@ def test_video_batch(batch_size = 8):
                 count += 1                                    
         line = source_list.readline()
 
+def inference_trans_drone():
+    net_name = "faster_rcnn_r50_fpn_1x_coco"
+    config_file = "configs/usf_drone"+net_name+".py"
+    checkpoint_file = "/data2/qilei_chen/DATA/usf_drone/work_dirs/faster_rcnn_r50_fpn_1x_coco/latest.pth"
+    model = init_detector(config_file, checkpoint_file, device='cuda:0')
+    image_dir = "/data2/qilei_chen/DATA/trans_drone/images"
+    image_list = glob.glob(os.path.join(image_dir,"*.jpg"))
+    result_save_dir = "/data2/qilei_chen/DATA/trans_drone/results/"+net_name
+    if not os.path.exists(result_save_dir):
+        os.makedirs(result_save_dir)
+    score_thr = 0.3
+    for image_dir in image_list:
+        img = mmcv.imread(image_dir)
+        img_file_name = os.path.basename(image_dir)
+        result = inference_detector(model, img)
+        out_file = result_save_dir+'/'+img_file_name
+        model.show_result(img, result, score_thr=score_thr, bbox_color=colors[2],
+                            text_color=colors[2], font_size=10,
+                            out_file=out_file)
 if __name__ == "__main__":
     
     #test_images(model_name = 'faster_rcnn_r50_fpn_1x_coco',model_epoch = 'epoch_13.pth')
@@ -721,4 +742,5 @@ if __name__ == "__main__":
     test_images(model_name = 'faster_rcnn_r50_fpn_1x_coco_fine',model_epoch = 'epoch_9.pth')
     '''
     #test_video_batch(16)
-    test_images(model_name = 'gfl_r50_fpn_1x_coco_512_ciou',model_epoch = 'epoch_13.pth')
+    #test_images(model_name = 'gfl_r50_fpn_1x_coco_512_ciou',model_epoch = 'epoch_13.pth')
+    inference_trans_drone()

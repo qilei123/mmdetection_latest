@@ -154,9 +154,10 @@ model = dict(
         feat_channels=256,
         strides=[4, 8, 16, 32, 64],
         loss_cls=dict(
-            type='QualityFocalLoss',
+            type='FocalLoss',
             use_sigmoid=True,
-            beta=2.0,
+            gamma=2.0,
+            alpha=0.25,
             loss_weight=1.0),
         loss_bbox=dict(type='CIoULoss', loss_weight=1.0),
         loss_centerness=dict(

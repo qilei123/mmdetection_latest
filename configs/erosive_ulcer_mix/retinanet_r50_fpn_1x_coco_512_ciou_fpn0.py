@@ -169,7 +169,7 @@ data = dict(
         ],
         classes=('erosive', 'ulcer')))
 evaluation = dict(interval=1, metric='bbox')
-optimizer = dict(type='SGD', lr=0.001, momentum=0.9, weight_decay=0.0001)
+optimizer = dict(type='SGD', lr=0.0001, momentum=0.9, weight_decay=0.0001)
 optimizer_config = dict(grad_clip=None)
 lr_config = dict(
     policy='step',

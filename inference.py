@@ -719,7 +719,7 @@ def inference_trans_drone():
     model = init_detector(config_file, checkpoint_file, device='cuda:0')
     image_dir = "/data2/qilei_chen/DATA/trans_drone/images"
     image_list = glob.glob(os.path.join(image_dir,"*.jpg"))
-    result_save_dir = "/data2/qilei_chen/DATA/trans_drone/results/"+net_name
+    result_save_dir = "/data2/qilei_chen/DATA/trans_drone/results/"+net_name+"_rotate"
     if not os.path.exists(result_save_dir):
         os.makedirs(result_save_dir)
     score_thr = 0.3

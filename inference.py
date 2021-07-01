@@ -725,7 +725,7 @@ def inference_trans_drone():
     score_thr = 0.3
     for image_dir in image_list:
         img = mmcv.imread(image_dir)
-        #img = mmcv.imrotate(img, -90,auto_bound=True)
+        img = mmcv.imrotate(img, -90,auto_bound=True)
         img_file_name = os.path.basename(image_dir)
         result = inference_detector(model, img)
         out_file = result_save_dir+'/'+img_file_name

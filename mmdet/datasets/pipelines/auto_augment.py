@@ -418,7 +418,7 @@ class Rotate(object):
         for key in results.get('img_fields', ['img']):
             img = results[key].copy()
             img_rotated = mmcv.imrotate(
-                img, angle, center, scale, border_value=self.img_fill_val)
+                img, angle, center, scale, border_value=self.img_fill_val,auto_bound=True)
             results[key] = img_rotated.astype(img.dtype)
 
     def _rotate_bboxes(self, results, rotate_matrix):

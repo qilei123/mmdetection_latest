@@ -116,8 +116,9 @@ train_pipeline = [
             dict(
                     type='Rotate',
                     level=10,
-                    max_rotate_angle=90,
-                    prob=1.)
+                    max_rotate_angle=180,
+                    prob=1.,
+                    random_negative_prob = 1.)
         ]]),
     dict(
         type='Normalize',

@@ -713,19 +713,19 @@ def test_video_batch(batch_size = 8):
         line = source_list.readline()
 
 def inference_trans_drone():
-    net_name = "faster_rcnn_r50_fpn_1x_coco"
+    net_name = "faster_rcnn_r50_fpn_1x_coco_autoaug"
     config_file = "configs/usf_drone/"+net_name+".py"
-    checkpoint_file = "/data2/qilei_chen/DATA/usf_drone/work_dirs/faster_rcnn_r50_fpn_1x_coco/latest.pth"
+    checkpoint_file = "/data2/qilei_chen/DATA/usf_drone/work_dirs/faster_rcnn_r50_fpn_1x_coco_autoaug/latest.pth"
     model = init_detector(config_file, checkpoint_file, device='cuda:0')
     image_dir = "/data2/qilei_chen/DATA/trans_drone/images"
     image_list = glob.glob(os.path.join(image_dir,"*.jpg"))
-    result_save_dir = "/data2/qilei_chen/DATA/trans_drone/results/"+net_name+"_rotate"
+    result_save_dir = "/data2/qilei_chen/DATA/trans_drone/results/"+net_name
     if not os.path.exists(result_save_dir):
         os.makedirs(result_save_dir)
     score_thr = 0.3
     for image_dir in image_list:
         img = mmcv.imread(image_dir)
-        img = mmcv.imrotate(img, -90,auto_bound=True)
+        #img = mmcv.imrotate(img, -90,auto_bound=True)
         img_file_name = os.path.basename(image_dir)
         result = inference_detector(model, img)
         out_file = result_save_dir+'/'+img_file_name

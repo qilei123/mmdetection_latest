@@ -715,7 +715,7 @@ def test_video_batch(batch_size = 8):
 def inference_trans_drone():
     net_name = "faster_rcnn_r50_fpn_1x_coco_rotate"
     config_file = "configs/usf_drone/"+net_name+".py"
-    checkpoint_file = "/data1/qilei_chen/DATA/usf_drone/work_dirs/faster_rcnn_r50_fpn_1x_coco_autoaug/latest.pth"
+    checkpoint_file = "/data1/qilei_chen/DATA/usf_drone/work_dirs/"+net_name+"/latest.pth"
     model = init_detector(config_file, checkpoint_file, device='cuda:0')
     image_dir = "/data2/qilei_chen/DATA/trans_drone/images"
     image_list = glob.glob(os.path.join(image_dir,"*.jpg"))

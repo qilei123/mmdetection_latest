@@ -12,6 +12,7 @@ from img_crop import crop_img
 from extra_nms import *
 import datetime
 import glob
+import torch
 
 NMS_ALL = True
 show_time = False
@@ -732,6 +733,30 @@ def inference_trans_drone():
         model.show_result(img, result, score_thr=score_thr, bbox_color=colors[2],
                             text_color=colors[2], font_size=10,
                             out_file=out_file)
+
+def testTorchScript():
+    net_name = "faster_rcnn_r50_fpn_1x_coco_rotate"
+    config_file = "configs/usf_drone/"+net_name+".py"
+    checkpoint_file = "/data1/qilei_chen/DATA/usf_drone/work_dirs/"+net_name+"/latest.pth"
+    model = init_detector(config_file, checkpoint_file, device='cuda:0')
+
+    # Use torch.jit.trace to generate a torch.jit.ScriptModule via tracing.
+    traced_script_module = torch.jit.script(model)#, example)
+    '''
+    test_input = torch.rand(1, 3, 224, 224)
+
+    device = torch.device("cuda:0")
+    test_input = test_input.to(device)
+    print(test_input.size())
+    output1 = model.model(test_input)
+    output2 = traced_script_module(test_input)
+    '''
+    traced_script_module.save("/data1/qilei_chen/DATA/usf_drone/work_dirs/"+net_name+"/latest.pt")
+    
+    # The traced ScriptModule can now be evaluated identically to a regular PyTorch module
+    #print(output1)
+    #print(output2)
+
 if __name__ == "__main__":
     
     #test_images(model_name = 'faster_rcnn_r50_fpn_1x_coco',model_epoch = 'epoch_13.pth')
@@ -744,4 +769,5 @@ if __name__ == "__main__":
     '''
     #test_video_batch(16)
     #test_images(model_name = 'gfl_r50_fpn_1x_coco_512_ciou',model_epoch = 'epoch_13.pth')
-    inference_trans_drone()
+    #inference_trans_drone()
+    testTorchScript()

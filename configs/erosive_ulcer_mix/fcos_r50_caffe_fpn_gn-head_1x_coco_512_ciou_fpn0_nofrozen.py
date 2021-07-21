@@ -1,5 +1,6 @@
 dataset_type = 'CocoDataset'
-data_root = '/data1/qilei_chen/DATA/erosive_ulcer_mix/'
+#data_root = '/data1/qilei_chen/DATA/erosive_ulcer_mix/'
+data_root = '/data2/dechunwang/dataset/'
 img_norm_cfg = dict(
     mean=[102.9801, 115.9465, 122.7717], std=[1.0, 1.0, 1.0], to_rgb=False)
 train_pipeline = [
@@ -40,8 +41,10 @@ data = dict(
     workers_per_gpu=2,
     train=dict(
         type='CocoDataset',
-        ann_file=data_root+'annotations/train_mix.json',
-        img_prefix=data_root+'images/',
+        #ann_file=data_root+'annotations/train_mix.json',
+        #img_prefix=data_root+'images/',
+        ann_file=data_root+'gastric_object_detection/erosive_annotations/train_mix.json',
+        img_prefix=data_root+'gastric_object_detection/erosive/',        
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(type='LoadAnnotations', with_bbox=True),
@@ -58,8 +61,10 @@ data = dict(
         ],classes=('erosive', 'ulcer')),
     val=dict(
         type='CocoDataset',
-        ann_file=data_root+'annotations/test_mix.json',
-        img_prefix=data_root+'images/',
+        #ann_file=data_root+'annotations/test_mix.json',
+        #img_prefix=data_root+'images/',
+        ann_file=data_root+'gastric_object_detection/erosive_annotations/test_mix.json',
+        img_prefix=data_root+'gastric_object_detection/erosive/',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(
@@ -81,8 +86,10 @@ data = dict(
         ],classes=('erosive', 'ulcer')),
     test=dict(
         type='CocoDataset',
-        ann_file=data_root+'annotations/test_mix.json',
-        img_prefix=data_root+'images/',
+        #ann_file=data_root+'annotations/test_mix.json',
+        #img_prefix=data_root+'images/',
+        ann_file=data_root+'gastric_object_detection/erosive_annotations/test_mix.json',
+        img_prefix=data_root+'gastric_object_detection/erosive/',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(
@@ -115,7 +122,7 @@ lr_config = dict(
     warmup='constant',
     warmup_iters=500,
     warmup_ratio=0.3333333333333333,
-    step=[8, 11])
+    step=[16, 22])
 runner = dict(type='EpochBasedRunner', max_epochs=24)
 checkpoint_config = dict(interval=1)
 log_config = dict(interval=50, hooks=[dict(type='TextLoggerHook')])

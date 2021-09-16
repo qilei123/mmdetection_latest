@@ -26,7 +26,7 @@ class PolypDataset(CustomDataset):
 
     #CLASSES = ('polyp', 'instrument')
     #cat_ids = [1,2]
-    CLASSES = ('polyp')
+    CLASSES = ('polyp',)
     cat_ids = [1]
     def __init__(self, clean_ann=False,empty_ann=1, **kwargs):
         self.clean_ann = clean_ann 

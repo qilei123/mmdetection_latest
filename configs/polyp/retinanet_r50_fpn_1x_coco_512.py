@@ -58,7 +58,7 @@ model = dict(
         score_thr=0.05,
         nms=dict(type='nms', iou_threshold=0.1),
         max_per_img=100))
-dataset_type = 'PolypDataset'
+dataset_type = 'CocoDataset'
 data_root = '/data2/qilei_chen/DATA/new_polyp_data_combination/'
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
@@ -116,7 +116,8 @@ data = dict(
             dict(type='Pad', size_divisor=32),
             dict(type='DefaultFormatBundle'),
             dict(type='Collect', keys=['img', 'gt_bboxes', 'gt_labels'])
-        ]),
+        ],
+        classes=('polyp',)),
     val=dict(
         type=dataset_type,
         data_root=data_root,
@@ -140,7 +141,8 @@ data = dict(
                     dict(type='ImageToTensor', keys=['img']),
                     dict(type='Collect', keys=['img'])
                 ])
-        ]),
+        ],
+        classes=('polyp',)),
     test=dict(
         type=dataset_type,
         data_root=data_root,
@@ -164,7 +166,8 @@ data = dict(
                     dict(type='ImageToTensor', keys=['img']),
                     dict(type='Collect', keys=['img'])
                 ])
-        ]))
+        ],
+        classes=('polyp',)))
 evaluation = dict(interval=1, metric='bbox')
 optimizer = dict(type='SGD', lr=0.001, momentum=0.9, weight_decay=0.0001)
 optimizer_config = dict(grad_clip=None)

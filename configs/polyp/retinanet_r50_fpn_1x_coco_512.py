@@ -100,6 +100,7 @@ data = dict(
     workers_per_gpu=2,
     train=dict(
         type=dataset_type,
+        data_root=data_root,
         ann_file=data_root + 'annos/train_polyp_xywh.json',
         img_prefix=data_root + 'images/',
         pipeline=[
@@ -118,6 +119,7 @@ data = dict(
         ]),
     val=dict(
         type=dataset_type,
+        data_root=data_root,
         ann_file=data_root + 'annos/test_polyp_xywh.json',
         img_prefix=data_root + 'images/',
         pipeline=[
@@ -141,6 +143,7 @@ data = dict(
         ]),
     test=dict(
         type=dataset_type,
+        data_root=data_root,
         ann_file=data_root + 'annos/test_polyp_xywh.json',
         img_prefix=data_root + 'images/',
         pipeline=[

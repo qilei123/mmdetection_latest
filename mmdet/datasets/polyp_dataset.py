@@ -305,4 +305,4 @@ class PolypDataset(CustomDataset):
         return data_infos
 
     def get_ann_info(self, idx):
-        return self.img_infos[idx]['ann']
+        return self.data_infos[idx]['ann']

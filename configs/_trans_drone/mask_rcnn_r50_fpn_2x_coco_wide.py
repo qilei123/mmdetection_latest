@@ -252,4 +252,4 @@ log_level = 'INFO'
 load_from = None
 resume_from = None
 workflow = [('train', 1)]
-work_dir = data_root+'work_dirs/mask_rcnn_r50_fpn_2x_coco_wide/'
+work_dir = data_root+'work_dirs_latest/mask_rcnn_r50_fpn_2x_coco_wide/'

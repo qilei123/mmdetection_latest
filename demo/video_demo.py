@@ -55,6 +55,32 @@ def main():
         video_writer.release()
     cv2.destroyAllWindows()
 
+def main_cv2():
+    args = parse_args()
+    assert args.out or args.show, \
+        ('Please specify at least one operation (save/show the '
+         'video) with the argument "--out" or "--show"')
+
+    model = init_detector(args.config, args.checkpoint, device=args.device)
+
+    video_reader = cv2.VideoCapture(args.video)
+    video_writer = None
+    if args.out:
+        fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+        video_writer = cv2.VideoWriter(
+            args.out, fourcc, video_reader.get(cv2.CAP_PROP_FPS),
+            (int(video_reader.get(cv2.CAP_PROP_FRAME_WIDTH)),
+            int(video_reader.get(cv2.CAP_PROP_FRAME_HEIGHT))))
+
+    success,frame = video_reader.read()
+
+    while success:
+        result = inference_detector(model, frame)
+        frame = model.show_result(frame, result, score_thr=args.score_thr)
+        #cv2.imwrite("/data2/qilei_chen/DATA/trans_drone/videos/test.jpg",frame)
+        video_writer.write(frame)
+        success,frame = video_reader.read()
 
 if __name__ == '__main__':
-    main()
+    #main()
+    main_cv2()

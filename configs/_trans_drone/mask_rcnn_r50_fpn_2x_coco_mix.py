@@ -168,8 +168,8 @@ data = dict(
     train=dict(
         type='CocoDataset',
         ann_file=data_root+'annotations/train_mix.json',
-        img_prefix=data_root+'trans_drone_wide_images/images/',
-        #img_prefix=data_root+'images/',
+        #img_prefix=data_root+'trans_drone_wide_images/images/',
+        img_prefix=data_root+'images/',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(type='LoadAnnotations', with_bbox=True, with_mask=True),
@@ -189,8 +189,8 @@ data = dict(
     val=dict(
         type='CocoDataset',
         ann_file=data_root+'annotations/test_mix.json',
-        img_prefix=data_root+'trans_drone_wide_images/images/',
-        #img_prefix=data_root+'images/',
+        #img_prefix=data_root+'trans_drone_wide_images/images/',
+        img_prefix=data_root+'images/',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(
@@ -213,8 +213,8 @@ data = dict(
     test=dict(
         type='CocoDataset',
         ann_file=data_root+'annotations/test_mix.json',
-        img_prefix=data_root+'trans_drone_wide_images/images/',
-        #img_prefix=data_root+'images/',
+        #img_prefix=data_root+'trans_drone_wide_images/images/',
+        img_prefix=data_root+'images/',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(

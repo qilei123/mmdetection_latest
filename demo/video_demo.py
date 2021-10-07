@@ -76,7 +76,7 @@ def main_cv2():
 
     while success:
         result = inference_detector(model, frame)
-        frame = model.show_result(frame, result, score_thr=args.score_thr)
+        #frame = model.show_result(frame, result, score_thr=args.score_thr)
         #cv2.imwrite("/data2/qilei_chen/DATA/trans_drone/videos/test.jpg",frame)
         video_writer.write(frame)
         success,frame = video_reader.read()

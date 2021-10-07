@@ -3,7 +3,9 @@ _base_ = [
     '../_base_/datasets/coco_instance.py',
     '../_base_/schedules/schedule_2x.py', '../_base_/default_runtime.py'
 ]
-
+classes=('Small 1-piece vehicle',
+                    'Large 1-piece vehicle',
+                    'Extra-large 2-piece truck')
 model = dict(
     type='MaskRCNN',
     pretrained='torchvision://resnet50',
@@ -183,9 +185,7 @@ data = dict(
             dict(
                 type='Collect',
                 keys=['img', 'gt_bboxes', 'gt_labels', 'gt_masks'])
-        ],classes=('Small 1-piece vehicle',
-                    'Large 1-piece vehicle',
-                    'Extra-large 2-piece truck')),
+        ],classes=classes),
     val=dict(
         type='CocoDataset',
         ann_file=data_root+'annotations/test_wide.json',
@@ -209,9 +209,7 @@ data = dict(
                     dict(type='ImageToTensor', keys=['img']),
                     dict(type='Collect', keys=['img'])
                 ])
-        ],classes=('Small 1-piece vehicle',
-                    'Large 1-piece vehicle',
-                    'Extra-large 2-piece truck')),
+        ],classes=classes),
     test=dict(
         type='CocoDataset',
         ann_file=data_root+'annotations/test_wide.json',
@@ -235,9 +233,7 @@ data = dict(
                     dict(type='ImageToTensor', keys=['img']),
                     dict(type='Collect', keys=['img'])
                 ])
-        ],classes=('Small 1-piece vehicle',
-                    'Large 1-piece vehicle',
-                    'Extra-large 2-piece truck')))
+        ],classes=classes))
 evaluation = dict(metric=['bbox', 'segm'])
 optimizer = dict(type='SGD', lr=0.001, momentum=0.9, weight_decay=0.0001)
 optimizer_config = dict(grad_clip=None)
